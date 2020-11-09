@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ProjetOOP_v2
 {
-    class Student
+    class Student : IExam, ICourses, IPayment
     {
 		public string Id { get; set; }
 		public string Password { get; set; }

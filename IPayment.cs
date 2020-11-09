@@ -4,8 +4,7 @@ using System.Text;
 
 namespace ProjetOOP_v2
 {
-    interface IExam
+    interface IPayment
     {
-        string DateExam { get; set; }
     }
 }
