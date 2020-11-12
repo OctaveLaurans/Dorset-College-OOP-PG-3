@@ -208,6 +208,9 @@ namespace ProjetOOP_v2
             Admin Paul = new Admin("Paul", "polo");
             liste3.Add(Paul);
 
+            Student Camille = new Student("Camille", "cam");
+            liste.Add(Camille);
+
             ChoixIdentification(liste, liste2, liste3);
 
 
