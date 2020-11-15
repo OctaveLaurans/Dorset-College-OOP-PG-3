@@ -4,15 +4,16 @@ using System.Text;
 
 namespace ProjetOOP_v2
 {
-    class Admin : ICourses, IPayment
+    class Admin : Person
     {
-        public string Id { get; set; }
-        public string Password { get; set; }
-
-        public Admin(string Id, string Password)
+        public Admin(string name, string adress, string phoneNumber, string login, string password)
         {
-            this.Id = Id;
-            this.Password = Password;
+            this.Name = name;
+            this.Adress = adress;
+            this.PhoneNumber = phoneNumber;
+            this.Login = login;
+            this.Password = password;
         }
+
     }
 }

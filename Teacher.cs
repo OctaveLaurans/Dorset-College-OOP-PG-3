@@ -4,15 +4,19 @@ using System.Text;
 
 namespace ProjetOOP_v2
 {
-    class Teacher : IExam, ICourses
+    class Teacher : Person
     {
-        public string Id { get; set; }
-        public string Password { get; set; }
 
-        public Teacher(string Id, string Password)
+        List<Student> GroupStudents { get; set; }
+
+        public Teacher(string name, string adress, string phoneNumber, string login, string password, List<Student> students)
         {
-            this.Id = Id;
-            this.Password = Password;
+            this.Name = name;
+            this.Adress = adress;
+            this.PhoneNumber = phoneNumber;
+            this.Login = login;
+            this.Password = password;
+            this.GroupStudents = students;
         }
     }
 }

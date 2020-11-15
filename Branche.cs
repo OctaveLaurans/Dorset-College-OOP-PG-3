@@ -4,10 +4,9 @@ using System.Text;
 
 namespace ProjetOOP_v2
 {
-    interface IPayment
+    class Branche
     {
-        int ToBePaid { get; set; }
-        int NumberOfPayments { get; set; }
-
+        public string BrancheName { get; set; }
+        public int FeesAmount { get; set; }
     }
 }

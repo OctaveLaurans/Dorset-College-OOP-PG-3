@@ -6,6 +6,7 @@ namespace ProjetOOP_v2
 {
     public class Program
     {
+        /*
         static void ChoixIdentification(List<Student> liste, List<Teacher> liste2, List<Admin> liste3)
         {
             string y = "";
@@ -92,7 +93,7 @@ namespace ProjetOOP_v2
             {
                 Console.WriteLine(a.Id + "  " + a.Password);
             }
-            */
+            *
 
             bool result = true;
             do
@@ -190,40 +191,20 @@ namespace ProjetOOP_v2
             while (result == true);
 
         }
-
+        */
         public static void Main(string[] args)
         {
-            List<Student> liste = new List<Student>();
 
-            Student arthur = new Student("arthur", "azert");
-            Student maxime = new Student("maxime", "gege");
-            liste.Add(arthur);
-            liste.Add(maxime);
+            Branche branche1 = new Branche { BrancheName = "Ingeneering", FeesAmount = 1000 };
 
-            List<Teacher> liste2 = new List<Teacher>();
-            Teacher Jacques = new Teacher("Jacques", "jaki");
-            liste2.Add(Jacques);
+            Student maxime = new Student("Maxime", "Chaville", "001", "maxime@yahoo.fr", "1234", branche1, 2);
 
-            List<Admin> liste3 = new List<Admin>();
-            Admin Paul = new Admin("Paul", "polo");
-            liste3.Add(Paul);
+            // maxime.ManageInformation();
+            maxime.DisplayInformation();
 
-            Student Camille = new Student("Camille", "cam");
-            liste.Add(Camille);
+            maxime.Payment();
 
-            ChoixIdentification(liste, liste2, liste3);
-
-
-
-
-
-
-
-
-
-
-
-
+            maxime.DisplayInformation();
 
             Console.ReadKey();
         }
