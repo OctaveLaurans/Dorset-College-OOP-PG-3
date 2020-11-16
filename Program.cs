@@ -206,7 +206,6 @@ namespace ProjetOOP_v2
 
             maxime.DisplayInformation();
 
-            Console.WriteLine();
             Console.ReadKey();
         }
     }
