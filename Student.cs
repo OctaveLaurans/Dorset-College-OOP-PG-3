@@ -13,9 +13,11 @@ namespace ProjetOOP_v2
         public int ToBePaid { get; set; }
         public int NumberOfPayments { get; set; }
 
+        public int NumberOfAbsences { get; set; }
 
 
-        public Student(string name, string adress, string phoneNumber, string login, string password, Branche branche, int numberOfPayments)
+
+        public Student(string name, string adress, string phoneNumber, string login, string password, Branche branche, int numberOfPayments, int numberOfAbsences)
 		{
             this.Name = name;
             this.Adress = adress;
@@ -28,6 +30,8 @@ namespace ProjetOOP_v2
             this.ToBePaid = Branche.FeesAmount;
 
             this.NumberOfPayments = numberOfPayments;
+
+            this.NumberOfAbsences = numberOfAbsences;
 		}
 
         public void ManageInformation()
@@ -74,6 +78,7 @@ namespace ProjetOOP_v2
             Console.WriteLine($"Phone Number : {PhoneNumber}");
             Console.WriteLine($"Email / Login : {Login}");
             Console.WriteLine($"Amount that need to be paid : {ToBePaid}$");
+            Console.WriteLine($"Number of Absences : {NumberOfAbsences}");
             Console.WriteLine();
         }
 
