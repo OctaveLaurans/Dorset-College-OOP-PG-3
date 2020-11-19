@@ -8,7 +8,7 @@ namespace ProjetOOP_v2
     {
 
         public Branche Branche { get; set; }
-
+        public List<ICourses> Courses {get; set;}
 
         public int ToBePaid { get; set; }
         public int NumberOfPayments { get; set; }
@@ -17,7 +17,7 @@ namespace ProjetOOP_v2
 
 
 
-        public Student(string name, string adress, string phoneNumber, string login, string password, Branche branche, int numberOfPayments, int numberOfAbsences)
+        public Student(string name, string adress, string phoneNumber, string login, string password, Branche branche, int numberOfPayments, int numberOfAbsences, List<ICourses> courses)
 		{
             this.Name = name;
             this.Adress = adress;
@@ -32,6 +32,7 @@ namespace ProjetOOP_v2
             this.NumberOfPayments = numberOfPayments;
 
             this.NumberOfAbsences = numberOfAbsences;
+            this.Courses = courses;
 		}
 
         public void ManageInformation()
@@ -87,6 +88,12 @@ namespace ProjetOOP_v2
             int amount = Branche.FeesAmount / NumberOfPayments;
 
             ToBePaid -= amount;
+        }
+
+        public void Inscription(ICourses course)
+        {
+            courses.Add(course);
+            //Ajouter cet élève à la liste du prof qui fait ce cours
         }
     }
 }

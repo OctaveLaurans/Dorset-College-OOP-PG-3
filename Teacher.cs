@@ -6,7 +6,7 @@ namespace ProjetOOP_v2
 {
     class Teacher : Person
     {
-
+        ICourses Course;
         List<Student> GroupStudents { get; set; }
 
         public Teacher(string name, string adress, string phoneNumber, string login, string password, List<Student> students)
