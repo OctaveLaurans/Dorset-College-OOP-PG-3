@@ -8,7 +8,7 @@ namespace ProjetOOP_v2
     {
 
         public Branche Branche { get; set; }
-        public List<ICourses> Courses {get; set;}
+        public List<Course> Courses {get; set;}
 
         public int ToBePaid { get; set; }
         public int NumberOfPayments { get; set; }
@@ -17,7 +17,7 @@ namespace ProjetOOP_v2
 
 
 
-        public Student(string name, string adress, string phoneNumber, string login, string password, Branche branche, int numberOfPayments, int numberOfAbsences, List<ICourses> courses)
+        public Student(string name, string adress, string phoneNumber, string login, string password, Branche branche, int numberOfPayments, int numberOfAbsences, List<Course> courses)
 		{
             this.Name = name;
             this.Adress = adress;

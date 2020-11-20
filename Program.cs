@@ -197,7 +197,27 @@ namespace ProjetOOP_v2
 
             Branche branche1 = new Branche { BrancheName = "Ingeneering", FeesAmount = 1000 };
 
-            Student maxime = new Student("Maxime", "Chaville", "001", "maxime@yahoo.fr", "1234", branche1, 2);
+
+            List<Student> listStudents = new List<Student>();
+            List<Teacher> listTeachers = new List<Teacher>();
+
+
+
+            Admin director = new Admin("Pascal", "Paris", "17", "pascal@gmail.com", "1234", listStudents, listTeachers);
+
+
+
+
+            Course statistics = director.CreationCourse();
+
+
+            List<Course> courses = new List<Course>();
+            courses.Add(statistics);
+
+
+            Student maxime = new Student("Maxime", "Chaville", "001", "maxime@yahoo.fr", "1234", branche1, 2, 0, courses);
+
+
 
             // maxime.ManageInformation();
             maxime.DisplayInformation();
@@ -206,7 +226,10 @@ namespace ProjetOOP_v2
 
             maxime.DisplayInformation();
 
-            Teacher thai = new Teacher("Thai", "La Défense", "0618", "thai@devinci.fr", "4321")
+
+
+
+            Teacher thai = new Teacher("Thai", "La Défense", "0618", "thai@devinci.fr", "4321", listStudents);
             List<Teacher> listteacher= new List<Teacher>();
             listteacher.Add(thai);
 
@@ -214,21 +237,6 @@ namespace ProjetOOP_v2
 
         }
 
-        public void InscriptionCourse(ICourses course, Student name, List<Teacher> listteacher)
-        {
-            if(course not in name.Courses)
-            {
-                name.Courses.Add(course);
-                for(int i = 0, i < listteacher.Count, i++)
-                {
-                    if (listteacher(i).Course == course)
-                    {
-                        listteacher(i).GroupStudent += name;
-                    }
-                }
-            }
-            
-            
-        }
+        
     }
 }
