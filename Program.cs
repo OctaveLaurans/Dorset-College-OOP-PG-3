@@ -206,8 +206,29 @@ namespace ProjetOOP_v2
 
             maxime.DisplayInformation();
 
+            Teacher thai = new Teacher("Thai", "La Défense", "0618", "thai@devinci.fr", "4321")
+            List<Teacher> listteacher= new List<Teacher>();
+            listteacher.Add(thai);
+
             Console.ReadKey();
+
         }
 
+        public void InscriptionCourse(ICourses course, Student name, List<Teacher> listteacher)
+        {
+            if(course not in name.Courses)
+            {
+                name.Courses.Add(course);
+                for(int i = 0, i < listteacher.Count, i++)
+                {
+                    if (listteacher(i).Course == course)
+                    {
+                        listteacher(i).GroupStudent += name;
+                    }
+                }
+            }
+            
+            
+        }
     }
 }

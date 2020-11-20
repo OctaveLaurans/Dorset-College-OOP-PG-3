@@ -90,10 +90,6 @@ namespace ProjetOOP_v2
             ToBePaid -= amount;
         }
 
-        public void Inscription(ICourses course)
-        {
-            courses.Add(course);
-            //Ajouter cet élève à la liste du prof qui fait ce cours
-        }
+        
     }
 }
