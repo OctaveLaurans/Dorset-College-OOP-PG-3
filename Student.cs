@@ -15,9 +15,9 @@ namespace ProjetOOP_v2
 
         public int NumberOfAbsences { get; set; }
 
+        public int Group { get; set; }
 
-
-        public Student(string name, string adress, string phoneNumber, string login, string password, Branche branche, int numberOfPayments, int numberOfAbsences, List<Course> courses)
+        public Student(string name, string adress, string phoneNumber, string login, string password, Branche branche, int numberOfPayments, int numberOfAbsences)
 		{
             this.Name = name;
             this.Adress = adress;
@@ -32,7 +32,8 @@ namespace ProjetOOP_v2
             this.NumberOfPayments = numberOfPayments;
 
             this.NumberOfAbsences = numberOfAbsences;
-            this.Courses = courses;
+
+            Courses = new List<Course>();
 		}
 
         public void ManageInformation()

@@ -196,28 +196,93 @@ namespace ProjetOOP_v2
         {
 
             Branche branche1 = new Branche { BrancheName = "Ingeneering", FeesAmount = 1000 };
+            Branche branche2 = new Branche { BrancheName = "Business", FeesAmount = 2000 };
 
 
-            List<Student> listStudents = new List<Student>();
+
             List<Teacher> listTeachers = new List<Teacher>();
 
 
 
-            Admin director = new Admin("Pascal", "Paris", "17", "pascal@gmail.com", "1234", listStudents, listTeachers);
+            Student max = new Student("Max", "Chaville", "001", "maxime@yahoo.fr", "1234", branche1, 2, 0);
+            Student gay = new Student("Gay", "Sevres", "001", "maxime@yahoo.fr", "1234", branche1, 2, 0);
+            Student be = new Student("Be", "Meudon", "001", "maxime@yahoo.fr", "1234", branche2, 2, 0);
+            Student ime = new Student("Ime", "Clamart", "001", "maxime@yahoo.fr", "1234", branche1, 2, 0);
+            Student sam = new Student("Sam", "Bobigny", "001", "maxime@yahoo.fr", "1234", branche1, 2, 0);
+            Student url = new Student("Url", "Dublin", "001", "maxime@yahoo.fr", "1234", branche1, 2, 0);
+            Student bar = new Student("Bar", "Montcuq", "001", "maxime@yahoo.fr", "1234", branche1, 2, 0);
+            Student chut = new Student("Chut", "Tokyo", "001", "maxime@yahoo.fr", "1234", branche1, 2, 0);
+
+
+            Admin director = new Admin("Pascal", "Paris", "17", "pascal@gmail.com", "1234");
+
+
+            director.AllStudents.Add(max);
+            director.AllStudents.Add(gay);
+            director.AllStudents.Add(be);
+            director.AllStudents.Add(ime);
+            director.AllStudents.Add(sam);
+            director.AllStudents.Add(url);
+            director.AllStudents.Add(bar);
+            director.AllStudents.Add(chut);
+
+
 
 
 
 
             Course statistics = director.CreationCourse();
+            Course oop = director.CreationCourse();
 
 
-            List<Course> courses = new List<Course>();
-            courses.Add(statistics);
 
 
-            Student maxime = new Student("Maxime", "Chaville", "001", "maxime@yahoo.fr", "1234", branche1, 2, 0, courses);
+            Teacher thai = new Teacher("Thai", "Paris", "17", "thai@yahoo.fr", "1234");
+            Teacher dupont = new Teacher("Dupont", "Paris", "17", "thai@yahoo.fr", "1234");
 
 
+            List<Student> td1 = director.CreateStudentsGroup(branche1);
+            List<Student> td2 = director.CreateStudentsGroup(branche1);
+
+
+            director.IncsriptionCourse(statistics, thai, td1);
+            director.IncsriptionCourse(oop, dupont, td2);
+
+
+
+
+            foreach(Student student in td1)
+            {
+                Console.WriteLine($"{student.Name}  studies  {student.Courses[0].NameCourse}");
+            }
+            Console.WriteLine();
+            foreach (Student student in td2)
+            {
+                Console.WriteLine($"{student.Name}  studies  {student.Courses[0].NameCourse}");
+            }
+
+
+            Console.WriteLine();
+
+
+            Console.WriteLine(thai.Course.NameCourse);
+            for (int i=0; i<thai.GroupStudents[0].Count; i++)
+            {
+                Console.WriteLine(thai.GroupStudents[0][i].Name);
+            }
+
+
+            Console.WriteLine();
+
+
+            Console.WriteLine(dupont.Course.NameCourse);
+            for (int i = 0; i < dupont.GroupStudents[0].Count; i++)
+            {
+                Console.WriteLine(dupont.GroupStudents[0][i].Name);
+            }
+
+
+            /*
 
             // maxime.ManageInformation();
             maxime.DisplayInformation();
@@ -226,12 +291,7 @@ namespace ProjetOOP_v2
 
             maxime.DisplayInformation();
 
-
-
-
-            Teacher thai = new Teacher("Thai", "La Défense", "0618", "thai@devinci.fr", "4321", listStudents);
-            List<Teacher> listteacher= new List<Teacher>();
-            listteacher.Add(thai);
+            */
 
             Console.ReadKey();
 
