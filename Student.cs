@@ -19,12 +19,8 @@ namespace ProjetOOP_v2
         public int Group { get; set; }
 
         public Student(string name, string adress, string phoneNumber, string login, string password, Branche branche, int numberOfPayments, int numberOfAbsences)
+            : base(name, adress, phoneNumber, login, password)
 		{
-            this.Name = name;
-            this.Adress = adress;
-            this.PhoneNumber = phoneNumber;
-			this.Login = login;
-			this.Password = password;
 
             this.Branche = branche;
 
@@ -75,7 +71,7 @@ namespace ProjetOOP_v2
 
         }
 
-        public void DisplayInformation()
+        public override void DisplayInformation()
         {
             Console.WriteLine($"Name : {Name}");
             Console.WriteLine($"Adress : {Adress}");

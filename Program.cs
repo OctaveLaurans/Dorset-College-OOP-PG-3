@@ -6,42 +6,38 @@ namespace ProjetOOP_v2
 {
     public class Program
     {
-        /*
-        static void ChoixIdentification(List<Student> liste, List<Teacher> liste2, List<Admin> liste3)
+        
+        static int IdentificationChoice()
         {
-            string y = "";
+            int choice = 0;
+
+            string continu = "";
             do
             {
-                Console.WriteLine("\nQue voulez vous faire ?\nVous connectez en tant que :\n1 Student\n2 Teacher\n3 Admin\n\nSi vous n'avez pas de compte :\n\n4 Créez un compte");
+                Console.Write("\nVirtual Global College Application\n\nAre you a student, a teacher or an administrator ?\n1 : Student\n2 : Teacher\n3 : Admin\nChoice : ");
+                choice = Convert.ToInt32(Console.ReadLine());
 
-                int x = Convert.ToInt32(Console.ReadLine());
-                switch (x)
+                Console.WriteLine();
+
+                if(choice == 1 || choice == 2 || choice == 3)
                 {
-                    case 1:
-                        Console.WriteLine("Vous tentez de vous connecter en tant qu'étudiant");
-                        Identification(liste, liste2, liste3, x);
-                        break;
-                    case 2:
-                        Console.WriteLine("Vous tentez de vous connecter en tant que prof");
-                        Identification(liste, liste2, liste3, x);
-                        break;
-                    case 3:
-                        Console.WriteLine("Vous tentez de vous connecter en tant qu'Admin");
-                        Identification(liste, liste2, liste3, x);
-                        break;
-                    case 4:
-                        Inscription(liste, liste2, liste3);
-                        Console.WriteLine("Voulez vous vous connecter maintenant : oui / non");
-                        y = Console.ReadLine();
-                        break;
-                    default:
-                        Console.WriteLine("Vous avez choisi une option non valable\nVoulez-vous ré essayer : oui / non");
-                        y = Console.ReadLine();
-                        break;
+                    Console.WriteLine("Accessing application");
+                    break;
+                }
+                else
+                {
+                    Console.Write("This choice is not available. Type \"Yes\" if you want to try again : ");
+                    continu = Console.ReadLine();
+                    Console.WriteLine();
                 }
             }
-            while (y == "oui");
+            while (continu == "Yes");
+
+            return choice;
         }
+
+
+        /*
         static void Inscription(List<Student> liste, List<Teacher> liste2, List<Admin> liste3)
         {
             Console.WriteLine("Quel type de compte voulez-vous créer :\n1 Student\n2 Teacher\n3 Admin\n");
@@ -78,120 +74,111 @@ namespace ProjetOOP_v2
                     break;
             }
         }
-        static void Identification(List<Student> liste, List<Teacher> liste2, List<Admin> liste3, int x)
+        */
+   
+        static int IdentificationStudent(List<Student> DBStudents, string login, string password)
         {
-
-            /*
-            for (int i = 0; i < 2; i++)
+            int index = 0;
+            for (int i = 0; i < DBStudents.Count; i++)
             {
-                string id = Console.ReadLine();
-                string password = Console.ReadLine();
-                Student nouveau1 = new Student(id, password);
-                liste.Add(nouveau1);
+                if (DBStudents[i].Login == login && DBStudents[i].Password == password)
+                {
+                    index = i;
+                    break;
+                }
             }
-            foreach (Student a in liste)
-            {
-                Console.WriteLine(a.Id + "  " + a.Password);
-            }
-            *
+            return index;
+        }
 
-            bool result = true;
+        static int IdentificationTeacher(List<Teacher> DBTeachers, string login, string password)
+        {
+            int index = 0;
+            for (int i = 0; i < DBTeachers.Count; i++)
+            {
+                if (DBTeachers[i].Login == login && DBTeachers[i].Password == password)
+                {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
+        }
+
+        static int IdentificationAdmin(List<Admin> DBAdmins, string login, string password)
+        {
+            int index = 0;
+            for (int i = 0; i < DBAdmins.Count; i++)
+            {
+                if (DBAdmins[i].Login == login && DBAdmins[i].Password == password)
+                {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
+        }
+
+
+
+        static void Application(List<Student> DBStudents, List<Teacher> DBTeachers, List<Admin> DBAdmins)
+        {
+            int choice = IdentificationChoice();
+
+            int index = -1;
+
             do
             {
-                Console.WriteLine("Renseignez votre id");
-                string answer1 = Console.ReadLine();
-                string stop = "";
-                int i = 0;
+                Console.Write("Login : ");
+                string login = Console.ReadLine();
+                Console.Write("Password : ");
+                string password = Console.ReadLine();
+                Console.WriteLine();
 
-                if (x == 1)
+                switch (choice)
                 {
-                    while (i < liste.Count && liste[i].Id != answer1)
-                    {
-                        i++;
-                        if (i == liste.Count)
-                        {
-                            Console.WriteLine("Erreur d'identification");
-                            result = false;
-                        }
-                    }
-                }
-                else if (x == 2)
-                {
-                    while (i < liste2.Count && liste2[i].Id != answer1)
-                    {
-                        i++;
-                        if (i == liste2.Count)
-                        {
-                            Console.WriteLine("Erreur d'identification");
-                            result = false;
-                        }
-                    }
-                }
-                else
-                {
-                    while (i < liste3.Count && liste3[i].Id != answer1)
-                    {
-                        i++;
-                        if (i == liste3.Count)
-                        {
-                            Console.WriteLine("Erreur d'identification");
-                            result = false;
-                        }
-                    }
+                    case 1:
+                        index = IdentificationStudent(DBStudents, login, password);
+                        ApplicationStudent(DBStudents, index);
+                        break;
+
+                    case 2:
+                        index = IdentificationTeacher(DBTeachers, login, password);
+                        ApplicationTeacher(DBTeachers, index);
+                        break;
+
+                    case 3:
+                        index = IdentificationAdmin(DBAdmins, login, password);
+                        ApplicationAdmin(DBAdmins, index);
+                        break;
                 }
 
-
-
-                if (result == true)
+                if (index < 0)
                 {
-                    Console.WriteLine("Rentrez votre code");
-                    string answer2 = Console.ReadLine();
-                    if (x == 1)
-                    {
-                        if (liste[i].Password == answer2)
-                        {
-                            Console.WriteLine("Bienvenue");
-                            result = false;
-                        }
-                    }
-                    else if (x == 2)
-                    {
-                        if (liste2[i].Password == answer2)
-                        {
-                            Console.WriteLine("Bienvenue");
-                            result = false;
-                        }
-                    }
-                    else
-                    {
-                        if (liste3[i].Password == answer2)
-                        {
-                            Console.WriteLine("Bienvenue");
-                            result = false;
-                        }
-                    }
+                    Console.WriteLine("Error of connection - Email or Password invalid\nPlease try again\n\n");
+                }
 
-                    if (result == true)
-                    {
-                        Console.WriteLine("Mot de passe incorrect");
-                        Console.WriteLine("Voulez vous réessayer :\noui ou non ?");
-                        stop = Console.ReadLine();
-                        if (stop == "non") result = false;
-                    }
-                }
-                else
-                {
-                    result = true;
-                    Console.WriteLine("ID inccorect");
-                    Console.WriteLine("Voulez vous réessayer ?\noui ou non ?");
-                    stop = Console.ReadLine();
-                    if (stop == "non") result = false;
-                }
             }
-            while (result == true);
-
+            while (index < 0);
         }
-        */
+        static void ApplicationStudent(List<Student> DBStudents, int index)
+        {
+            Student student = DBStudents[index];
+            student.DisplayInformation();
+        }
+        static void ApplicationTeacher(List<Teacher> DBTeacher, int index)
+        {
+            Teacher teacher = DBTeacher[index];
+            teacher.DisplayInformation();
+        }
+        static void ApplicationAdmin(List<Admin> DBAdmins, int index)
+        {
+            Admin admin = DBAdmins[index];
+            admin.DisplayInformation();
+        }
+
+
+
+
         public static void Main(string[] args)
         {
 
@@ -232,8 +219,8 @@ namespace ProjetOOP_v2
 
 
 
-            Course statistics = director.CreationCourse();
-            Course oop = director.CreationCourse();
+            // Course statistics = director.CreationCourse();
+            // Course oop = director.CreationCourse();
 
 
 
@@ -245,6 +232,22 @@ namespace ProjetOOP_v2
             director.AllTeachers.Add(dupont);
 
 
+
+
+            List<Student> DBStudents = new List<Student>();
+            DBStudents.Add(max);
+
+            List<Teacher> DBTeachers = new List<Teacher>();
+            DBTeachers.Add(thai);
+
+            List<Admin> DBAdmins = new List<Admin>();
+            DBAdmins.Add(director);
+
+            Application(DBStudents, DBTeachers, DBAdmins);
+
+
+
+            /*
             List<Student> td1 = director.CreateStudentsGroup(branche1);
             List<Student> td2 = director.CreateStudentsGroup(branche1);
 

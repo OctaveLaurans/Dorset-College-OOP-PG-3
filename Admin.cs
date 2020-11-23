@@ -11,15 +11,19 @@ namespace ProjetOOP_v2
         public List<Teacher> AllTeachers { get; set; }
 
         public Admin(string name, string adress, string phoneNumber, string login, string password)
+            : base(name, adress, phoneNumber, login, password)
         {
-            this.Name = name;
-            this.Adress = adress;
-            this.PhoneNumber = phoneNumber;
-            this.Login = login;
-            this.Password = password;
             AllStudents = new List<Student>();
             AllTeachers = new List<Teacher>();
 
+        }
+
+        public override void DisplayInformation()
+        {
+            Console.WriteLine($"Name : {Name}");
+            Console.WriteLine($"Adress : {Adress}");
+            Console.WriteLine($"Phone Number : {PhoneNumber}");
+            Console.WriteLine($"Email / Login : {Login}");
         }
 
 
@@ -53,7 +57,7 @@ namespace ProjetOOP_v2
         {
             Console.WriteLine("You want to create a course, what's the subject ?");
             string nameCourse= Console.ReadLine();
-            Console.WriteLine("Course date ? (DD/MM)");
+            Console.WriteLine("Course date ? (Day in the week)");
             string dayCourse = Console.ReadLine();
             Console.WriteLine("At what time ? (HH:MM)");
             string hourCourse = Console.ReadLine();
