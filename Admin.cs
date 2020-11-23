@@ -53,11 +53,11 @@ namespace ProjetOOP_v2
         {
             Console.WriteLine("You want to create a course, what's the subject ?");
             string nameCourse= Console.ReadLine();
-            Console.WriteLine("Course date ?");
+            Console.WriteLine("Course date ? (DD/MM)");
             string dayCourse = Console.ReadLine();
-            Console.WriteLine("At what time ?");
+            Console.WriteLine("At what time ? (HH:MM)");
             string hourCourse = Console.ReadLine();
-            Console.WriteLine("Duration ?");
+            Console.WriteLine("Duration ? (in decimal form)");
             double duration = Convert.ToDouble(Console.ReadLine());
 
             Console.WriteLine($"Subject : {nameCourse}, Date : {dayCourse}, Hours : {hourCourse}");
@@ -76,6 +76,32 @@ namespace ProjetOOP_v2
             foreach(Student student in students)
             {
                 student.Courses.Add(course);
+            }
+        }
+
+        public Exam CreationExam()
+        {
+            Console.WriteLine("You want to create an Exam, what's the subject ?");
+            string nameExam = Console.ReadLine();
+            Console.WriteLine("Exam date ? (DD/MM)");
+            string dayExam = Console.ReadLine();
+            Console.WriteLine("At what time ? (HH:MM)");
+            string hourExam = Console.ReadLine();
+            Console.WriteLine("Duration ? (in decimal form)");
+            double durationExam = Convert.ToDouble(Console.ReadLine());
+
+            Console.WriteLine($"Subject : {nameExam}, Date : {dayExam}, Hours : {hourExam}");
+
+            Exam exam = new Exam { NameExam = nameExam, DayExam = dayExam, HourExam = hourExam };
+
+            return exam;
+        }
+
+        public void IncsriptionExam(Exam exam, List<Student> students)
+        {//We have to verify that the student follows the exam subject
+            foreach (Student student in students)
+            {
+                student.Exams.Add(exam);
             }
         }
     }

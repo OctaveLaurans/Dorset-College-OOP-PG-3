@@ -197,6 +197,7 @@ namespace ProjetOOP_v2
 
             Branche branche1 = new Branche { BrancheName = "Ingeneering", FeesAmount = 1000 };
             Branche branche2 = new Branche { BrancheName = "Business", FeesAmount = 2000 };
+            Branche branche3 = new Branche { BrancheName = "Litterature", FeesAmount = 300 };
 
 
 
@@ -239,6 +240,9 @@ namespace ProjetOOP_v2
 
             Teacher thai = new Teacher("Thai", "Paris", "17", "thai@yahoo.fr", "1234");
             Teacher dupont = new Teacher("Dupont", "Paris", "17", "thai@yahoo.fr", "1234");
+
+            director.AllTeachers.Add(thai);
+            director.AllTeachers.Add(dupont);
 
 
             List<Student> td1 = director.CreateStudentsGroup(branche1);

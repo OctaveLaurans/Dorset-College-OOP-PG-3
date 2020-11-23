@@ -9,6 +9,7 @@ namespace ProjetOOP_v2
 
         public Branche Branche { get; set; }
         public List<Course> Courses {get; set;}
+        public List<Exam> Exams { get; set; }
 
         public int ToBePaid { get; set; }
         public int NumberOfPayments { get; set; }
@@ -34,6 +35,7 @@ namespace ProjetOOP_v2
             this.NumberOfAbsences = numberOfAbsences;
 
             Courses = new List<Course>();
+            Exams = new List<Exam>();
 		}
 
         public void ManageInformation()
