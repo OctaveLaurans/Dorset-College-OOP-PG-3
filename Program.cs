@@ -160,6 +160,7 @@ namespace ProjetOOP_v2
             }
             while (index < 0);
         }
+
         static void ApplicationStudent(List<Student> DBStudents, int index)
         {
             Student student = DBStudents[index];
