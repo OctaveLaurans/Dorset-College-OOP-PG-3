@@ -6,20 +6,20 @@ namespace ProjetOOP_v2
 {
     public class Program
     {
-        
-        static int IdentificationChoice()
+
+        static string IdentificationChoice()
         {
-            int choice = 0;
+            string choice = "";
 
             string continu = "";
             do
             {
                 Console.Write("\nVirtual Global College Application\n\nAre you a student, a teacher or an administrator ?\n1 : Student\n2 : Teacher\n3 : Admin\nChoice : ");
-                choice = Convert.ToInt32(Console.ReadLine());
+                choice = Console.ReadLine();
 
                 Console.WriteLine();
 
-                if(choice == 1 || choice == 2 || choice == 3)
+                if (choice == "1" || choice == "2" || choice == "3")
                 {
                     Console.WriteLine("Accessing application");
                     break;
@@ -75,10 +75,10 @@ namespace ProjetOOP_v2
             }
         }
         */
-   
+
         static int IdentificationStudent(List<Student> DBStudents, string login, string password)
         {
-            int index = 0;
+            int index = -1;
             for (int i = 0; i < DBStudents.Count; i++)
             {
                 if (DBStudents[i].Login == login && DBStudents[i].Password == password)
@@ -92,7 +92,7 @@ namespace ProjetOOP_v2
 
         static int IdentificationTeacher(List<Teacher> DBTeachers, string login, string password)
         {
-            int index = 0;
+            int index = -1;
             for (int i = 0; i < DBTeachers.Count; i++)
             {
                 if (DBTeachers[i].Login == login && DBTeachers[i].Password == password)
@@ -106,7 +106,7 @@ namespace ProjetOOP_v2
 
         static int IdentificationAdmin(List<Admin> DBAdmins, string login, string password)
         {
-            int index = 0;
+            int index = -1;
             for (int i = 0; i < DBAdmins.Count; i++)
             {
                 if (DBAdmins[i].Login == login && DBAdmins[i].Password == password)
@@ -122,43 +122,54 @@ namespace ProjetOOP_v2
 
         static void Application(List<Student> DBStudents, List<Teacher> DBTeachers, List<Admin> DBAdmins)
         {
-            int choice = IdentificationChoice();
+            string choice = IdentificationChoice();
 
             int index = -1;
-
-            do
+            if (choice == "1" || choice == "2" || choice == "3")
             {
-                Console.Write("Login : ");
-                string login = Console.ReadLine();
-                Console.Write("Password : ");
-                string password = Console.ReadLine();
-                Console.WriteLine();
-
-                switch (choice)
+                do
                 {
-                    case 1:
-                        index = IdentificationStudent(DBStudents, login, password);
-                        ApplicationStudent(DBStudents, index);
-                        break;
+                    Console.Write("Login : ");
+                    string login = Console.ReadLine();
+                    Console.Write("Password : ");
+                    string password = Console.ReadLine();
+                    Console.WriteLine();
 
-                    case 2:
-                        index = IdentificationTeacher(DBTeachers, login, password);
-                        ApplicationTeacher(DBTeachers, index);
-                        break;
+                    switch (choice)
+                    {
+                        case "1":
+                            index = IdentificationStudent(DBStudents, login, password);
+                            if (index > 0) ApplicationStudent(DBStudents, index);
+                            break;
 
-                    case 3:
-                        index = IdentificationAdmin(DBAdmins, login, password);
-                        ApplicationAdmin(DBAdmins, index);
-                        break;
+                        case "2":
+                            index = IdentificationTeacher(DBTeachers, login, password);
+                            if (index > 0) ApplicationTeacher(DBTeachers, index);
+                            break;
+
+                        case "3":
+                            index = IdentificationAdmin(DBAdmins, login, password);
+                            if (index > 0) ApplicationAdmin(DBAdmins, index);
+                            break;
+                    }
+
+                    if (index < 0)
+                    {
+                        index = 4;
+                        //Console.WriteLine("Error of connection - Email or Password invalid\nPlease try again\n\n");
+                        Console.WriteLine("Error of connection - Email or Password invalid\nDo you want to try again ? yes or no ?\n\n");
+                        string answer = Console.ReadLine();
+                        if (answer == "yes")
+                        {
+                            index = -1;
+                            choice = IdentificationChoice();
+                        }
+                    }
+
                 }
-
-                if (index < 0)
-                {
-                    Console.WriteLine("Error of connection - Email or Password invalid\nPlease try again\n\n");
-                }
-
+                while (index < 0);
             }
-            while (index < 0);
+
         }
 
         static void ApplicationStudent(List<Student> DBStudents, int index)
@@ -166,34 +177,46 @@ namespace ProjetOOP_v2
             int choice = 0;
             int choice2 = 0;
             Student student = DBStudents[index];
-            Console.Write("\nWhich program do you want to execute ?\n\n\n1 : To display my informations\n2 : To manage my informations\n3 : To display my grade book\n4: To display my attendance\n5 : To display my calendar \nChoice : ");
-            choice = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine();
 
-            if (choice == 1)
+            string answer = "";
+            do
             {
-                Console.WriteLine("Your informations :\n");
-                student.DisplayInformation();
-            }
-            if (choice == 2)
-                do
+                Console.Write("\nWhich program do you want to execute ?\n\n\n1 : To display my informations\n2 : To manage my informations\n3 : To display my grade book\n4: To display my attendance\n5 : To display my calendar \nChoice : ");
+                choice = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine();
+
+                if (choice == 1)
                 {
-                    student.ManageInformation();
-                    Console.WriteLine("Your new informations are :\n");
+                    Console.WriteLine("Your informations :\n");
                     student.DisplayInformation();
-                    Console.WriteLine("Do you want to change an other information ?\n1 : Yes\n2 : No\nChoice : ");
-                    choice2 = Convert.ToInt32(Console.ReadLine());
-                    Console.WriteLine();
+                }
+                if (choice == 2)
+                    do
+                    {
+                        student.ManageInformation();
+                        Console.WriteLine("Your new informations are :\n");
+                        student.DisplayInformation();
+                        Console.WriteLine("Do you want to change an other information ?\n1 : Yes\n2 : No\nChoice : ");
+                        choice2 = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine();
+
+                    }
+                    while (choice2 == 1);
+                if (choice == 6)
+                {
+                    Console.WriteLine("Your time table :\n\n\n");
 
                 }
-                while (choice2 == 1);
-            if (choice == 6)
-            {
-                Console.WriteLine("Your time table :\n\n\n");
 
-            }
+                //il reste à créer le carnet de notes et le calendier de cours et d'exam de l'étudiant et afficher l'attendance 
 
-            //il reste à créer le carnet de notes et le calendier de cours et d'exam de l'étudiant et afficher l'attendance 
+
+                Console.WriteLine("Do you want to continue ? yes or no");
+                answer = Console.ReadLine();
+            } while (answer == "yes");
+
+
+
         }
 
 
@@ -202,49 +225,65 @@ namespace ProjetOOP_v2
         {
             Teacher teacher = DBTeacher[index];
             int choice = 0;
-            Console.Write("\nWhich program do you want to execute ?\n\n\n1 : To display my informations\n2 : To access to my students informations\n3 : To register a student in a course\n4: To manage grade books\n5 : To display grade books\n6 : To display the calendar\n7 : To manage the calendar\n8: To manage the attendance\n9 : To display the attendance\nChoice : ");
-            choice = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine();
+            string answer = "";
+            do
+            {
+                Console.Write("\nWhich program do you want to execute ?\n\n\n1 : To display my informations\n2 : To access to my students informations\n3 : To register a student in a course\n4: To manage grade books\n5 : To display grade books\n6 : To display the calendar\n7 : To manage the calendar\n8: To manage the attendance\n9 : To display the attendance\nChoice : ");
+                choice = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine();
 
-            if (choice == 1)
-            {
-                Console.WriteLine("Your informations :\n");
-                teacher.DisplayInformation();
-            }
-            //if (choice == 2)
-            {
-                //a faire
-            }//
-            /*if(choice == 3)
-            {
-                teacher.InscriptionCourseStudent(Student name);
-            }*/
-            
+                if (choice == 1)
+                {
+                    Console.WriteLine("Your informations :\n");
+                    teacher.DisplayInformation();
+                }
+                //if (choice == 2)
+                {
+                    //a faire
+                }//
+                /*if(choice == 3)
+                {
+                    teacher.InscriptionCourseStudent(Student name);
+                }*/
+                Console.WriteLine("Do you want to continue ? yes or no");
+                answer = Console.ReadLine();
+            } while (answer == "yes");
+
+
         }
         static void ApplicationAdmin(List<Admin> DBAdmins, int index)
         {
             Admin admin = DBAdmins[index];
             int choice = 0;
-            Console.Write("\nWhich program do you want to execute ?\n\n\n1 : To display my informations\n2 : To access to students informations\n3 : To access to teachers informations\n4 : To create students groups\n5 : To create a course\n6 : To create an exam\n7 : To display grade books\n8 : To display the calendar\n9 : To manage the calendar\n10 : To display the attendance\n11 : To manage the payment\n12 : To register a student in an exam\nChoice : ");
-            choice = Convert.ToInt32(Console.ReadLine());
 
-            if (choice == 1)
+            string answer = "";
+            do
             {
-                admin.DisplayInformation();
-            }
-            /*if (choice == 4)
-            {
-                admin.CreateStudentsGroup(Branche branche);
-            }*/
-            if (choice == 5)
-            {
-                admin.CreationCourse();
-            }
-            if (choice == 6)
-            {
-                admin.CreationExam();
-            }
-            
+                Console.Write("\nWhich program do you want to execute ?\n\n\n1 : To display my informations\n2 : To access to students informations\n3 : To access to teachers informations\n4 : To create students groups\n5 : To create a course\n6 : To create an exam\n7 : To display grade books\n8 : To display the calendar\n9 : To manage the calendar\n10 : To display the attendance\n11 : To manage the payment\n12 : To register a student in an exam\nChoice : ");
+                choice = Convert.ToInt32(Console.ReadLine());
+
+                if (choice == 1)
+                {
+                    admin.DisplayInformation();
+                }
+                /*if (choice == 4)
+                {
+                    admin.CreateStudentsGroup(Branche branche);
+                }*/
+                if (choice == 5)
+                {
+                    admin.CreationCourse();
+                }
+                if (choice == 6)
+                {
+                    admin.CreationExam();
+                }
+                Console.WriteLine("Do you want to continue ? yes or no");
+                answer = Console.ReadLine();
+            } while (answer == "yes");
+
+
+
 
         }
 
@@ -265,11 +304,11 @@ namespace ProjetOOP_v2
 
 
 
-            Student max = new Student("Max", "Chaville", "001", "maxime@yahoo.fr", "1234", branche1, 2, 1,1, 0);
-            Student gay = new Student("Gay", "Sevres", "001", "maxime@yahoo.fr", "1234", branche1, 2, 1, 2, 0);
+            Student max = new Student("Max", "Chaville", "001", "maxime@yahoo.fr", "1234", branche1, 2, 1, 1, 0);
+            Student gay = new Student("Gay", "Sevres", "001", "arthur", "1234", branche1, 2, 1, 2, 0);
             Student be = new Student("Be", "Meudon", "001", "maxime@yahoo.fr", "1234", branche2, 2, 1, 1, 0);
             Student ime = new Student("Ime", "Clamart", "001", "maxime@yahoo.fr", "1234", branche1, 2, 1, 1, 0);
-            Student sam = new Student("Sam", "Bobigny", "001", "maxime@yahoo.fr", "1234", branche1, 2, 1,1, 0);
+            Student sam = new Student("Sam", "Bobigny", "001", "maxime@yahoo.fr", "1234", branche1, 2, 1, 1, 0);
             Student url = new Student("Url", "Dublin", "001", "maxime@yahoo.fr", "1234", branche1, 2, 1, 1, 0);
             Student bar = new Student("Bar", "Montcuq", "001", "maxime@yahoo.fr", "1234", branche1, 2, 1, 1, 0);
             Student chut = new Student("Chut", "Tokyo", "001", "maxime@yahoo.fr", "1234", branche1, 2, 1, 1, 0);
@@ -277,6 +316,7 @@ namespace ProjetOOP_v2
 
 
             Admin director = new Admin("Pascal", "Paris", "17", "pascal@gmail.com", "1234");
+            Admin director2 = new Admin("Pascal2", "Paris2", "18", "pascal2@gmail.com", "1234");
 
 
             director.AllStudents.Add(max);
@@ -302,7 +342,7 @@ namespace ProjetOOP_v2
 
 
             Teacher thai = new Teacher("Thai", "Paris", "17", "thai@yahoo.fr", "1234");
-            Teacher dupont = new Teacher("Dupont", "Paris", "17", "thai@yahoo.fr", "1234");
+            Teacher dupont = new Teacher("Dupont", "Paris", "17", "dupont@yahoo.fr", "1234");
 
             director.AllTeachers.Add(thai);
             director.AllTeachers.Add(dupont);
@@ -312,9 +352,11 @@ namespace ProjetOOP_v2
 
             List<Student> DBStudents = new List<Student>();
             DBStudents.Add(max);
+            DBStudents.Add(gay);
 
             List<Teacher> DBTeachers = new List<Teacher>();
             DBTeachers.Add(thai);
+            DBTeachers.Add(dupont);
 
             List<Admin> DBAdmins = new List<Admin>();
             DBAdmins.Add(director);
@@ -380,6 +422,6 @@ namespace ProjetOOP_v2
 
         }
 
-        
+
     }
 }
