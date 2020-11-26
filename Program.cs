@@ -163,19 +163,91 @@ namespace ProjetOOP_v2
 
         static void ApplicationStudent(List<Student> DBStudents, int index)
         {
+            int choice = 0;
+            int choice2 = 0;
             Student student = DBStudents[index];
-            student.DisplayInformation();
+            Console.Write("\nWhich program do you want to execute ?\n\n\n1 : To display my informations\n2 : To manage my informations\n3 : To display my grade book\n4: To display my attendance\n5 : To display my calendar \nChoice : ");
+            choice = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine();
+
+            if (choice == 1)
+            {
+                Console.WriteLine("Your informations :\n");
+                student.DisplayInformation();
+            }
+            if (choice == 2)
+                do
+                {
+                    student.ManageInformation();
+                    Console.WriteLine("Your new informations are :\n");
+                    student.DisplayInformation();
+                    Console.WriteLine("Do you want to change an other information ?\n1 : Yes\n2 : No\nChoice : ");
+                    choice2 = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine();
+
+                }
+                while (choice2 == 1);
+            if (choice == 6)
+            {
+                Console.WriteLine("Your time table :\n\n\n");
+
+            }
+
+            //il reste à créer le carnet de notes et le calendier de cours et d'exam de l'étudiant et afficher l'attendance 
         }
+
+
+
         static void ApplicationTeacher(List<Teacher> DBTeacher, int index)
         {
             Teacher teacher = DBTeacher[index];
-            teacher.DisplayInformation();
+            int choice = 0;
+            Console.Write("\nWhich program do you want to execute ?\n\n\n1 : To display my informations\n2 : To access to my students informations\n3 : To register a student in a course\n4: To manage grade books\n5 : To display grade books\n6 : To display the calendar\n7 : To manage the calendar\n8: To manage the attendance\n9 : To display the attendance\nChoice : ");
+            choice = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine();
+
+            if (choice == 1)
+            {
+                Console.WriteLine("Your informations :\n");
+                teacher.DisplayInformation();
+            }
+            //if (choice == 2)
+            {
+                //a faire
+            }//
+            /*if(choice == 3)
+            {
+                teacher.InscriptionCourseStudent(Student name);
+            }*/
+            
         }
         static void ApplicationAdmin(List<Admin> DBAdmins, int index)
         {
             Admin admin = DBAdmins[index];
-            admin.DisplayInformation();
+            int choice = 0;
+            Console.Write("\nWhich program do you want to execute ?\n\n\n1 : To display my informations\n2 : To access to students informations\n3 : To access to teachers informations\n4 : To create students groups\n5 : To create a course\n6 : To create an exam\n7 : To display grade books\n8 : To display the calendar\n9 : To manage the calendar\n10 : To display the attendance\n11 : To manage the payment\n12 : To register a student in an exam\nChoice : ");
+            choice = Convert.ToInt32(Console.ReadLine());
+
+            if (choice == 1)
+            {
+                admin.DisplayInformation();
+            }
+            /*if (choice == 4)
+            {
+                admin.CreateStudentsGroup(Branche branche);
+            }*/
+            if (choice == 5)
+            {
+                admin.CreationCourse();
+            }
+            if (choice == 6)
+            {
+                admin.CreationExam();
+            }
+            
+
         }
+
 
 
 
