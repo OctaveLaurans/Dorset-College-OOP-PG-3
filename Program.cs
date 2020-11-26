@@ -203,6 +203,7 @@ namespace ProjetOOP_v2
             Student chut = new Student("Chut", "Tokyo", "001", "maxime@yahoo.fr", "1234", branche1, 2, 0);
 
 
+
             Admin director = new Admin("Pascal", "Paris", "17", "pascal@gmail.com", "1234");
 
 
@@ -215,6 +216,8 @@ namespace ProjetOOP_v2
             director.AllStudents.Add(bar);
             director.AllStudents.Add(chut);
 
+            Student arthur = new Student("arthur", "compiegne", "001", "maxime@yahoo.fr", "1234", branche1, 2, 0);
+            director.AllStudents.Add(arthur);
 
 
 
