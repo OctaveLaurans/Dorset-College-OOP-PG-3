@@ -15,10 +15,12 @@ namespace ProjetOOP_v2
         public int NumberOfPayments { get; set; }
 
         public int NumberOfAbsences { get; set; }
+        public int NumberOfPresence { get; set; }
+        public int NumberOfDelay { get; set; }
 
         public int Group { get; set; }
 
-        public Student(string name, string adress, string phoneNumber, string login, string password, Branche branche, int numberOfPayments, int numberOfAbsences)
+        public Student(string name, string adress, string phoneNumber, string login, string password, Branche branche, int numberOfPayments, int numberOfAbsences, int numberOfPresence, int numberOfDelay)
             : base(name, adress, phoneNumber, login, password)
 		{
 
@@ -89,6 +91,25 @@ namespace ProjetOOP_v2
             ToBePaid -= amount;
         }
 
-        
+        public void DisplayAttendance(List<Student> AllStudent)
+        {
+            Console.Write("Enter your name :\n");
+            string Nchoice = Console.ReadLine();
+            for (int i = 0; i < AllStudent.Count; i++)
+            {
+                if (AllStudent[i].Name == Nchoice)
+                {
+                    Console.WriteLine("Nomber of Presence :", AllStudent[i].NumberOfPresence);
+                    Console.WriteLine("Nombre of Delay :", AllStudent[i].NumberOfDelay);
+                    Console.WriteLine("Nomber of Absence :", AllStudent[i].NumberOfAbsences);
+                }
+                else
+                {
+                    Console.WriteLine("This student doesn't exist ... please try again\n");
+                }
+            }
+        }
+
+
     }
 }
