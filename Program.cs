@@ -139,17 +139,17 @@ namespace ProjetOOP_v2
                     {
                         case "1":
                             index = IdentificationStudent(DBStudents, login, password);
-                            if (index > 0) ApplicationStudent(DBStudents, index);
+                            if (index >= 0) ApplicationStudent(DBStudents, index);
                             break;
 
                         case "2":
                             index = IdentificationTeacher(DBTeachers, login, password);
-                            if (index > 0) ApplicationTeacher(DBTeachers, index);
+                            if (index >= 0) ApplicationTeacher(DBTeachers, index);
                             break;
 
                         case "3":
                             index = IdentificationAdmin(DBAdmins, login, password);
-                            if (index > 0) ApplicationAdmin(DBAdmins, index);
+                            if (index >= 0) ApplicationAdmin(DBAdmins, index);
                             break;
                     }
 

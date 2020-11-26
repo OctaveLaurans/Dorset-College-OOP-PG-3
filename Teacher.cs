@@ -97,6 +97,7 @@ namespace ProjetOOP_v2
                     Console.WriteLine("This student doesn't exist ... please try again\n");
                 }
                 do
+
                 {
                     Console.WriteLine("Nomber of Presence :", AllStudent[i].NumberOfPresence);
                     Console.WriteLine("Nombre of Delay :", AllStudent[i].NumberOfDelay);
