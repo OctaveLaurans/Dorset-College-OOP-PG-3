@@ -120,7 +120,7 @@ namespace ProjetOOP_v2
 
 
 
-        static void Application(List<Student> DBStudents, List<Teacher> DBTeachers, List<Admin> DBAdmins)
+        static void Application(List<Student> DBStudents, List<Teacher> DBTeachers, List<Admin> DBAdmins, List<Student> AllStudents, List<Course> AllCourses)
         {
             string choice = IdentificationChoice();
 
@@ -139,17 +139,17 @@ namespace ProjetOOP_v2
                     {
                         case "1":
                             index = IdentificationStudent(DBStudents, login, password);
-                            if (index >= 0) ApplicationStudent(DBStudents, index);
+                            if (index >= 0) ApplicationStudent(DBStudents, index, AllStudents);
                             break;
 
                         case "2":
                             index = IdentificationTeacher(DBTeachers, login, password);
-                            if (index >= 0) ApplicationTeacher(DBTeachers, index);
+                            if (index >= 0) ApplicationTeacher(DBTeachers, index, AllStudents, AllCourses);
                             break;
 
                         case "3":
                             index = IdentificationAdmin(DBAdmins, login, password);
-                            if (index >= 0) ApplicationAdmin(DBAdmins, index);
+                            if (index >= 0) ApplicationAdmin(DBAdmins, index, AllStudents, AllCourses);
                             break;
                     }
 
@@ -172,7 +172,7 @@ namespace ProjetOOP_v2
 
         }
 
-        static void ApplicationStudent(List<Student> DBStudents, int index)
+        static void ApplicationStudent(List<Student> DBStudents, int index, List<Student> AllStudents)
         {
             int choice = 0;
             int choice2 = 0;
@@ -185,12 +185,12 @@ namespace ProjetOOP_v2
                 choice = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine();
 
-                if (choice == 1)
+                if (choice == 1) //ok ca marche
                 {
                     Console.WriteLine("Your informations :\n");
                     student.DisplayInformation();
                 }
-                if (choice == 2)
+                if (choice == 2) //ok ca marche
                     do
                     {
                         student.ManageInformation();
@@ -202,13 +202,18 @@ namespace ProjetOOP_v2
 
                     }
                     while (choice2 == 1);
-                if (choice == 6)
+                //if (choice == 3) //a faire
+                if (choice == 4)
                 {
-                    Console.WriteLine("Your time table :\n\n\n");
-
+                    student.DisplayAttendance(AllStudents); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
                 }
 
-                //il reste à créer le carnet de notes et le calendier de cours et d'exam de l'étudiant et afficher l'attendance 
+                if (choice == 5)
+                {
+                    Console.WriteLine("Your time table :\n\n\n");//n'affiche rien 
+
+                }
+                
 
 
                 Console.WriteLine("Do you want to continue ? yes or no");
@@ -221,7 +226,7 @@ namespace ProjetOOP_v2
 
 
 
-        static void ApplicationTeacher(List<Teacher> DBTeacher, int index)
+        static void ApplicationTeacher(List<Teacher> DBTeacher, int index, List<Student> AllStudents, List<Course>AllCourses)
         {
             Teacher teacher = DBTeacher[index];
             int choice = 0;
@@ -232,7 +237,7 @@ namespace ProjetOOP_v2
                 choice = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine();
 
-                if (choice == 1)
+                if (choice == 1) //ok ca marche
                 {
                     Console.WriteLine("Your informations :\n");
                     teacher.DisplayInformation();
@@ -243,15 +248,33 @@ namespace ProjetOOP_v2
                 }//
                 /*if(choice == 3)
                 {
-                    teacher.InscriptionCourseStudent(Student name);
+                    teacher.InscriptionCourseStudent(Student name); // a revoir 
                 }*/
+                //if (choice == 4) // a faire
+                //if (choice == 5) // a faire
+                                        
+             // if (choice == 6) //a faire
+                
+                if (choice == 7)
+                {
+                    teacher.CreationTimetable( AllCourses);
+                }
+                if (choice == 8)
+                {
+                    Console.WriteLine("You want to manage the attendance, please follow the instructions\n\n");
+                    teacher.ManageAttendance(AllStudents); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
+                }
+                if (choice == 9)
+                {
+                    teacher.DisplayAttendance(AllStudents); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
+                }
                 Console.WriteLine("Do you want to continue ? yes or no");
                 answer = Console.ReadLine();
             } while (answer == "yes");
 
 
         }
-        static void ApplicationAdmin(List<Admin> DBAdmins, int index)
+        static void ApplicationAdmin(List<Admin> DBAdmins, int index, List<Student> AllStudents, List<Course> AllCourses)
         {
             Admin admin = DBAdmins[index];
             int choice = 0;
@@ -266,17 +289,26 @@ namespace ProjetOOP_v2
                 {
                     admin.DisplayInformation();
                 }
-                /*if (choice == 4)
+                //if (choice == 2) a faire
+                //if (choice == 3) a faire
+                /* (choice == 4)
                 {
                     admin.CreateStudentsGroup(Branche branche);
                 }*/
                 if (choice == 5)
                 {
-                    admin.CreationCourse();
+                    admin.CreationCourse(AllCourses);
                 }
                 if (choice == 6)
                 {
                     admin.CreationExam();
+                }
+                //if (choice == 7) a faire
+                //if (choice == 8) a faire
+                //if (choice == 9) a faire
+                if (choice == 10)
+                {
+                    admin.DisplayAttendance(AllStudents); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
                 }
                 Console.WriteLine("Do you want to continue ? yes or no");
                 answer = Console.ReadLine();
@@ -361,7 +393,10 @@ namespace ProjetOOP_v2
             List<Admin> DBAdmins = new List<Admin>();
             DBAdmins.Add(director);
 
-            Application(DBStudents, DBTeachers, DBAdmins);
+            List<Student> AllStudents = new List<Student>();
+            List<Course> AllCourses = new List<Course>();
+
+            Application(DBStudents, DBTeachers, DBAdmins, AllStudents, AllCourses);
 
 
 

@@ -40,7 +40,7 @@ namespace ProjetOOP_v2
             int td = Convert.ToInt32(Console.ReadLine());
 
             int compteur = 0;
-            while(groupStudents.Count<5 && compteur<AllStudents.Count)
+            while (groupStudents.Count < 5 && compteur < AllStudents.Count)
             {
                 if (AllStudents[compteur].Branche == branche && AllStudents[compteur].Group == 0)
                 {
@@ -55,22 +55,23 @@ namespace ProjetOOP_v2
 
 
 
-        public Course CreationCourse()
+        public Course CreationCourse(List<Course> AllCourses)
         {
             Console.WriteLine("You want to create a course, what's the subject ?");
-            string nameCourse= Console.ReadLine();
+            string nameCourse = Console.ReadLine();
             Console.WriteLine("Course date ? (Day in the week)");
             string dayCourse = Console.ReadLine();
             Console.WriteLine("At what time ? (HH:MM)");
-            string hourCourse = Console.ReadLine();
+            int hourCourse = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Duration ? (in decimal form)");
             double duration = Convert.ToDouble(Console.ReadLine());
 
             Console.WriteLine($"Subject : {nameCourse}, Date : {dayCourse}, Hours : {hourCourse}");
 
-            Course course  = new Course { NameCourse = nameCourse, DayCourse = dayCourse, HourCourse = hourCourse };
+            Course course = new Course { NameCourse = nameCourse, DayCourse = dayCourse, HourCourse = hourCourse };
 
             return course;
+            AllCourses.Add(course);
         }
 
         public void IncsriptionCourse(Course course, Teacher teacher, List<Student> students)
@@ -79,7 +80,7 @@ namespace ProjetOOP_v2
 
             teacher.GroupStudents.Add(students);
 
-            foreach(Student student in students)
+            foreach (Student student in students)
             {
                 student.Courses.Add(course);
             }
@@ -186,6 +187,70 @@ namespace ProjetOOP_v2
                     Console.WriteLine("Nomber of Absence :", AllStudent[i].NumberOfAbsences);
                 }
                 while (x == true);
+            }
+        }
+
+
+        public void CreationTimetable(List<Course> AllCourses)
+        {
+            string[][] Timetable = new string[6][];
+            Timetable[0][0] = "Monday";
+            Timetable[1][0] = "Tuesday";
+            Timetable[2][0] = "Wednesday";
+            Timetable[3][0] = "Thursday";
+            Timetable[4][0] = "Friday";
+            Timetable[5][0] = "Saturday";
+            for (int j = 0; j < 6; j++)
+            {
+                for (int i = 8; i < 21; i++)
+                {
+                    Timetable[j][i - 7] = (i + "H - " + (i + 1) + "H :");
+                }
+            }
+            foreach (Course course in AllCourses)
+            {
+                if (course.DayCourse == "Monday")
+                {
+                    for (int i = 0; i < course.Duration; i++)
+                    {
+                        Timetable[0][course.HourCourse + i] = (Timetable[0][course.HourCourse + i] + course.NameCourse);
+                    }
+                }
+                if (course.DayCourse == "Tuesday")
+                {
+                    for (int i = 0; i < course.Duration; i++)
+                    {
+                        Timetable[0][course.HourCourse + i] = (Timetable[0][course.HourCourse + i] + course.NameCourse);
+                    }
+                }
+                if (course.DayCourse == "Wednesday")
+                {
+                    for (int i = 0; i < course.Duration; i++)
+                    {
+                        Timetable[0][course.HourCourse + i] = (Timetable[0][course.HourCourse + i] + course.NameCourse);
+                    }
+                }
+                if (course.DayCourse == "Thursday")
+                {
+                    for (int i = 0; i < course.Duration; i++)
+                    {
+                        Timetable[0][course.HourCourse + i] = (Timetable[0][course.HourCourse + i] + course.NameCourse);
+                    }
+                }
+                if (course.DayCourse == "Friday")
+                {
+                    for (int i = 0; i < course.Duration; i++)
+                    {
+                        Timetable[0][course.HourCourse + i] = (Timetable[0][course.HourCourse + i] + course.NameCourse);
+                    }
+                }
+                if (course.DayCourse == "Saturday")
+                {
+                    for (int i = 0; i < course.Duration; i++)
+                    {
+                        Timetable[0][course.HourCourse + i] = (Timetable[0][course.HourCourse + i] + course.NameCourse);
+                    }
+                }
             }
         }
     }

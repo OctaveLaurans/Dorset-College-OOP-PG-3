@@ -8,7 +8,7 @@ namespace ProjetOOP_v2
     {
         public string NameCourse { get; set; }
         public string DayCourse { get; set; }
-        public string HourCourse { get; set; }
+        public int HourCourse { get; set; }
         public double Duration { get; set; }
 
     }
