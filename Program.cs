@@ -15,7 +15,8 @@ namespace ProjetOOP_v2
             string continu = "";
             do
             {
-                Console.Write("\nVirtual Global College Application\n\nAre you a student, a teacher or an administrator ?\n1 : Student\n2 : Teacher\n3 : Admin\nChoice : ");
+                Console.Clear();
+                Console.Write("Virtual Global College Application\n\nAre you a student, a teacher or an administrator ?\n1 : Student\n2 : Teacher\n3 : Admin\nChoice : ");
                 choice = Console.ReadLine();
 
                 Console.WriteLine();
@@ -130,9 +131,11 @@ namespace ProjetOOP_v2
             {
                 do
                 {
-                    Console.Write("Login : ");
+                    Console.Clear();
+                    Console.CursorTop = 10;
+                    CentrerLeTexte("Login : ");
                     string login = Console.ReadLine();
-                    Console.Write("Password : ");
+                    CentrerLeTexte("Password : ");
                     string password = Console.ReadLine();
                     Console.WriteLine();
 
@@ -182,44 +185,45 @@ namespace ProjetOOP_v2
             string answer = "";
             do
             {
-                Console.Write("\nWhich program do you want to execute ?\n\n\n1 : To display my informations\n2 : To manage my informations\n3 : To display my grade book\n4 : To display my attendance\n5 : To display my timetable \nChoice : ");
+                Console.Clear();
+                Console.WriteLine("Which program do you want to execute ?\n\n\n1 : To display my informations\n2 : To manage my informations\n3 : To display my grade book\n4: To display my attendance\n5 : To display my calendar \nChoice : ");
                 choice = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine();
-
-                if (choice == 1) //ok ca marche
+                switch (choice)
                 {
-                    Console.WriteLine("Your informations :\n");
-                    student.DisplayInformation();
-                }
-                if (choice == 2) //ok ca marche
-                    do
-                    {
-                        student.ManageInformation();
-                        Console.WriteLine("Your new informations are :\n");
+                    case 1: //ok ca marche
+                        Console.Clear();
+                        Console.WriteLine("Your informations :\n");
                         student.DisplayInformation();
-                        Console.Write("Do you want to change an other information ?\n1 : Yes\n2 : No\nChoice : ");
-                        choice2 = Convert.ToInt32(Console.ReadLine());
-                        Console.WriteLine();
+                        break;
+                    case 2: // ok ça amarche
+                        do
+                        {
+                            Console.Clear();
+                            student.ManageInformation();
+                            Console.Clear();
+                            Console.WriteLine("Your new informations are :\n");
+                            student.DisplayInformation();
+                            Console.WriteLine("Do you want to change an other information ?\n1 : Yes\n2 : No\nChoice : ");
+                            choice2 = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine();
 
-                    }
-                    while (choice2 == 1);
-                if (choice == 3)
-                {
-                    Console.WriteLine("No grade available");
-                    Console.WriteLine();
+                        }
+                        while (choice2 == 1);
+                        break;
+                    case 3: // à faire
+                        Console.Clear();
+                        Console.WriteLine("No grade available");
+                        break;
+                    case 4:
+                        Console.Clear();
+                        student.DisplayAttendance(); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
+                        break;
+                    case 5:
+                        Console.Clear();
+                        student.DisplayTimetable();
+                        break;
                 }
-                if (choice == 4)
-                {
-                    student.DisplayAttendance(); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
-                }
-
-                if (choice == 5)
-                {
-                    student.DisplayTimetable();
-                }
-                
-
-
                 Console.WriteLine("Do you want to continue ? yes or no");
                 answer = Console.ReadLine();
             } while (answer == "yes");
@@ -237,44 +241,59 @@ namespace ProjetOOP_v2
             string answer = "";
             do
             {
-                Console.Write("\nWhich program do you want to execute ?\n\n\n1 : To display my informations\n2 : To access to my students informations\n3 : To manage grade books\n4 : To display grade books\n5 : To display my timetable\n6 : To display the attendance\nChoice : ");
+                Console.Clear();
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my informations\n2 : To access to my students informations\n3 : To register a student in a course\n4: To manage grade books\n5 : To display grade books\n6 : To display the calendar\n7 : To manage the calendar\n8: To manage the attendance\n9 : To display the attendance\nChoice : ");
                 choice = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine();
+                switch (choice)
+                {
+                    case 1:
+                        Console.Clear();
+                        Console.WriteLine("Your informations :\n");
+                        teacher.DisplayInformation();
+                        break;
+                    case 2: // à faire
+                        Console.Clear();
+                        Console.WriteLine("à faire");
+                        break;
+                    case 3:
+                        Console.Clear();
+                        Console.WriteLine("à faire");
+                        //teacher.InscriptionCourseStudent(Student name); // a revoir 
+                        break;
+                    case 4: // à faire
+                        Console.Clear();
+                        Console.WriteLine("à faire");
+                        break;
+                    case 5: // à faire
+                        Console.Clear();
+                        Console.WriteLine("à faire");
+                        break;
+                    case 6: // à faire
+                        Console.Clear();
+                        Console.WriteLine("à faire");
+                        break;
+                    case 7:
+                        Console.Clear();
+                        break;
+                    case 8:
+                        Console.Clear();
+                        Console.WriteLine("You want to manage the attendance, please follow the instructions\n\n");
+                        teacher.ManageAttendance(DBStudents); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
+                        break;
+                    case 9:
+                        Console.Clear();
+                        teacher.DisplayAttendance(DBStudents); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
+                        break;
+                }
 
-                if (choice == 1) //ok ca marche
-                {
-                    Console.WriteLine("Your informations :\n");
-                    teacher.DisplayInformation();
-                }
-                //if (choice == 2)
-                {
-                    //a faire
-                }//
-                /*if(choice == 3)
-                {
-                }*/
-                //if (choice == 4) // a faire
-                //if (choice == 5) // a faire
-                                        
-             // if (choice == 6) //a faire
-                
-                // if (choice == 7)
-                if (choice == 8)
-                {
-                    Console.WriteLine("You want to manage the attendance, please follow the instructions\n\n");
-                    teacher.ManageAttendance(DBStudents); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
-                }
-                if (choice == 9)
-                {
-                    teacher.DisplayAttendance(DBStudents); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
-                }
                 Console.WriteLine("Do you want to continue ? yes or no");
                 answer = Console.ReadLine();
             } while (answer == "yes");
 
 
         }
-        static void ApplicationAdmin(List<Admin> DBAdmins, int index, List<Student> DBStudents, List<Course> AllCourses)
+        static void ApplicationAdmin(List<Admin> DBAdmins, int index, List<Student> AllStudents, List<Course> AllCourses)
         {
             Admin admin = DBAdmins[index];
             int choice = 0;
@@ -282,47 +301,65 @@ namespace ProjetOOP_v2
             string answer = "";
             do
             {
-                Console.Write("\nWhich program do you want to execute ?\n\n\n1 : To display my informations\n2 : To access to students informations\n3 : To access to teachers informations\n4 : To create students groups\n5 : To create a course\n6 : To create an exam\n7 : To display the attendance\n8 : To manage the attendance\n9 : To manage the payment\n10 : To register a student in an exam\nChoice : ");
+                Console.Clear();
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my informations\n2 : To access to students informations\n3 : To access to teachers informations\n4 : To create students groups\n5 : To create a course\n6 : To create an exam\n7 : To display grade books\n8 : To display the calendar\n9 : To manage the calendar\n10 : To display the attendance\n11 : To manage the payment\n12 : To register a student in an exam\nChoice : ");
                 choice = Convert.ToInt32(Console.ReadLine());
-
-                if (choice == 1)
+                switch (choice)
                 {
-                    admin.DisplayInformation();
-                }
-                //if (choice == 2) a faire
-                //if (choice == 3) a faire
-                /* (choice == 4)
-                {
-                    admin.CreateStudentsGroup(Branche branche);
-                }*/
-                if (choice == 5)
-                {
-                    admin.CreationCourse(AllCourses);
-                }
-                if (choice == 6)
-                {
-                    admin.CreationExam();
-                }
-                //if (choice == 7) a faire
-                //if (choice == 8) a faire
-                //if (choice == 9) a faire
-                if (choice == 7)
-                {
-                    admin.DisplayAttendance(DBStudents); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
+                    case 1:
+                        Console.Clear();
+                        admin.DisplayInformation();
+                        break;
+                    case 2: // à faire
+                        Console.Clear();
+                        Console.WriteLine("à faire");
+                        break;
+                    case 3: // à faire
+                        Console.Clear();
+                        Console.WriteLine("à faire");
+                        break;
+                    case 4: // à faire
+                        Console.Clear();
+                        Console.WriteLine("à faire");
+                        //     admin.CreateStudentsGroup(Branche branche);
+                        break;
+                    case 5:
+                        Console.Clear();
+                        admin.CreationCourse(AllCourses);
+                        break;
+                    case 6:
+                        Console.Clear();
+                        admin.CreationExam();
+                        break;
+                    case 7: // à faire
+                        Console.Clear();
+                        Console.WriteLine("à faire");
+                        break;
+                    case 8: // à faire
+                        Console.Clear();
+                        Console.WriteLine("à faire");
+                        break;
+                    case 9: // à faire
+                        Console.Clear();
+                        Console.WriteLine("à faire");
+                        break;
+                    case 10:
+                        Console.Clear();
+                        admin.DisplayAttendance(AllStudents); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
+                        break;
                 }
                 Console.WriteLine("Do you want to continue ? yes or no");
                 answer = Console.ReadLine();
             } while (answer == "yes");
-
-
-
-
         }
 
 
-
-
-
+        public static void CentrerLeTexte(string texte)
+        {
+            int nbEspaces = 45;
+            Console.SetCursorPosition(nbEspaces, Console.CursorTop);
+            Console.Write(texte);
+        }
         static void Initialization(List<Student> DBStudents, List<Teacher> DBTeachers, List<Admin> DBAdmins, SortedList<string, Branche> branches, List<Course> courses)
         {
 
@@ -372,7 +409,6 @@ namespace ProjetOOP_v2
             }
             fichierLect.Close();
         }
-
 
         public static void Main(string[] args)
         {

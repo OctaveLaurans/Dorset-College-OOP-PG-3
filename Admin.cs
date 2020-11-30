@@ -69,9 +69,9 @@ namespace ProjetOOP_v2
             Console.WriteLine($"Subject : {nameCourse}, Date : {dayCourse}, Hours : {hourCourse}");
 
             Course course = new Course { NameCourse = nameCourse, DayCourse = dayCourse, HourCourse = hourCourse };
+            AllCourses.Add(course);
 
             return course;
-            AllCourses.Add(course);
         }
 
         public void IncsriptionCourse(Course course, Teacher teacher, List<Student> students)
