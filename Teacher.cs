@@ -7,12 +7,14 @@ namespace ProjetOOP_v2
     class Teacher : Person
     {
         public Course Course;
-        public List<List<Student>> GroupStudents { get; set; }
+        public List<Student> GroupStudents { get; set; }
 
-        public Teacher(string name, string adress, string phoneNumber, string login, string password)
+        public Teacher(string name, string adress, string phoneNumber, string login, string password, Course course)
             : base(name, adress, phoneNumber, login, password)
         {
-            GroupStudents = new List<List<Student>>();
+            GroupStudents = new List<Student>();
+
+            Course = course;
         }
 
         public override void DisplayInformation()

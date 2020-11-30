@@ -9,14 +9,14 @@ namespace ProjetOOP_v2
 
         public List<Student> AllStudents { get; set; }
         public List<Teacher> AllTeachers { get; set; }
-        public List<Course> AllCourses { get; set; }
+        public List<List<Course>> AllCourses { get; set; }
 
-        public Admin(string name, string adress, string phoneNumber, string login, string password)
+        public Admin(string name, string adress, string phoneNumber, string login, string password, List<Student> allStudents, List<Teacher> allTeachers, List<List<Course>> allCourses)
             : base(name, adress, phoneNumber, login, password)
         {
-            AllStudents = new List<Student>();
-            AllTeachers = new List<Teacher>();
-            AllCourses = new List<Course>();
+            AllStudents = allStudents;
+            AllTeachers = allTeachers;
+            AllCourses = allCourses;
 
         }
 
@@ -55,35 +55,71 @@ namespace ProjetOOP_v2
 
 
 
-        public Course CreationCourse(List<Course> AllCourses)
+        public Course CreationCourse()
         {
-            Console.WriteLine("You want to create a course, what's the subject ?");
+            Console.WriteLine("You want to create a course, whiwh branch is concerned ?");
+            string branche = Console.ReadLine();
+            Console.WriteLine("What's the subject of the course ?");
             string nameCourse = Console.ReadLine();
             Console.WriteLine("Course date ? (Day in the week)");
             string dayCourse = Console.ReadLine();
-            Console.WriteLine("At what time ? (HH:MM)");
+            Console.WriteLine("At what time ?");
             int hourCourse = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Duration ? (in decimal form)");
+            Console.WriteLine("Duration ?");
             double duration = Convert.ToDouble(Console.ReadLine());
 
-            Console.WriteLine($"Subject : {nameCourse}, Date : {dayCourse}, Hours : {hourCourse}");
+            Console.WriteLine($"Subject : {nameCourse}, Date : {dayCourse}, Hour : {hourCourse}");
 
             Course course = new Course { NameCourse = nameCourse, DayCourse = dayCourse, HourCourse = hourCourse };
-            AllCourses.Add(course);
+
+            int brancheNumber = -1;
+            switch(branche)
+            {
+                case "Business":
+                    brancheNumber = 0;
+                    break;
+
+                case "Ingeneering":
+                    brancheNumber = 1;
+                    break;
+
+                case "Literature":
+                    brancheNumber = 2;
+                    break;
+            }
+
+
+            AllCourses[brancheNumber].Add(course);
 
             return course;
         }
 
-        public void IncsriptionCourse(Course course, Teacher teacher, List<Student> students)
+        public void IncsriptionCourse(Teacher teacher, Student student)
         {
-            teacher.Course = course;
+            Branche branche = student.Branche;
+            int brancheNumber = -1;
 
-            teacher.GroupStudents.Add(students);
-
-            foreach (Student student in students)
+            switch(branche.BrancheName)
             {
-                student.Courses.Add(course);
+                case "Business":
+                    brancheNumber = 0;
+                    break;
+
+                case "Ingeneering":
+                    brancheNumber = 1;
+                    break;
+
+                case "Literature":
+                    brancheNumber = 2;
+                    break;
+
             }
+
+            teacher.Course = AllCourses[brancheNumber][AllCourses[brancheNumber].Count - 1];
+
+            teacher.GroupStudents.Add(student);
+
+            student.Courses.Add(AllCourses[brancheNumber][AllCourses[brancheNumber].Count - 1]);
         }
 
         public Exam CreationExam()

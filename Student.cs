@@ -20,7 +20,7 @@ namespace ProjetOOP_v2
 
         public int Group { get; set; }
 
-        public Student(string name, string adress, string phoneNumber, string login, string password, Branche branche, int numberOfPayments, int numberOfAbsences, int numberOfPresence, int numberOfDelay, int group, List<Course> courses)
+        public Student(string name, string adress, string phoneNumber, string login, string password, Branche branche, int numberOfPayments, int group, int numberOfAbsences, int numberOfPresence, int numberOfDelay, List<Course> courses)
             : base(name, adress, phoneNumber, login, password)
 		{
 
