@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.IO;
+using System.Linq;
 
 namespace ProjetOOP_v2
 {
@@ -120,7 +121,7 @@ namespace ProjetOOP_v2
 
 
 
-        static void Application(List<Student> DBStudents, List<Teacher> DBTeachers, List<Admin> DBAdmins, List<Student> AllStudents, List<Course> AllCourses)
+        static void Application(List<Student> DBStudents, List<Teacher> DBTeachers, List<Admin> DBAdmins, List<Course> AllCourses)
         {
             string choice = IdentificationChoice();
 
@@ -139,17 +140,17 @@ namespace ProjetOOP_v2
                     {
                         case "1":
                             index = IdentificationStudent(DBStudents, login, password);
-                            if (index >= 0) ApplicationStudent(DBStudents, index, AllStudents);
+                            if (index >= 0) ApplicationStudent(DBStudents, index);
                             break;
 
                         case "2":
                             index = IdentificationTeacher(DBTeachers, login, password);
-                            if (index >= 0) ApplicationTeacher(DBTeachers, index, AllStudents, AllCourses);
+                            if (index >= 0) ApplicationTeacher(DBTeachers, index, DBStudents);
                             break;
 
                         case "3":
                             index = IdentificationAdmin(DBAdmins, login, password);
-                            if (index >= 0) ApplicationAdmin(DBAdmins, index, AllStudents, AllCourses);
+                            if (index >= 0) ApplicationAdmin(DBAdmins, index, DBStudents, AllCourses);
                             break;
                     }
 
@@ -172,7 +173,7 @@ namespace ProjetOOP_v2
 
         }
 
-        static void ApplicationStudent(List<Student> DBStudents, int index, List<Student> AllStudents)
+        static void ApplicationStudent(List<Student> DBStudents, int index)
         {
             int choice = 0;
             int choice2 = 0;
@@ -181,7 +182,7 @@ namespace ProjetOOP_v2
             string answer = "";
             do
             {
-                Console.Write("\nWhich program do you want to execute ?\n\n\n1 : To display my informations\n2 : To manage my informations\n3 : To display my grade book\n4: To display my attendance\n5 : To display my calendar \nChoice : ");
+                Console.Write("\nWhich program do you want to execute ?\n\n\n1 : To display my informations\n2 : To manage my informations\n3 : To display my grade book\n4 : To display my attendance\n5 : To display my timetable \nChoice : ");
                 choice = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine();
 
@@ -196,22 +197,25 @@ namespace ProjetOOP_v2
                         student.ManageInformation();
                         Console.WriteLine("Your new informations are :\n");
                         student.DisplayInformation();
-                        Console.WriteLine("Do you want to change an other information ?\n1 : Yes\n2 : No\nChoice : ");
+                        Console.Write("Do you want to change an other information ?\n1 : Yes\n2 : No\nChoice : ");
                         choice2 = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine();
 
                     }
                     while (choice2 == 1);
-                //if (choice == 3) //a faire
+                if (choice == 3)
+                {
+                    Console.WriteLine("No grade available");
+                    Console.WriteLine();
+                }
                 if (choice == 4)
                 {
-                    student.DisplayAttendance(AllStudents); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
+                    student.DisplayAttendance(); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
                 }
 
                 if (choice == 5)
                 {
-                    Console.WriteLine("Your time table :\n\n\n");//n'affiche rien 
-
+                    student.DisplayTimetable();
                 }
                 
 
@@ -226,14 +230,14 @@ namespace ProjetOOP_v2
 
 
 
-        static void ApplicationTeacher(List<Teacher> DBTeacher, int index, List<Student> AllStudents, List<Course>AllCourses)
+        static void ApplicationTeacher(List<Teacher> DBTeacher, int index, List<Student> DBStudents)
         {
             Teacher teacher = DBTeacher[index];
             int choice = 0;
             string answer = "";
             do
             {
-                Console.Write("\nWhich program do you want to execute ?\n\n\n1 : To display my informations\n2 : To access to my students informations\n3 : To register a student in a course\n4: To manage grade books\n5 : To display grade books\n6 : To display the calendar\n7 : To manage the calendar\n8: To manage the attendance\n9 : To display the attendance\nChoice : ");
+                Console.Write("\nWhich program do you want to execute ?\n\n\n1 : To display my informations\n2 : To access to my students informations\n3 : To manage grade books\n4 : To display grade books\n5 : To display my timetable\n6 : To display the attendance\nChoice : ");
                 choice = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine();
 
@@ -248,25 +252,21 @@ namespace ProjetOOP_v2
                 }//
                 /*if(choice == 3)
                 {
-                    teacher.InscriptionCourseStudent(Student name); // a revoir 
                 }*/
                 //if (choice == 4) // a faire
                 //if (choice == 5) // a faire
                                         
              // if (choice == 6) //a faire
                 
-                if (choice == 7)
-                {
-                    teacher.CreationTimetable( AllCourses);
-                }
+                // if (choice == 7)
                 if (choice == 8)
                 {
                     Console.WriteLine("You want to manage the attendance, please follow the instructions\n\n");
-                    teacher.ManageAttendance(AllStudents); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
+                    teacher.ManageAttendance(DBStudents); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
                 }
                 if (choice == 9)
                 {
-                    teacher.DisplayAttendance(AllStudents); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
+                    teacher.DisplayAttendance(DBStudents); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
                 }
                 Console.WriteLine("Do you want to continue ? yes or no");
                 answer = Console.ReadLine();
@@ -274,7 +274,7 @@ namespace ProjetOOP_v2
 
 
         }
-        static void ApplicationAdmin(List<Admin> DBAdmins, int index, List<Student> AllStudents, List<Course> AllCourses)
+        static void ApplicationAdmin(List<Admin> DBAdmins, int index, List<Student> DBStudents, List<Course> AllCourses)
         {
             Admin admin = DBAdmins[index];
             int choice = 0;
@@ -282,7 +282,7 @@ namespace ProjetOOP_v2
             string answer = "";
             do
             {
-                Console.Write("\nWhich program do you want to execute ?\n\n\n1 : To display my informations\n2 : To access to students informations\n3 : To access to teachers informations\n4 : To create students groups\n5 : To create a course\n6 : To create an exam\n7 : To display grade books\n8 : To display the calendar\n9 : To manage the calendar\n10 : To display the attendance\n11 : To manage the payment\n12 : To register a student in an exam\nChoice : ");
+                Console.Write("\nWhich program do you want to execute ?\n\n\n1 : To display my informations\n2 : To access to students informations\n3 : To access to teachers informations\n4 : To create students groups\n5 : To create a course\n6 : To create an exam\n7 : To display the attendance\n8 : To manage the attendance\n9 : To manage the payment\n10 : To register a student in an exam\nChoice : ");
                 choice = Convert.ToInt32(Console.ReadLine());
 
                 if (choice == 1)
@@ -306,9 +306,9 @@ namespace ProjetOOP_v2
                 //if (choice == 7) a faire
                 //if (choice == 8) a faire
                 //if (choice == 9) a faire
-                if (choice == 10)
+                if (choice == 7)
                 {
-                    admin.DisplayAttendance(AllStudents); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
+                    admin.DisplayAttendance(DBStudents); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
                 }
                 Console.WriteLine("Do you want to continue ? yes or no");
                 answer = Console.ReadLine();
@@ -323,14 +323,74 @@ namespace ProjetOOP_v2
 
 
 
+        static void Initialization(List<Student> DBStudents, List<Teacher> DBTeachers, List<Admin> DBAdmins, SortedList<string, Branche> branches, List<Course> courses)
+        {
+
+            string nomFichier = "C:\\Users\\maxim\\Documents\\ESILV A3\\Dorset Online\\OOP\\Project\\Database.csv";
+            StreamReader fichierLect = new StreamReader(nomFichier);
+            string ligne = "";
+            List<string[]> datas = new List<string[]>();
+            while (fichierLect.Peek() > 0)
+            {
+                ligne = fichierLect.ReadLine();
+                datas.Add(ligne.Split(';'));
+            }
+
+            for (int i = 0; i < datas.Count; i++)
+            {
+                string status = datas[i][7];
+                switch (status)
+                {
+                    case "Student":
+                        int index = branches.IndexOfKey(datas[i][8]);
+                        Branche branche = branches.ElementAt(index).Value;
+
+                        Student student = new Student(datas[i][0] + " " + datas[i][1], datas[i][2] + ", " + datas[i][3],
+                            datas[i][4], datas[i][5], datas[i][6], branche, Convert.ToInt32(datas[i][9]), Convert.ToInt32(datas[i][10]),
+                            Convert.ToInt32(datas[i][11]), Convert.ToInt32(datas[i][12]), Convert.ToInt32(datas[i][13]), courses);
+
+                        DBStudents.Add(student);
+
+                        break;
+
+                    case "Teacher":
+                        Teacher teacher = new Teacher(datas[i][0] + " " + datas[i][1], datas[i][2] + ", " + datas[i][3],
+                            datas[i][4], datas[i][5], datas[i][6]);
+
+                        DBTeachers.Add(teacher);
+
+                        break;
+
+                    case "Admin":
+                        Admin admin = new Admin(datas[i][0] + " " + datas[i][1], datas[i][2] + ", " + datas[i][3],
+                            datas[i][4], datas[i][5], datas[i][6]);
+
+                        DBAdmins.Add(admin);
+
+                        break;
+                }
+            }
+            fichierLect.Close();
+        }
+
+
         public static void Main(string[] args)
         {
 
             Branche branche1 = new Branche { BrancheName = "Ingeneering", FeesAmount = 1000 };
             Branche branche2 = new Branche { BrancheName = "Business", FeesAmount = 2000 };
-            Branche branche3 = new Branche { BrancheName = "Litterature", FeesAmount = 300 };
+            Branche branche3 = new Branche { BrancheName = "Literature", FeesAmount = 300 };
+            SortedList<string, Branche> branches = new SortedList<string, Branche>();
+            branches.Add(branche1.BrancheName, branche1);
+            branches.Add(branche2.BrancheName, branche2);
+            branches.Add(branche3.BrancheName, branche3);
 
 
+            List<Student> DBStudents = new List<Student>();
+            List<Teacher> DBTeachers = new List<Teacher>();
+            List<Admin> DBAdmins = new List<Admin>();
+
+            /*
 
             List<Teacher> listTeachers = new List<Teacher>();
 
@@ -394,9 +454,19 @@ namespace ProjetOOP_v2
             DBAdmins.Add(director);
 
             List<Student> AllStudents = new List<Student>();
-            List<Course> AllCourses = new List<Course>();
+            */
 
-            Application(DBStudents, DBTeachers, DBAdmins, AllStudents, AllCourses);
+            List<Course> AllCourses = new List<Course>();
+            Course statistics = new Course { NameCourse = "Statistics", DayCourse = "Monday", HourCourse = 9, Duration = 1 };
+            Course oop = new Course { NameCourse = "OOP", DayCourse = "Wednesday", HourCourse = 15, Duration = 1 };
+            Course dataStructure = new Course { NameCourse = "Data Structure", DayCourse = "Friday", HourCourse = 11, Duration = 1 };
+            AllCourses.Add(statistics);
+            AllCourses.Add(oop);
+            AllCourses.Add(dataStructure);
+
+            Initialization(DBStudents, DBTeachers, DBAdmins, branches, AllCourses);
+
+            Application(DBStudents, DBTeachers, DBAdmins, AllCourses);
 
 
 

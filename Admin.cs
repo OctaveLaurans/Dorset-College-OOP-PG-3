@@ -167,26 +167,23 @@ namespace ProjetOOP_v2
 
         public void DisplayAttendance(List<Student> AllStudent)
         {
-            Console.Write("Enter the name of the student for whom you want to manage the attendance\n");
+            Console.Write("Enter the name of the student for whom you want to display the attendance\n");
             string Nchoice = Console.ReadLine();
-            bool x = false;
+            bool studentExist = false;
             for (int i = 0; i < AllStudent.Count; i++)
             {
                 if (AllStudent[i].Name == Nchoice)
                 {
-                    x = true;
+                    studentExist = true;
+                    Console.WriteLine("Nomber of Presence : "+ AllStudent[i].NumberOfPresence);
+                    Console.WriteLine("Nombre of Delay : "+ AllStudent[i].NumberOfDelay);
+                    Console.WriteLine("Nomber of Absence : "+ AllStudent[i].NumberOfAbsences);
+                    break;
                 }
-                else
-                {
-                    Console.WriteLine("This student doesn't exist ... please try again\n");
-                }
-                do
-                {
-                    Console.WriteLine("Nomber of Presence :", AllStudent[i].NumberOfPresence);
-                    Console.WriteLine("Nombre of Delay :", AllStudent[i].NumberOfDelay);
-                    Console.WriteLine("Nomber of Absence :", AllStudent[i].NumberOfAbsences);
-                }
-                while (x == true);
+            }
+            if(studentExist==false)
+            {
+                Console.WriteLine("This student doesn't exist ... please try again\n");
             }
         }
 
@@ -220,35 +217,35 @@ namespace ProjetOOP_v2
                 {
                     for (int i = 0; i < course.Duration; i++)
                     {
-                        Timetable[0][course.HourCourse + i] = (Timetable[0][course.HourCourse + i] + course.NameCourse);
+                        Timetable[1][course.HourCourse + i] = (Timetable[0][course.HourCourse + i] + course.NameCourse);
                     }
                 }
                 if (course.DayCourse == "Wednesday")
                 {
                     for (int i = 0; i < course.Duration; i++)
                     {
-                        Timetable[0][course.HourCourse + i] = (Timetable[0][course.HourCourse + i] + course.NameCourse);
+                        Timetable[2][course.HourCourse + i] = (Timetable[0][course.HourCourse + i] + course.NameCourse);
                     }
                 }
                 if (course.DayCourse == "Thursday")
                 {
                     for (int i = 0; i < course.Duration; i++)
                     {
-                        Timetable[0][course.HourCourse + i] = (Timetable[0][course.HourCourse + i] + course.NameCourse);
+                        Timetable[3][course.HourCourse + i] = (Timetable[0][course.HourCourse + i] + course.NameCourse);
                     }
                 }
                 if (course.DayCourse == "Friday")
                 {
                     for (int i = 0; i < course.Duration; i++)
                     {
-                        Timetable[0][course.HourCourse + i] = (Timetable[0][course.HourCourse + i] + course.NameCourse);
+                        Timetable[4][course.HourCourse + i] = (Timetable[0][course.HourCourse + i] + course.NameCourse);
                     }
                 }
                 if (course.DayCourse == "Saturday")
                 {
                     for (int i = 0; i < course.Duration; i++)
                     {
-                        Timetable[0][course.HourCourse + i] = (Timetable[0][course.HourCourse + i] + course.NameCourse);
+                        Timetable[5][course.HourCourse + i] = (Timetable[0][course.HourCourse + i] + course.NameCourse);
                     }
                 }
             }

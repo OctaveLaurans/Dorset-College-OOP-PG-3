@@ -20,7 +20,7 @@ namespace ProjetOOP_v2
 
         public int Group { get; set; }
 
-        public Student(string name, string adress, string phoneNumber, string login, string password, Branche branche, int numberOfPayments, int numberOfAbsences, int numberOfPresence, int numberOfDelay)
+        public Student(string name, string adress, string phoneNumber, string login, string password, Branche branche, int numberOfPayments, int numberOfAbsences, int numberOfPresence, int numberOfDelay, int group, List<Course> courses)
             : base(name, adress, phoneNumber, login, password)
 		{
 
@@ -32,8 +32,15 @@ namespace ProjetOOP_v2
 
             this.NumberOfAbsences = numberOfAbsences;
 
-            Courses = new List<Course>();
+            this.NumberOfPresence = numberOfPresence;
+
+            this.NumberOfDelay = numberOfDelay;
+
+            Courses = courses;
             Exams = new List<Exam>();
+
+
+            Group = group;
 		}
 
         public void ManageInformation()
@@ -79,8 +86,18 @@ namespace ProjetOOP_v2
             Console.WriteLine($"Adress : {Adress}");
             Console.WriteLine($"Phone Number : {PhoneNumber}");
             Console.WriteLine($"Email / Login : {Login}");
+            Console.WriteLine($"Branche : {Branche.BrancheName}");
             Console.WriteLine($"Amount that need to be paid : {ToBePaid}$");
-            Console.WriteLine($"Number of Absences : {NumberOfAbsences}");
+            Console.WriteLine($"Group : {Group}");
+            Console.WriteLine();
+
+            Console.WriteLine("Courses : ");
+            foreach(Course course in Courses)
+            {
+                Console.WriteLine(course.NameCourse);
+            }
+
+            Console.WriteLine();
             Console.WriteLine();
         }
 
@@ -91,25 +108,84 @@ namespace ProjetOOP_v2
             ToBePaid -= amount;
         }
 
-        public void DisplayAttendance(List<Student> AllStudent)
+        public void DisplayAttendance()
         {
-            Console.Write("Enter your name :\n");
-            string Nchoice = Console.ReadLine();
-            for (int i = 0; i < AllStudent.Count; i++)
-            {
-                if (AllStudent[i].Name == Nchoice)
-                {
-                    Console.WriteLine("Nomber of Presence :", AllStudent[i].NumberOfPresence);
-                    Console.WriteLine("Nombre of Delay :", AllStudent[i].NumberOfDelay);
-                    Console.WriteLine("Nomber of Absence :", AllStudent[i].NumberOfAbsences);
-                }
-                else
-                {
-                    Console.WriteLine("This student doesn't exist ... please try again\n");
-                }
-            }
+            Console.WriteLine("Nomber of Presence : " + NumberOfPresence);
+            Console.WriteLine("Nombre of Delay : " + NumberOfDelay);
+            Console.WriteLine("Nomber of Absence : " + NumberOfAbsences);
         }
 
+        public void DisplayTimetable()
+        {
+            Console.Write("\t\t Monday \tTuesday \tWednesday \tThursday \tFriday\n");
 
+            for(int i=8; i<21; i++)
+            {
+                Console.Write($"{i}h\t\t");
+                foreach(Course course in Courses)
+                {
+                    switch(course.DayCourse)
+                    {
+                        case "Monday":
+                            if(course.HourCourse==i)
+                            {
+                                Console.Write(course.NameCourse);
+                            }
+                            else
+                            {
+                                Console.Write("\t\t\t\t");
+                            }
+                            break;
+
+                        case "Tuesday":
+                            if (course.HourCourse == i)
+                            {
+                                Console.Write(course.NameCourse);
+                            }
+                            else
+                            {
+                                Console.Write("\t\t\t\t");
+                            }
+                            break;
+
+                        case "Wednesday":
+                            if (course.HourCourse == i)
+                            {
+                                Console.Write(course.NameCourse);
+                            }
+                            else
+                            {
+                                Console.Write("\t\t\t\t");
+                            }
+                            break;
+
+                        case "Thursday":
+                            if (course.HourCourse == i)
+                            {
+                                Console.Write(course.NameCourse);
+                            }
+                            else
+                            {
+                                Console.Write("\t\t\t\t");
+                            }
+                            break;
+
+                        case "Friday":
+                            if (course.HourCourse == i)
+                            {
+                                Console.Write(course.NameCourse);
+                            }
+                            else
+                            {
+                                Console.Write("\t\t\t\t");
+                            }
+                            break;
+                    }
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+
+        }
     }
 }
