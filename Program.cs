@@ -149,7 +149,7 @@ namespace ProjetOOP_v2
             do
             {
                 Console.Clear();
-                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To manage my information\n3 : To display my grade book\n4: To display my attendance\n5 : To display my calendar \nChoice : ");
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To manage my information\n3 : To display my grade book\n4: To display my attendance\n5 : To display my calendar\n6 : To pay the school fees\nChoice : ");
                 choice = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine();
                 switch (choice)
@@ -185,6 +185,10 @@ namespace ProjetOOP_v2
                     case 5:
                         Console.Clear();
                         student.DisplayTimetable();
+                        break;
+                    case 6:
+                        Console.Clear();
+                        student.Payment();
                         break;
                 }
                 Console.WriteLine("Do you want to continue ? Yes or No");

@@ -102,6 +102,7 @@ namespace ProjetOOP_v2
             int amount = Branche.FeesAmount / NumberOfPayments;
 
             ToBePaid -= amount;
+            Console.WriteLine($"You have just paid {amount}$. You still have to pay {ToBePaid}$.\n");
         }
 
         public void DisplayAttendance()
