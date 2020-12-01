@@ -118,74 +118,39 @@ namespace ProjetOOP_v2
         public void DisplayTimetable()
         {
             Console.Write("\t\t Monday \tTuesday \tWednesday \tThursday \tFriday\n");
+            
+            List<string> week = new List<string>();
+            week.Add("Monday");
+            week.Add("Tuesday");
+            week.Add("Wednesday");
+            week.Add("Thursday");
+            week.Add("Friday");
 
-            for(int i=8; i<21; i++)
+            bool courseOrNot = false;
+            
+            for (int i = 8; i < 21; i++)
             {
                 Console.Write($"{i}h\t\t");
-                foreach(Course course in Courses)
+                foreach (string day in week)
                 {
-                    switch(course.DayCourse)
+                    foreach(Course course in Courses)
                     {
-                        case "Monday":
-                            if(course.HourCourse==i)
-                            {
-                                Console.Write(course.NameCourse);
-                            }
-                            else
-                            {
-                                Console.Write("\t\t\t\t");
-                            }
+                        if (course.DayCourse == day && course.HourCourse==i)
+                        {
+                            Console.Write(course.NameCourse+"\t");
+                            courseOrNot = true;
                             break;
-
-                        case "Tuesday":
-                            if (course.HourCourse == i)
-                            {
-                                Console.Write(course.NameCourse);
-                            }
-                            else
-                            {
-                                Console.Write("\t\t\t\t");
-                            }
-                            break;
-
-                        case "Wednesday":
-                            if (course.HourCourse == i)
-                            {
-                                Console.Write(course.NameCourse);
-                            }
-                            else
-                            {
-                                Console.Write("\t\t\t\t");
-                            }
-                            break;
-
-                        case "Thursday":
-                            if (course.HourCourse == i)
-                            {
-                                Console.Write(course.NameCourse);
-                            }
-                            else
-                            {
-                                Console.Write("\t\t\t\t");
-                            }
-                            break;
-
-                        case "Friday":
-                            if (course.HourCourse == i)
-                            {
-                                Console.Write(course.NameCourse);
-                            }
-                            else
-                            {
-                                Console.Write("\t\t\t\t");
-                            }
-                            break;
+                        }
                     }
+                    if(courseOrNot==false)
+                    {
+                        Console.Write("\t\t");
+                    }
+                    courseOrNot = false;
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine();
-
+            
         }
     }
 }
