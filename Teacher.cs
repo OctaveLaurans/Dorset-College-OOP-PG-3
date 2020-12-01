@@ -9,10 +9,10 @@ namespace ProjetOOP_v2
         public Course Course;
         public List<Student> GroupStudents { get; set; }
 
-        public Teacher(string name, string adress, string phoneNumber, string login, string password, Course course)
+        public Teacher(string name, string adress, string phoneNumber, string login, string password, Course course, List<Student> listOfStudents)
             : base(name, adress, phoneNumber, login, password)
         {
-            GroupStudents = new List<Student>();
+            GroupStudents = listOfStudents;
 
             Course = course;
         }
@@ -24,6 +24,17 @@ namespace ProjetOOP_v2
             Console.WriteLine($"Phone Number : {PhoneNumber}");
             Console.WriteLine($"Email / Login : {Login}");
         }
+
+        public void DisplayStudentsInformation()
+        {
+            foreach(Student student in GroupStudents)
+            {
+                student.DisplayInformation();
+            }
+        }
+
+
+
 
         public void InscriptionCourseStudent(Student name)
         {

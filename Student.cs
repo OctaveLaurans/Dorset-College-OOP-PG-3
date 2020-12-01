@@ -18,9 +18,8 @@ namespace ProjetOOP_v2
         public int NumberOfPresence { get; set; }
         public int NumberOfDelay { get; set; }
 
-        public int Group { get; set; }
 
-        public Student(string name, string adress, string phoneNumber, string login, string password, Branche branche, int numberOfPayments, int group, int numberOfAbsences, int numberOfPresence, int numberOfDelay, List<Course> courses)
+        public Student(string name, string adress, string phoneNumber, string login, string password, Branche branche, int numberOfPayments, int numberOfAbsences, int numberOfPresence, int numberOfDelay, List<Course> courses)
             : base(name, adress, phoneNumber, login, password)
 		{
 
@@ -39,8 +38,6 @@ namespace ProjetOOP_v2
             Courses = courses;
             Exams = new List<Exam>();
 
-
-            Group = group;
 		}
 
         public void ManageInformation()
@@ -88,7 +85,6 @@ namespace ProjetOOP_v2
             Console.WriteLine($"Email / Login : {Login}");
             Console.WriteLine($"Branche : {Branche.BrancheName}");
             Console.WriteLine($"Amount that need to be paid : {ToBePaid}$");
-            Console.WriteLine($"Group : {Group}");
             Console.WriteLine();
 
             Console.WriteLine("Courses : ");

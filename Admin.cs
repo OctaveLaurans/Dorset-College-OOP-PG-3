@@ -29,7 +29,7 @@ namespace ProjetOOP_v2
         }
 
 
-
+        /*
         public List<Student> CreateStudentsGroup(Branche branche)
         {
 
@@ -52,7 +52,7 @@ namespace ProjetOOP_v2
 
             return groupStudents;
         }
-
+        */
 
 
         public Course CreationCourse()

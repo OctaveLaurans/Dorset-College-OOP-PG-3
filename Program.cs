@@ -214,7 +214,7 @@ namespace ProjetOOP_v2
                         break;
                     case 2: // à faire
                         Console.Clear();
-                        Console.WriteLine("à faire");
+                        teacher.DisplayStudentsInformation();
                         break;
                     case 3:
                         Console.Clear();
@@ -262,7 +262,7 @@ namespace ProjetOOP_v2
             do
             {
                 Console.Clear();
-                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my informations\n2 : To access to students informations\n3 : To access to teachers informations\n4 : To create students groups\n5 : To create a course\n6 : To create an exam\n7 : To display grade books\n8 : To display the calendar\n9 : To manage the calendar\n10 : To display the attendance\n11 : To manage the payment\n12 : To register a student in an exam\n13 : To register a student to a course\n14 : To delete a course\nChoice : ");
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my informations\n2 : To access to students informations\n3 : To access to teachers informations\n5 : To create a course\n6 : To create an exam\n7 : To display grade books\n8 : To display the calendar\n9 : To manage the calendar\n10 : To display the attendance\n11 : To manage the payment\n12 : To register a student in an exam\n13 : To register a student to a course\n14 : To delete a course\nChoice : ");
                 choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -363,14 +363,49 @@ namespace ProjetOOP_v2
 
                         Student student = new Student(datas[i][0], datas[i][1], datas[i][2],
                             datas[i][3], datas[i][4], branche, Convert.ToInt32(datas[i][7]), Convert.ToInt32(datas[i][8]),
-                            Convert.ToInt32(datas[i][9]), Convert.ToInt32(datas[i][10]), Convert.ToInt32(datas[i][11]), courses[index]);
+                            Convert.ToInt32(datas[i][9]), Convert.ToInt32(datas[i][10]), courses[index]);
 
                         DBStudents.Add(student);
 
                         break;
 
                     case "Teacher":
-                        Teacher teacher = new Teacher(datas[i][0], datas[i][1], datas[i][2], datas[i][3], datas[i][4], courses[1][0]);
+                        // Create each teacher with his course and his list of students
+
+                        //Course
+                        string courseName = datas[i][11];
+
+                        int brancheNumber = 0;
+                        int courseNumber = 0;
+                        bool courseFound = false;
+                        for(brancheNumber=0; brancheNumber<courses.Count; brancheNumber++)
+                        {
+                            for(courseNumber=0; courseNumber<courses[brancheNumber].Count; courseNumber++)
+                            {
+                                if (courses[brancheNumber][courseNumber].NameCourse == courseName)
+                                {
+                                    courseFound = true;
+                                    break;
+                                }
+                            }
+                            if(courseFound==true)
+                            {
+                                break;
+                            }
+                        }
+
+                        //List of students
+                        List<Student> studentOfTeacher = new List<Student>();
+                        foreach(Student undergraduate in DBStudents)
+                        {
+                            if(undergraduate.Branche.BrancheName == branches.Keys[brancheNumber])
+                            {
+                                studentOfTeacher.Add(undergraduate);
+                            }
+                        }
+
+                        Teacher teacher = new Teacher(datas[i][0], datas[i][1], datas[i][2], datas[i][3], datas[i][4], courses[brancheNumber][courseNumber],
+                            studentOfTeacher);
 
                         DBTeachers.Add(teacher);
 
@@ -393,7 +428,7 @@ namespace ProjetOOP_v2
 
             List<string> writer = new List<string>();
 
-            newInfo = "Name;Address;Phone Number;Email / Login;Password;Status;Branch;Number of Payments;Group;Absence;Presence;Delay;Course(s)";
+            newInfo = "Name;Address;Phone Number;Email / Login;Password;Status;Branch;Number of Payments;Absence;Presence;Delay;Course(s)";
             writer.Add(newInfo);
             newInfo = "";
             writer.Add(newInfo);
@@ -401,7 +436,7 @@ namespace ProjetOOP_v2
             foreach (Student student in DBStudents)
             {
                 newInfo = student.Name + ";" + student.Adress + ";" + student.PhoneNumber + ";" + student.Login + ";" + student.Password + ";" +
-                "Student" + ";" + student.Branche.BrancheName + ";" + student.NumberOfPayments + ";" + student.Group + ";" + student.NumberOfAbsences +
+                "Student" + ";" + student.Branche.BrancheName + ";" + student.NumberOfPayments + ";" + student.NumberOfAbsences +
                 ";" + student.NumberOfPresence + ";" + student.NumberOfDelay;
                 foreach(Course course in student.Courses)
                 {
@@ -412,7 +447,7 @@ namespace ProjetOOP_v2
             foreach (Teacher teacher in DBTeachers)
             {
                 newInfo = teacher.Name + ";" + teacher.Adress + ";" + teacher.PhoneNumber + ";" + teacher.Login + ";" + teacher.Password + ";" +
-                "Teacher" + ";" + ";" + ";" + ";" + ";" + ";" + ";" + teacher.Course.NameCourse;
+                "Teacher" + ";" + ";" + ";" + ";" + ";" + ";" + teacher.Course.NameCourse;
                 writer.Add(newInfo);
             }
             foreach (Admin admin in DBAdmins)
