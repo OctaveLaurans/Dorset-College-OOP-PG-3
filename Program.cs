@@ -231,7 +231,7 @@ namespace ProjetOOP_v2
                         break;
                     case 6: // à faire
                         Console.Clear();
-                        Console.WriteLine("à faire");
+                        teacher.DisplayTimetable();
                         break;
                     case 7:
                         Console.Clear();
@@ -262,7 +262,7 @@ namespace ProjetOOP_v2
             do
             {
                 Console.Clear();
-                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my informations\n2 : To access to students informations\n3 : To access to teachers informations\n5 : To create a course\n6 : To create an exam\n7 : To display grade books\n8 : To display the calendar\n9 : To manage the calendar\n10 : To display the attendance\n11 : To manage the payment\n12 : To register a student in an exam\n13 : To register a teacher to a course\n14 : To delete a course\nChoice : ");
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my informations\n2 : To access to students informations\n3 : To access to teachers informations\n5 : To create a course\n6 : To create an exam\n7 : To display grade books\n8 : To display the calendar\n9 : To manage the calendar\n10 : To display the attendance\n11 : To manage the payment\n12 : To register a student in an exam\n13 : To register a teacher to a course\n14 : To delete a course\n15 : To display Teacher Timetable\nChoice : ");
                 choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -324,6 +324,11 @@ namespace ProjetOOP_v2
                     case 14:
                         Console.Clear();
                         admin.DeleteCourse();
+                        break;
+
+                    case 15:
+                        Console.Clear();
+                        admin.DisplayTimetableTeacher();
                         break;
                 }
                 Console.WriteLine("Do you want to continue ? yes or no");

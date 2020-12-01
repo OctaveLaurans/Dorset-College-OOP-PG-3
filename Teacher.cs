@@ -34,13 +34,6 @@ namespace ProjetOOP_v2
         }
 
 
-
-
-        public void InscriptionCourseStudent(Student name)
-        {
-            name.Courses.Add(Course);
-        }
-
         public void ManageAttendance(List<Student> AllStudent)
         {
             int choice = 0;
@@ -120,6 +113,39 @@ namespace ProjetOOP_v2
         }
 
         
+        public void DisplayTimetable()
+        {
+            Console.Write("\t\t Monday \tTuesday \tWednesday \tThursday \tFriday\n");
+
+            List<string> week = new List<string>();
+            week.Add("Monday");
+            week.Add("Tuesday");
+            week.Add("Wednesday");
+            week.Add("Thursday");
+            week.Add("Friday");
+
+            bool courseOrNot = false;
+
+            for (int i = 8; i < 21; i++)
+            {
+                Console.Write($"{i}h\t\t");
+                foreach (string day in week)
+                {
+                    if (Course.DayCourse == day && Course.HourCourse == i)
+                    {
+                        Console.Write(Course.NameCourse + "\t");
+                        courseOrNot = true;
+                        break;
+                    }
+                    if (courseOrNot == false)
+                    {
+                        Console.Write("\t\t");
+                    }
+                    courseOrNot = false;
+                }
+                Console.WriteLine();
+            }
+        }
     }
 
 }

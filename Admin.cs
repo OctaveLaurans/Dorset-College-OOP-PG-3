@@ -291,66 +291,49 @@ namespace ProjetOOP_v2
         }
 
 
-        public void CreationTimetable(List<Course> AllCourses)
+        public void DisplayTimetableTeacher()
         {
-            string[][] Timetable = new string[6][];
-            Timetable[0][0] = "Monday";
-            Timetable[1][0] = "Tuesday";
-            Timetable[2][0] = "Wednesday";
-            Timetable[3][0] = "Thursday";
-            Timetable[4][0] = "Friday";
-            Timetable[5][0] = "Saturday";
-            for (int j = 0; j < 6; j++)
+            Console.Write("\t\t Monday \tTuesday \tWednesday \tThursday \tFriday\n");
+
+            List<string> week = new List<string>();
+            week.Add("Monday");
+            week.Add("Tuesday");
+            week.Add("Wednesday");
+            week.Add("Thursday");
+            week.Add("Friday");
+
+            bool courseOrNot = false;
+
+            for (int i = 8; i < 21; i++)
             {
-                for (int i = 8; i < 21; i++)
+                Console.Write($"{i}h\t\t");
+                foreach (string day in week)
                 {
-                    Timetable[j][i - 7] = (i + "H - " + (i + 1) + "H :");
-                }
-            }
-            foreach (Course course in AllCourses)
-            {
-                if (course.DayCourse == "Monday")
-                {
-                    for (int i = 0; i < course.Duration; i++)
+                    foreach (List<Course> list in AllCourses)
                     {
-                        Timetable[0][course.HourCourse + i] = (Timetable[0][course.HourCourse + i] + course.NameCourse);
+                        foreach(Course course in list)
+                        {
+                            if (course.DayCourse == day && course.HourCourse == i)
+                            {
+                                foreach(Teacher teacher in AllTeachers)
+                                {
+                                    if(teacher.Course==course)
+                                    {
+                                        Console.Write(teacher.Name + "\t");
+                                        courseOrNot = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
                     }
-                }
-                if (course.DayCourse == "Tuesday")
-                {
-                    for (int i = 0; i < course.Duration; i++)
+                    if (courseOrNot == false)
                     {
-                        Timetable[1][course.HourCourse + i] = (Timetable[0][course.HourCourse + i] + course.NameCourse);
+                        Console.Write("\t\t");
                     }
+                    courseOrNot = false;
                 }
-                if (course.DayCourse == "Wednesday")
-                {
-                    for (int i = 0; i < course.Duration; i++)
-                    {
-                        Timetable[2][course.HourCourse + i] = (Timetable[0][course.HourCourse + i] + course.NameCourse);
-                    }
-                }
-                if (course.DayCourse == "Thursday")
-                {
-                    for (int i = 0; i < course.Duration; i++)
-                    {
-                        Timetable[3][course.HourCourse + i] = (Timetable[0][course.HourCourse + i] + course.NameCourse);
-                    }
-                }
-                if (course.DayCourse == "Friday")
-                {
-                    for (int i = 0; i < course.Duration; i++)
-                    {
-                        Timetable[4][course.HourCourse + i] = (Timetable[0][course.HourCourse + i] + course.NameCourse);
-                    }
-                }
-                if (course.DayCourse == "Saturday")
-                {
-                    for (int i = 0; i < course.Duration; i++)
-                    {
-                        Timetable[5][course.HourCourse + i] = (Timetable[0][course.HourCourse + i] + course.NameCourse);
-                    }
-                }
+                Console.WriteLine();
             }
         }
     }
