@@ -22,7 +22,6 @@ namespace ProjetOOP_v2
         {
             GroupStudents = new List<Student>();
 
-
         }
 
         public override void DisplayInformation()
@@ -31,6 +30,43 @@ namespace ProjetOOP_v2
             Console.WriteLine($"Adress : {Adress}");
             Console.WriteLine($"Phone Number : {PhoneNumber}");
             Console.WriteLine($"Email / Login : {Login}");
+            if (Course != null) Console.WriteLine($"Course : {Course.NameCourse}\n");
+        }
+        public override void ManageInformation()
+        {
+            Console.WriteLine("Which information do you want to change ?");
+            Console.WriteLine("1. Adress");
+            Console.WriteLine("2. Phone Number");
+            Console.WriteLine("3. Password");
+            Console.Write("Choice : ");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine();
+
+            string change;
+            switch (choice)
+            {
+                case 1:
+                    Console.Write("Enter your new adress : ");
+                    change = Console.ReadLine();
+                    this.Adress = change;
+                    Console.WriteLine();
+                    break;
+
+                case 2:
+                    Console.Write("Enter your new phone number : ");
+                    change = Console.ReadLine();
+                    this.PhoneNumber = change;
+                    Console.WriteLine();
+                    break;
+
+                case 3:
+                    Console.Write("Enter your new password : ");
+                    change = Console.ReadLine();
+                    this.Password = change;
+                    Console.WriteLine();
+                    break;
+            }
+
         }
 
         public void DisplayStudentsInformation()

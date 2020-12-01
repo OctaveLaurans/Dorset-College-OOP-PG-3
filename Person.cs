@@ -22,5 +22,6 @@ namespace ProjetOOP_v2
         }
 
         public abstract void DisplayInformation();
+        public abstract void ManageInformation();
     }
 }

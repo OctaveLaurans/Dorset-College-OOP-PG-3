@@ -40,7 +40,7 @@ namespace ProjetOOP_v2
 
 		}
 
-        public void ManageInformation()
+        public override void ManageInformation()
         {
             Console.WriteLine("Which information do you want to change ?");
             Console.WriteLine("1. Adress");
@@ -94,7 +94,7 @@ namespace ProjetOOP_v2
             }
 
             Console.WriteLine();
-            Console.WriteLine();
+
         }
 
         public void Payment()

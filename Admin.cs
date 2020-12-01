@@ -27,7 +27,88 @@ namespace ProjetOOP_v2
             Console.WriteLine($"Name : {Name}");
             Console.WriteLine($"Adress : {Adress}");
             Console.WriteLine($"Phone Number : {PhoneNumber}");
-            Console.WriteLine($"Email / Login : {Login}");
+            Console.WriteLine($"Email / Login : {Login}\n");
+        }
+        public override void ManageInformation()
+        {
+            Console.WriteLine("Which information do you want to change ?");
+            Console.WriteLine("1. Adress");
+            Console.WriteLine("2. Phone Number");
+            Console.WriteLine("3. Password");
+            Console.Write("Choice : ");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine();
+
+            string change;
+            switch (choice)
+            {
+                case 1:
+                    Console.Write("Enter your new adress : ");
+                    change = Console.ReadLine();
+                    this.Adress = change;
+                    Console.WriteLine();
+                    break;
+
+                case 2:
+                    Console.Write("Enter your new phone number : ");
+                    change = Console.ReadLine();
+                    this.PhoneNumber = change;
+                    Console.WriteLine();
+                    break;
+
+                case 3:
+                    Console.Write("Enter your new password : ");
+                    change = Console.ReadLine();
+                    this.Password = change;
+                    Console.WriteLine();
+                    break;
+            }
+
+        }
+
+
+        public void DisplayStudentInformation()
+        {
+            bool exist = false;
+
+            Console.Write("Enter the name of the student for whom you want to display the information\n");
+            string Nchoice = Console.ReadLine();
+            Console.WriteLine();
+            for (int i = 0; i < AllStudents.Count; i++)
+            {
+                if (AllStudents[i].Name == Nchoice)
+                {
+                    AllStudents[i].DisplayInformation();
+                    exist = true;
+                    break;
+                }
+            }
+            if (exist == false)
+            {
+                Console.WriteLine("This student doesn't exist ... please try again\n");
+            }
+        }
+
+        public void DisplayTeacherInformation()
+        {
+            bool exist = false;
+
+            Console.Write("Enter the name of the teacher for whom you want to display the information\n");
+            string Nchoice = Console.ReadLine();
+            Console.WriteLine();
+            for (int i = 0; i < AllTeachers.Count; i++)
+            {
+                if (AllTeachers[i].Name == Nchoice)
+                {
+                    AllTeachers[i].DisplayInformation();
+                    exist = true;
+                    break;
+                }
+            }
+            if (exist == false)
+            {
+                Console.WriteLine("This teacher doesn't exist ... please try again\n");
+            }
         }
 
         public Course CreationCourse()

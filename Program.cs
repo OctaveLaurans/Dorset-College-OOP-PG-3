@@ -202,7 +202,7 @@ namespace ProjetOOP_v2
             do
             {
                 Console.Clear();
-                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to my students information\n3 : To register a student in a course\n4: To manage grade books\n5 : To display grade books\n6 : To display the calendar\n7 : To manage the calendar\n8: To manage the attendance\n9 : To display the attendance\nChoice : ");
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to my students information\n3 : To register a student in a course\n4: To manage grade books\n5 : To display grade books\n6 : To display the calendar\n7 : To manage the calendar\n8: To manage the attendance\n9 : To display the attendance\n10 : To manage your information\nChoice : ");
                 choice = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine();
                 switch (choice)
@@ -243,6 +243,10 @@ namespace ProjetOOP_v2
                         Console.Clear();
                         teacher.DisplayAttendance(); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
                         break;
+                    case 10:
+                        Console.Clear();
+                        teacher.ManageInformation();
+                        break;
                 }
 
                 Console.WriteLine("Do you want to continue ? Yes or No");
@@ -260,7 +264,7 @@ namespace ProjetOOP_v2
             do
             {
                 Console.Clear();
-                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to students information\n3 : To access to teachers informations\n5 : To create a course\n6 : To create an exam\n7 : To display grade books\n8 : To display the calendar\n9 : To manage the calendar\n10 : To display the attendance\n11 : To manage the attendance\n12 : To register a student in an exam\n13 : To register a teacher to a course\n14 : To delete a course\n15 : To display Teacher Timetable\n16 : To Register a Student\n17 : To Remove a Student\n18 : To Register a Teacher\n19 : To Remove a Teacher\nChoice : ");
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to students information\n3 : To access to teachers informations\n5 : To create a course\n6 : To create an exam\n7 : To display grade books\n8 : To display the calendar\n9 : To manage the calendar\n10 : To display the attendance\n11 : To manage the attendance\n12 : To register a student in an exam\n13 : To register a teacher to a course\n14 : To delete a course\n15 : To display Teacher Timetable\n16 : To Register a Student\n17 : To Remove a Student\n18 : To Register a Teacher\n19 : To Remove a Teacher\n20 : To manage your information\nChoice : ");
                 choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -270,11 +274,11 @@ namespace ProjetOOP_v2
                         break;
                     case 2: // à faire
                         Console.Clear();
-                        Console.WriteLine("à faire");
+                        admin.DisplayStudentInformation();
                         break;
                     case 3: // à faire
                         Console.Clear();
-                        Console.WriteLine("à faire");
+                        admin.DisplayTeacherInformation();
                         break;
                     case 4: // à faire
                         Console.Clear();
@@ -351,6 +355,10 @@ namespace ProjetOOP_v2
                     case 19:
                         Console.Clear();
                         admin.RemoveTeacher();
+                        break;
+                    case 20:
+                        Console.Clear();
+                        admin.ManageInformation();
                         break;
                 }
                 Console.WriteLine("Do you want to continue ? Yes or No");
