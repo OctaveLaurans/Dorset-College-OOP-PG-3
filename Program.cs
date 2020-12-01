@@ -149,7 +149,7 @@ namespace ProjetOOP_v2
             do
             {
                 Console.Clear();
-                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To manage my information\n3 : To display my grade book\n4: To display my attendance\n5 : To display my calendar\n6 : To pay the school fees\nChoice : ");
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To manage my information\n3 : To display my grade book\n4: To display my attendance\n5 : To display my timetable\n6 : To pay the school fees\nChoice : ");
                 choice = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine();
                 switch (choice)
@@ -268,7 +268,7 @@ namespace ProjetOOP_v2
             do
             {
                 Console.Clear();
-                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to students information\n3 : To access to teachers informations\n5 : To create a course\n6 : To create an exam\n7 : To display grade books\n8 : To display the calendar\n9 : To manage the calendar\n10 : To display the attendance\n11 : To manage the attendance\n12 : To register a student in an exam\n13 : To register a teacher to a course\n14 : To delete a course\n15 : To display Teacher Timetable\n16 : To Register a Student\n17 : To Remove a Student\n18 : To Register a Teacher\n19 : To Remove a Teacher\n20 : To manage your information\nChoice : ");
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to students information\n3 : To access to teachers informations\n5 : To create a course\n6 : To create an exam\n7 : To display grade books\n8 : To display the calendar\n9 : To manage the calendar\n10 : To display the attendance\n11 : To manage the attendance\n12 : To register a student in an exam\n13 : To register a teacher to a course\n14 : To delete a course\n15 : To display Teacher Timetable\n16 : To Register a Student\n17 : To Remove a Student\n18 : To Register a Teacher\n19 : To Remove a Teacher\n20 : To manage your information\n21 : To manage a course\nChoice : ");
                 choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -292,15 +292,6 @@ namespace ProjetOOP_v2
                     case 5:
                         Console.Clear();
                         admin.CreationCourse();
-
-                        foreach(List<Course> list in admin.AllCourses)
-                        {
-                            foreach(Course course in list)
-                            {
-                                Console.WriteLine(course.NameCourse);
-                            }
-                        }
-
                         break;
                     case 6:
                         Console.Clear();
@@ -363,6 +354,10 @@ namespace ProjetOOP_v2
                     case 20:
                         Console.Clear();
                         admin.ManageInformation();
+                        break;
+                    case 21:
+                        Console.Clear();
+                        admin.ManageCourse();
                         break;
                 }
                 Console.WriteLine("Do you want to continue ? Yes or No");

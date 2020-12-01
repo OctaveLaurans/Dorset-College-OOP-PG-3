@@ -113,7 +113,7 @@ namespace ProjetOOP_v2
 
         public Course CreationCourse()
         {
-            Console.WriteLine("You want to create a course, whiwh branch is concerned ?");
+            Console.WriteLine("You want to create a course, which branch is concerned ?");
             string branche = Console.ReadLine();
             Console.WriteLine("What's the subject of the course ?");
             string nameCourse = Console.ReadLine();
@@ -123,10 +123,10 @@ namespace ProjetOOP_v2
             int hourCourse = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Duration ?");
             double duration = Convert.ToDouble(Console.ReadLine());
-
-            Console.WriteLine($"Subject : {nameCourse}, Date : {dayCourse}, Hour : {hourCourse}");
+            Console.WriteLine();
 
             Course course = new Course { NameCourse = nameCourse, DayCourse = dayCourse, HourCourse = hourCourse };
+            course.DisplaySchedule();
 
             int brancheNumber = -1;
             switch(branche)
@@ -150,10 +150,53 @@ namespace ProjetOOP_v2
             return course;
         }
 
+        public void ManageCourse()
+        {
+            Console.WriteLine("You want to modify a course, which branch is concerned ?");
+            string branche = Console.ReadLine();
+            Console.WriteLine("What's the name of the course ?");
+            string nameCourse = Console.ReadLine();
+
+            int brancheNumber = -1;
+            switch (branche)
+            {
+                case "Business":
+                    brancheNumber = 0;
+                    break;
+
+                case "Ingeneering":
+                    brancheNumber = 1;
+                    break;
+
+                case "Literature":
+                    brancheNumber = 2;
+                    break;
+            }
+
+            for (int i = 0; i < AllCourses[brancheNumber].Count; i++)
+            {
+                if (nameCourse == AllCourses[brancheNumber][i].NameCourse)
+                {
+                    Console.WriteLine($"What are the new schedule of the course {AllCourses[brancheNumber][i]}");
+                    Console.WriteLine("Course date ? (Day in the week)");
+                    string dayCourse = Console.ReadLine();
+                    Console.WriteLine("At what time ?");
+                    int hourCourse = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Duration ?");
+                    double duration = Convert.ToDouble(Console.ReadLine());
+                    Console.WriteLine();
+
+                    AllCourses[brancheNumber][i].DayCourse = dayCourse;
+                    AllCourses[brancheNumber][i].HourCourse = hourCourse;
+                    AllCourses[brancheNumber][i].Duration = duration;
+                    break;
+                }
+            }
+        }
 
         public void DeleteCourse()
         {
-            Console.WriteLine("You want to delete a course, whiwh branch is concerned ?");
+            Console.WriteLine("You want to delete a course, which branch is concerned ?");
             string branche = Console.ReadLine();
             Console.WriteLine("What's the name of the course ?");
             string nameCourse = Console.ReadLine();
@@ -292,19 +335,22 @@ namespace ProjetOOP_v2
                                   "Choice : ");
                     choice = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine();
-                    if (choice == 1)
+
+                    switch(choice)
                     {
-                        AllStudents[i].NumberOfPresence++;
-                        AllStudents[i].NumberOfAbsences--;
-                    }
-                    if (choice == 2)
-                    {
-                        AllStudents[i].NumberOfDelay++;
-                    }
-                    if (choice == 3)
-                    {
-                        AllStudents[i].NumberOfAbsences++;
-                        AllStudents[i].NumberOfPresence--;
+                        case 1:
+                            AllStudents[i].NumberOfPresence++;
+                            AllStudents[i].NumberOfAbsences--;
+                            break;
+
+                        case 2:
+                            AllStudents[i].NumberOfDelay++;
+                            break;
+
+                        case 3:
+                            AllStudents[i].NumberOfAbsences++;
+                            AllStudents[i].NumberOfPresence--;
+                            break;
                     }
 
                     AllStudents[i].DisplayAttendance();

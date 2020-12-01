@@ -11,5 +11,9 @@ namespace ProjetOOP_v2
         public int HourCourse { get; set; }
         public double Duration { get; set; }
 
+        public void DisplaySchedule()
+        {
+            Console.WriteLine($"Day : {DayCourse}\nHour : {HourCourse}\nDuration : {Duration}\n");
+        }
     }
 }
