@@ -262,7 +262,7 @@ namespace ProjetOOP_v2
             do
             {
                 Console.Clear();
-                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my informations\n2 : To access to students informations\n3 : To access to teachers informations\n4 : To create students groups\n5 : To create a course\n6 : To create an exam\n7 : To display grade books\n8 : To display the calendar\n9 : To manage the calendar\n10 : To display the attendance\n11 : To manage the payment\n12 : To register a student in an exam\n13 : To register a student to a course\nChoice : ");
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my informations\n2 : To access to students informations\n3 : To access to teachers informations\n4 : To create students groups\n5 : To create a course\n6 : To create an exam\n7 : To display grade books\n8 : To display the calendar\n9 : To manage the calendar\n10 : To display the attendance\n11 : To manage the payment\n12 : To register a student in an exam\n13 : To register a student to a course\n14 : To delete a course\nChoice : ");
                 choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -319,6 +319,11 @@ namespace ProjetOOP_v2
                     case 13:
                         Console.Clear();
                         admin.IncsriptionCourse(admin.AllTeachers[0], admin.AllStudents[0]);
+                        break;
+
+                    case 14:
+                        Console.Clear();
+                        admin.DeleteCourse();
                         break;
                 }
                 Console.WriteLine("Do you want to continue ? yes or no");

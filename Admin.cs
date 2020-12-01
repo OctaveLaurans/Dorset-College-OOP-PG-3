@@ -94,6 +94,43 @@ namespace ProjetOOP_v2
             return course;
         }
 
+
+        public void DeleteCourse()
+        {
+            Console.WriteLine("You want to delete a course, whiwh branch is concerned ?");
+            string branche = Console.ReadLine();
+            Console.WriteLine("What's the name of the course ?");
+            string nameCourse = Console.ReadLine();
+
+            int brancheNumber = -1;
+            switch (branche)
+            {
+                case "Business":
+                    brancheNumber = 0;
+                    break;
+
+                case "Ingeneering":
+                    brancheNumber = 1;
+                    break;
+
+                case "Literature":
+                    brancheNumber = 2;
+                    break;
+            }
+
+            for(int i=0; i<AllCourses[brancheNumber].Count; i++)
+            {
+                if(nameCourse==AllCourses[brancheNumber][i].NameCourse)
+                {
+                    AllCourses[brancheNumber].RemoveAt(i);
+                    Console.WriteLine("Course has been deleted\n");
+                    break;
+                }
+            }
+
+        }
+
+
         public void IncsriptionCourse(Teacher teacher, Student student)
         {
             Branche branche = student.Branche;
