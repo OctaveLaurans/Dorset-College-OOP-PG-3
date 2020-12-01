@@ -10,14 +10,15 @@ namespace ProjetOOP_v2
         public List<Student> AllStudents { get; set; }
         public List<Teacher> AllTeachers { get; set; }
         public List<List<Course>> AllCourses { get; set; }
+        public SortedList<string, Branche> Branches { get; set; }
 
-        public Admin(string name, string adress, string phoneNumber, string login, string password, List<Student> allStudents, List<Teacher> allTeachers, List<List<Course>> allCourses)
+        public Admin(string name, string adress, string phoneNumber, string login, string password, List<Student> allStudents, List<Teacher> allTeachers, List<List<Course>> allCourses, SortedList<string, Branche> branches)
             : base(name, adress, phoneNumber, login, password)
         {
             AllStudents = allStudents;
             AllTeachers = allTeachers;
             AllCourses = allCourses;
-
+            Branches = branches;
         }
 
         public override void DisplayInformation()
@@ -131,12 +132,28 @@ namespace ProjetOOP_v2
         }
 
 
-        public void IncsriptionCourse(Teacher teacher, Student student)
+        public void IncsriptionCourse()
         {
-            Branche branche = student.Branche;
-            int brancheNumber = -1;
 
-            switch(branche.BrancheName)
+            Console.Write("Enter the name of the teacher whom you want to register to a course\n");
+            string Nchoice = Console.ReadLine();
+            int j = 0;
+            for (j = 0; j < AllTeachers.Count; j++)
+            {
+                if (AllTeachers[j].Name == Nchoice)
+                {
+                    break;
+                }
+            }
+            Teacher teacher = AllTeachers[j];
+
+            Console.WriteLine("You want to register a teacher for a course, whiwh branch is concerned ?");
+            string branche = Console.ReadLine();
+            Console.WriteLine("What's the name of the course ?");
+            string nameCourse = Console.ReadLine();
+
+            int brancheNumber = -1;
+            switch (branche)
             {
                 case "Business":
                     brancheNumber = 0;
@@ -149,14 +166,27 @@ namespace ProjetOOP_v2
                 case "Literature":
                     brancheNumber = 2;
                     break;
-
             }
 
-            teacher.Course = AllCourses[brancheNumber][AllCourses[brancheNumber].Count - 1];
+            for (int i = 0; i < AllCourses[brancheNumber].Count; i++)
+            {
+                if (nameCourse == AllCourses[brancheNumber][i].NameCourse)
+                {
+                    teacher.Course = AllCourses[brancheNumber][i];
+                    Console.WriteLine($"{teacher.Name} has been registered for the course {teacher.Course.NameCourse}\n");
+                    break;
+                }
+            }
 
-            teacher.GroupStudents.Add(student);
+            teacher.GroupStudents.Clear();
 
-            student.Courses.Add(AllCourses[brancheNumber][AllCourses[brancheNumber].Count - 1]);
+            foreach(Student student in AllStudents)
+            {
+                if (student.Branche.BrancheName == Branches.Keys[brancheNumber])
+                {
+                    teacher.GroupStudents.Add(student);
+                }
+            }
         }
 
         public Exam CreationExam()
