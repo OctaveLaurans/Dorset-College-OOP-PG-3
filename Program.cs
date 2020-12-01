@@ -118,7 +118,7 @@ namespace ProjetOOP_v2
                 }
                 if(index >= 0)
                 {
-                    Console.WriteLine("Do you want to go to the login page ? Yes or No ?\n");
+                    Console.WriteLine("Do you want to go to the login page ? Yes or No ?");
                     string answer = Console.ReadLine();
                     if (answer == "Yes")
                     {
@@ -127,7 +127,7 @@ namespace ProjetOOP_v2
                 }
                 else
                 {
-                    Console.WriteLine("Error of connection - Email or Password invalid\nDo you want to try again ? Yes or No ?\n");
+                    Console.WriteLine("Error of connection - Email or Password invalid\nDo you want to try again ? Yes or No ?");
                     string answer = Console.ReadLine();
                     if (answer == "No")
                     {
@@ -149,7 +149,7 @@ namespace ProjetOOP_v2
             do
             {
                 Console.Clear();
-                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my informations\n2 : To manage my informations\n3 : To display my grade book\n4: To display my attendance\n5 : To display my calendar \nChoice : ");
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To manage my information\n3 : To display my grade book\n4: To display my attendance\n5 : To display my calendar \nChoice : ");
                 choice = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine();
                 switch (choice)
@@ -187,9 +187,9 @@ namespace ProjetOOP_v2
                         student.DisplayTimetable();
                         break;
                 }
-                Console.WriteLine("Do you want to continue ? yes or no");
+                Console.WriteLine("Do you want to continue ? Yes or No");
                 answer = Console.ReadLine();
-            } while (answer == "yes");
+            } while (answer == "Yes");
         }
 
 
@@ -202,7 +202,7 @@ namespace ProjetOOP_v2
             do
             {
                 Console.Clear();
-                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my informations\n2 : To access to my students informations\n3 : To register a student in a course\n4: To manage grade books\n5 : To display grade books\n6 : To display the calendar\n7 : To manage the calendar\n8: To manage the attendance\n9 : To display the attendance\nChoice : ");
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to my students information\n3 : To register a student in a course\n4: To manage grade books\n5 : To display grade books\n6 : To display the calendar\n7 : To manage the calendar\n8: To manage the attendance\n9 : To display the attendance\nChoice : ");
                 choice = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine();
                 switch (choice)
@@ -238,18 +238,16 @@ namespace ProjetOOP_v2
                         break;
                     case 8:
                         Console.Clear();
-                        Console.WriteLine("You want to manage the attendance, please follow the instructions\n\n");
-                        teacher.ManageAttendance(DBStudents); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
                         break;
                     case 9:
                         Console.Clear();
-                        teacher.DisplayAttendance(DBStudents); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
+                        teacher.DisplayAttendance(); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
                         break;
                 }
 
-                Console.WriteLine("Do you want to continue ? yes or no");
+                Console.WriteLine("Do you want to continue ? Yes or No");
                 answer = Console.ReadLine();
-            } while (answer == "yes");
+            } while (answer == "Yes");
 
 
         }
@@ -262,7 +260,7 @@ namespace ProjetOOP_v2
             do
             {
                 Console.Clear();
-                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my informations\n2 : To access to students informations\n3 : To access to teachers informations\n5 : To create a course\n6 : To create an exam\n7 : To display grade books\n8 : To display the calendar\n9 : To manage the calendar\n10 : To display the attendance\n11 : To manage the payment\n12 : To register a student in an exam\n13 : To register a teacher to a course\n14 : To delete a course\n15 : To display Teacher Timetable\n16 : To Register a Student\n17 : To Remove a Student\n18 : To Register a Teacher\n19 : To Remove a Teacher\nChoice : ");
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to students information\n3 : To access to teachers informations\n5 : To create a course\n6 : To create an exam\n7 : To display grade books\n8 : To display the calendar\n9 : To manage the calendar\n10 : To display the attendance\n11 : To manage the attendance\n12 : To register a student in an exam\n13 : To register a teacher to a course\n14 : To delete a course\n15 : To display Teacher Timetable\n16 : To Register a Student\n17 : To Remove a Student\n18 : To Register a Teacher\n19 : To Remove a Teacher\nChoice : ");
                 choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -314,7 +312,11 @@ namespace ProjetOOP_v2
                         break;
                     case 10:
                         Console.Clear();
-                        admin.DisplayAttendance(DBStudents); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
+                        admin.DisplayAttendance(); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
+                        break;
+                    case 11:
+                        Console.Clear();
+                        admin.ManageAttendance();
                         break;
                     case 13:
                         Console.Clear();
@@ -351,9 +353,9 @@ namespace ProjetOOP_v2
                         admin.RemoveTeacher();
                         break;
                 }
-                Console.WriteLine("Do you want to continue ? yes or no");
+                Console.WriteLine("Do you want to continue ? Yes or No");
                 answer = Console.ReadLine();
-            } while (answer == "yes");
+            } while (answer == "Yes");
         }
 
 
@@ -551,7 +553,7 @@ namespace ProjetOOP_v2
         public static void Main(string[] args)
         {
 
-            string nomFichier = "C:\\Users\\maxim\\Documents\\ESILV A3\\Dorset Online\\OOP\\Project\\Database.csv";
+            string nomFichier = "C:\\Users\\maxim\\Documents\\ESILV A3\\Dorset Online\\OOP\\Project\\Code\\Database.csv";
             string nomFichier2 = "C:\\Users\\maxim\\Documents\\ESILV A3\\Dorset Online\\OOP\\Project\\Database2.csv";
 
 

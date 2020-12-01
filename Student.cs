@@ -106,9 +106,10 @@ namespace ProjetOOP_v2
 
         public void DisplayAttendance()
         {
+            Console.WriteLine("Attendance\n");
             Console.WriteLine("Nomber of Presence : " + NumberOfPresence);
             Console.WriteLine("Nombre of Delay : " + NumberOfDelay);
-            Console.WriteLine("Nomber of Absence : " + NumberOfAbsences);
+            Console.WriteLine("Nomber of Absence : " + NumberOfAbsences +"\n");
         }
 
         public void DisplayTimetable()

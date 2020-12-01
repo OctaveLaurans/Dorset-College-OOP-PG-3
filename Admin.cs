@@ -189,79 +189,92 @@ namespace ProjetOOP_v2
             }
         }
 
-        public void ManageAttendance(List<Student> AllStudent)
+        public void ManageAttendance()
         {
             int choice = 0;
+            bool exist = false;
+
             Console.Write("Enter the name of the student for whom you want to manage the attendance\n");
             string Nchoice = Console.ReadLine();
-            bool x = false;
-            for (int i = 0; i < AllStudent.Count; i++)
+            Console.WriteLine();
+            for (int i = 0; i < AllStudents.Count; i++)
             {
-                if (AllStudent[i].Name == Nchoice)
+                if (AllStudents[i].Name == Nchoice)
                 {
-                    x = true;
-                }
-                else
-                {
-                    Console.WriteLine("This student doesn't exist ... please try again\n");
-                }
+                    Console.Write("Current ");
+                    AllStudents[i].DisplayAttendance();
 
-
-                do
-                {
-                    Console.Write("Teacher's Name ?\n");
-                    string Tchoice = Console.ReadLine();
-                    Console.WriteLine("Subject of the class?\n");
-                    string Schoice = Console.ReadLine();
-                    Console.WriteLine("Date  ?\n");
-                    string Dchoice = Console.ReadLine();
-                    Console.WriteLine("Hour ?\n");
-                    string Hchoice = Console.ReadLine();
-                    Console.WriteLine("Type 1 if the student is present in class\nType 2 if the student arrived late\nType 3 if the student is absent");
+                    Console.WriteLine("Which modification do you want to do ?");
+                    Console.Write("1 : The student was finally present in class (increase the number of presence and decrease the number of absence)\n" +
+                                  "2 : The student arrived late (increase the number of delay)\n" +
+                                  "3 : The student finally did not attend class (decrease the number of presence and increase the number of absence)\n" +
+                                  "Choice : ");
                     choice = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine();
                     if (choice == 1)
                     {
-                        AllStudent[i].NumberOfPresence++;
+                        AllStudents[i].NumberOfPresence++;
+                        AllStudents[i].NumberOfAbsences--;
                     }
                     if (choice == 2)
                     {
-                        AllStudent[i].NumberOfDelay++;
+                        AllStudents[i].NumberOfDelay++;
                     }
                     if (choice == 3)
                     {
-                        AllStudent[i].NumberOfAbsences++;
+                        AllStudents[i].NumberOfAbsences++;
+                        AllStudents[i].NumberOfPresence--;
                     }
 
-                    Console.WriteLine("Nomber of Presence :", AllStudent[i].NumberOfPresence);
-                    Console.WriteLine("Nombre of Delay :", AllStudent[i].NumberOfDelay);
-                    Console.WriteLine("Nomber of Absence :", AllStudent[i].NumberOfAbsences);
+                    AllStudents[i].DisplayAttendance();
+
+                    exist = true;
+                    break;
                 }
-                while (x == true);
+
+            }
+            if (exist == false)
+            {
+                Console.WriteLine("This student doesn't exist ... please try again\n");
             }
 
         }
 
 
-        public void DisplayAttendance(List<Student> AllStudent)
+        public void DisplayAttendance()
         {
-            Console.Write("Enter the name of the student for whom you want to display the attendance\n");
-            string Nchoice = Console.ReadLine();
-            bool studentExist = false;
-            for (int i = 0; i < AllStudent.Count; i++)
+            bool continu = false;
+            do
             {
-                if (AllStudent[i].Name == Nchoice)
+                bool exist = false;
+
+                Console.Write("Enter the name of the student for whom you want to display the attendance\n");
+                string Nchoice = Console.ReadLine();
+                Console.WriteLine();
+                for (int i = 0; i < AllStudents.Count; i++)
                 {
-                    studentExist = true;
-                    Console.WriteLine("Nomber of Presence : "+ AllStudent[i].NumberOfPresence);
-                    Console.WriteLine("Nombre of Delay : "+ AllStudent[i].NumberOfDelay);
-                    Console.WriteLine("Nomber of Absence : "+ AllStudent[i].NumberOfAbsences);
-                    break;
+                    if (AllStudents[i].Name == Nchoice)
+                    {
+                        AllStudents[i].DisplayAttendance();
+                        exist = true;
+                        break;
+                    }
                 }
+                if (exist == false)
+                {
+                    Console.WriteLine("This student does not exist. Please try again.\n");
+                    continu = true;
+                }
+                else
+                {
+                    Console.WriteLine("Do you want to check the attendance of another student ? Yes or No ?");
+                    string choice = Console.ReadLine();
+                    if (choice == "Yes") continu = true;
+                    else continu = false;
+                }
+                Console.WriteLine();
             }
-            if(studentExist==false)
-            {
-                Console.WriteLine("This student doesn't exist ... please try again\n");
-            }
+            while (continu == true);
         }
 
 

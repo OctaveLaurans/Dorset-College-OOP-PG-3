@@ -42,82 +42,41 @@ namespace ProjetOOP_v2
         }
 
 
-        public void ManageAttendance(List<Student> AllStudent)
+
+        public void DisplayAttendance()
         {
-            int choice = 0;
-            Console.Write("Enter the name of the student for whom you want to manage the attendance :\n");
-            string Nchoice = Console.ReadLine();
-            bool x = false;
-            for (int i = 0; i < AllStudent.Count; i++)
+            bool continu = false;
+            do
             {
-                if (AllStudent[i].Name == Nchoice)
+                bool exist = false;
+
+                Console.Write("Enter the name of the student for whom you want to display the attendance\n");
+                string Nchoice = Console.ReadLine();
+                Console.WriteLine();
+                for (int i = 0; i < GroupStudents.Count; i++)
                 {
-                    x = true;
+                    if (GroupStudents[i].Name == Nchoice)
+                    {
+                        GroupStudents[i].DisplayAttendance();
+                        exist = true;
+                        break;
+                    }
+                }
+                if(exist==false)
+                {
+                    Console.WriteLine("You don't have acces to this student information\n");
+                    continu = true;
                 }
                 else
                 {
-                    Console.WriteLine("This student doesn't exist ... please try again\n");
+                    Console.WriteLine("Do you want to check the attendance of another student ? Yes or No ?");
+                    string choice = Console.ReadLine();
+                    if (choice == "Yes") continu = true;
+                    else continu = false;
                 }
-
-
-                do
-                {
-                    Console.Write("Teacher's Name ?\n");
-                    string Tchoice = Console.ReadLine();
-                    Console.WriteLine("Subject of the class?\n");
-                    string Schoice = Console.ReadLine();
-                    Console.WriteLine("Date  ?\n");
-                    string Dchoice = Console.ReadLine();
-                    Console.WriteLine("Hour ?\n");
-                    string Hchoice = Console.ReadLine();
-                    Console.WriteLine("Type 1 if the student is present in class\nType 2 if the student arrived late\nType 3 if the student is absent");
-                    choice = Convert.ToInt32(Console.ReadLine());
-                    if (choice == 1)
-                    {
-                        AllStudent[i].NumberOfPresence++;
-                    }
-                    if (choice == 2)
-                    {
-                        AllStudent[i].NumberOfDelay++;
-                    }
-                    if (choice == 3)
-                    {
-                        AllStudent[i].NumberOfAbsences++;
-                    }
-
-                    Console.WriteLine("Nomber of Presence :", AllStudent[i].NumberOfPresence);
-                    Console.WriteLine("Nombre of Delay :", AllStudent[i].NumberOfDelay);
-                    Console.WriteLine("Nomber of Absence :", AllStudent[i].NumberOfAbsences);
-                }
-                while (x == true);
+                Console.WriteLine();
             }
-
-        }
-
-
-        public void DisplayAttendance(List<Student> AllStudent)
-        {
-            Console.Write("Enter the name of the student for whom you want to manage the attendance\n");
-            string Nchoice = Console.ReadLine();
-            bool x = false;
-            for (int i = 0; i < AllStudent.Count; i++)
-            {
-                if (AllStudent[i].Name == Nchoice)
-                {
-                    x = true;
-                }
-                else
-                {
-                    Console.WriteLine("This student doesn't exist ... please try again\n");
-                }
-                do
-                {
-                    Console.WriteLine("Nomber of Presence :", AllStudent[i].NumberOfPresence);
-                    Console.WriteLine("Nombre of Delay :", AllStudent[i].NumberOfDelay);
-                    Console.WriteLine("Nomber of Absence :", AllStudent[i].NumberOfAbsences);
-                }
-                while (x == true);
-            }
+            while (continu == true);
         }
 
         
