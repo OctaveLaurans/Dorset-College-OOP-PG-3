@@ -253,7 +253,7 @@ namespace ProjetOOP_v2
 
 
         }
-        static void ApplicationAdmin(List<Admin> DBAdmins, int index, List<Student> AllStudents)
+        static void ApplicationAdmin(List<Admin> DBAdmins, int index, List<Student> DBStudents)
         {
             Admin admin = DBAdmins[index];
             int choice = 0;
@@ -262,7 +262,7 @@ namespace ProjetOOP_v2
             do
             {
                 Console.Clear();
-                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my informations\n2 : To access to students informations\n3 : To access to teachers informations\n5 : To create a course\n6 : To create an exam\n7 : To display grade books\n8 : To display the calendar\n9 : To manage the calendar\n10 : To display the attendance\n11 : To manage the payment\n12 : To register a student in an exam\n13 : To register a teacher to a course\n14 : To delete a course\n15 : To display Teacher Timetable\nChoice : ");
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my informations\n2 : To access to students informations\n3 : To access to teachers informations\n5 : To create a course\n6 : To create an exam\n7 : To display grade books\n8 : To display the calendar\n9 : To manage the calendar\n10 : To display the attendance\n11 : To manage the payment\n12 : To register a student in an exam\n13 : To register a teacher to a course\n14 : To delete a course\n15 : To display Teacher Timetable\n16 : To Register a Student\n17 : To Remove a Student\n18 : To Register a Teacher\n19 : To Remove a Teacher\nChoice : ");
                 choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -314,7 +314,7 @@ namespace ProjetOOP_v2
                         break;
                     case 10:
                         Console.Clear();
-                        admin.DisplayAttendance(AllStudents); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
+                        admin.DisplayAttendance(DBStudents); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
                         break;
                     case 13:
                         Console.Clear();
@@ -329,6 +329,26 @@ namespace ProjetOOP_v2
                     case 15:
                         Console.Clear();
                         admin.DisplayTimetableTeacher();
+                        break;
+
+                    case 16:
+                        Console.Clear();
+                        admin.RegisterStudent();
+                        break;
+
+                    case 17:
+                        Console.Clear();
+                        admin.RemoveStudent();
+                        break;
+
+                    case 18:
+                        Console.Clear();
+                        admin.RegisterTeacher();
+                        break;
+
+                    case 19:
+                        Console.Clear();
+                        admin.RemoveTeacher();
                         break;
                 }
                 Console.WriteLine("Do you want to continue ? yes or no");
@@ -451,8 +471,11 @@ namespace ProjetOOP_v2
             }
             foreach (Teacher teacher in DBTeachers)
             {
+                string nameCourse = "";
+                if (teacher.Course != null) { nameCourse = teacher.Course.NameCourse; }
+
                 newInfo = teacher.Name + ";" + teacher.Adress + ";" + teacher.PhoneNumber + ";" + teacher.Login + ";" + teacher.Password + ";" +
-                "Teacher" + ";" + ";" + ";" + ";" + ";" + ";" + teacher.Course.NameCourse;
+                "Teacher" + ";" + ";" + ";" + ";" + ";" + ";" + nameCourse;
                 writer.Add(newInfo);
             }
             foreach (Admin admin in DBAdmins)

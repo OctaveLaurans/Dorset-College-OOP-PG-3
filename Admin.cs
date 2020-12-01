@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ProjetOOP_v2
@@ -28,33 +29,6 @@ namespace ProjetOOP_v2
             Console.WriteLine($"Phone Number : {PhoneNumber}");
             Console.WriteLine($"Email / Login : {Login}");
         }
-
-
-        /*
-        public List<Student> CreateStudentsGroup(Branche branche)
-        {
-
-            List<Student> groupStudents = new List<Student>();
-
-            // Assume that admin knows which groups already exist (to avoid that he creates two TDs with the same number)
-            Console.WriteLine("Which numero of TD do you want to create ?");
-            int td = Convert.ToInt32(Console.ReadLine());
-
-            int compteur = 0;
-            while (groupStudents.Count < 5 && compteur < AllStudents.Count)
-            {
-                if (AllStudents[compteur].Branche == branche && AllStudents[compteur].Group == 0)
-                {
-                    groupStudents.Add(AllStudents[compteur]);
-                    AllStudents[compteur].Group = td;
-                }
-                compteur++;
-            }
-
-            return groupStudents;
-        }
-        */
-
 
         public Course CreationCourse()
         {
@@ -334,6 +308,84 @@ namespace ProjetOOP_v2
                     courseOrNot = false;
                 }
                 Console.WriteLine();
+            }
+        }
+
+
+        public void RegisterStudent()
+        {
+            Console.WriteLine("Registering of a new student");
+            Console.Write("Type his/her name : ");
+            string name = Console.ReadLine();
+            Console.Write("Type his/her adress : ");
+            string adress = Console.ReadLine();
+            Console.Write("Type his/her phone number : ");
+            string phoneNumber = Console.ReadLine();
+            Console.Write("Type his/her email : ");
+            string email = Console.ReadLine();
+            Console.Write("Type his/her password : ");
+            string password = Console.ReadLine();
+            Console.Write("Type the name of his/her branch : ");
+            string branchName = Console.ReadLine();
+            Console.Write("Type the number of payments : ");
+            int nbrPayment = Convert.ToInt32(Console.ReadLine());
+
+            int index = Branches.IndexOfKey(branchName);
+            Branche branche = Branches.ElementAt(index).Value;
+
+            Student student = new Student(name, adress, phoneNumber, email, password, branche, nbrPayment, 0, 0, 0, AllCourses[index]);
+            AllStudents.Add(student);
+        }
+
+        public void RemoveStudent()
+        {
+            Console.WriteLine("Deleting a student");
+            Console.Write("Type his/her name : ");
+            string name = Console.ReadLine();
+
+            foreach(Student student in AllStudents)
+            {
+                if(student.Name == name)
+                {
+                    AllStudents.Remove(student);
+                    Console.WriteLine($"{student.Name} has been removed");
+                    break;
+                }
+            }
+        }
+
+        public void RegisterTeacher()
+        {
+            Console.WriteLine("Registering of a new teacher");
+            Console.Write("Type his/her name : ");
+            string name = Console.ReadLine();
+            Console.Write("Type his/her adress : ");
+            string adress = Console.ReadLine();
+            Console.Write("Type his/her phone number : ");
+            string phoneNumber = Console.ReadLine();
+            Console.Write("Type his/her email : ");
+            string email = Console.ReadLine();
+            Console.Write("Type his/her password : ");
+            string password = Console.ReadLine();
+
+            Teacher teacher = new Teacher(name, adress, phoneNumber, email, password);
+            AllTeachers.Add(teacher);
+        }
+
+        public void RemoveTeacher()
+        {
+            Console.WriteLine("Deleting a teacher");
+            Console.Write("Type his/her name : ");
+            string name = Console.ReadLine();
+
+            foreach (Teacher teacher in AllTeachers)
+            {
+                if (teacher.Name == name)
+                {
+                    AllTeachers.Remove(teacher);
+                    Console.WriteLine($"{teacher.Name} has been removed");
+                    break;
+                }
             }
         }
     }

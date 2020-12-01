@@ -17,6 +17,14 @@ namespace ProjetOOP_v2
             Course = course;
         }
 
+        public Teacher(string name, string adress, string phoneNumber, string login, string password)
+            : base(name, adress, phoneNumber, login, password)
+        {
+            GroupStudents = new List<Student>();
+
+
+        }
+
         public override void DisplayInformation()
         {
             Console.WriteLine($"Name : {Name}");
