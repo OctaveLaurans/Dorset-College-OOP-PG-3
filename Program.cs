@@ -141,8 +141,8 @@ namespace ProjetOOP_v2
 
         static void ApplicationStudent(List<Student> DBStudents, int index)
         {
-            int choice = 0;
-            int choice2 = 0;
+            string choice = "";
+            string choice2 = "";
             Student student = DBStudents[index];
 
             string answer = "";
@@ -150,16 +150,16 @@ namespace ProjetOOP_v2
             {
                 Console.Clear();
                 Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To manage my information\n3 : To display my grade book\n4: To display my attendance\n5 : To display my timetable\n6 : To pay the school fees\nChoice : ");
-                choice = Convert.ToInt32(Console.ReadLine());
+                choice = Console.ReadLine();
                 Console.WriteLine();
                 switch (choice)
                 {
-                    case 1: //ok ca marche
+                    case "1": //ok ca marche
                         Console.Clear();
                         Console.WriteLine("Your informations :\n");
                         student.DisplayInformation();
                         break;
-                    case 2: // ok ça amarche
+                    case "2": // ok ça amarche
                         do
                         {
                             Console.Clear();
@@ -167,28 +167,31 @@ namespace ProjetOOP_v2
                             Console.Clear();
                             Console.WriteLine("Your new informations are :\n");
                             student.DisplayInformation();
-                            Console.WriteLine("Do you want to change an other information ?\n1 : Yes\n2 : No\nChoice : ");
-                            choice2 = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("Do you want to change an other information ?\n Yes or No ?\nChoice : ");
+                            choice2 = Console.ReadLine();
                             Console.WriteLine();
 
                         }
-                        while (choice2 == 1);
+                        while (choice2 == "Yes");
                         break;
-                    case 3: // à faire
+                    case "3": // à faire
                         Console.Clear();
                         Console.WriteLine("No grade available");
                         break;
-                    case 4:
+                    case "4":
                         Console.Clear();
                         student.DisplayAttendance(); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
                         break;
-                    case 5:
+                    case "5":
                         Console.Clear();
                         student.DisplayTimetable();
                         break;
-                    case 6:
+                    case "6":
                         Console.Clear();
                         student.Payment();
+                        break;
+                    default:
+                        Console.WriteLine("\nThis choice is not available");
                         break;
                 }
                 Console.WriteLine("Do you want to continue ? Yes or No");
@@ -201,55 +204,58 @@ namespace ProjetOOP_v2
         static void ApplicationTeacher(List<Teacher> DBTeacher, int index, List<Student> DBStudents)
         {
             Teacher teacher = DBTeacher[index];
-            int choice = 0;
+            string choice = "";
             string answer = "";
             do
             {
                 Console.Clear();
                 Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to my students information\n3 : To register a student in a course\n4: To manage grade books\n5 : To display grade books\n6 : To display the calendar\n7 : To manage the calendar\n8: To manage the attendance\n9 : To display the attendance\n10 : To manage your information\nChoice : ");
-                choice = Convert.ToInt32(Console.ReadLine());
+                choice = Console.ReadLine();
                 Console.WriteLine();
                 switch (choice)
                 {
-                    case 1:
+                    case "1":
                         Console.Clear();
                         Console.WriteLine("Your informations :\n");
                         teacher.DisplayInformation();
                         break;
-                    case 2: // à faire
+                    case "2": // à faire
                         Console.Clear();
                         teacher.DisplayStudentsInformation();
                         break;
-                    case 3:
+                    case "3":
                         Console.Clear();
                         Console.WriteLine("à faire");
                         //teacher.InscriptionCourseStudent(Student name); // a revoir 
                         break;
-                    case 4: // à faire
+                    case "4": // à faire
                         Console.Clear();
                         Console.WriteLine("à faire");
                         break;
-                    case 5: // à faire
+                    case "5": // à faire
                         Console.Clear();
                         Console.WriteLine("à faire");
                         break;
-                    case 6: // à faire
+                    case "6": // à faire
                         Console.Clear();
                         teacher.DisplayTimetable();
                         break;
-                    case 7:
+                    case "7":
                         Console.Clear();
                         break;
-                    case 8:
+                    case "8":
                         Console.Clear();
                         break;
-                    case 9:
+                    case "9":
                         Console.Clear();
                         teacher.DisplayAttendance(); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
                         break;
-                    case 10:
+                    case "10":
                         Console.Clear();
                         teacher.ManageInformation();
+                        break;
+                    default:
+                        Console.WriteLine("\nThis choice is not available");
                         break;
                 }
 
@@ -262,102 +268,105 @@ namespace ProjetOOP_v2
         static void ApplicationAdmin(List<Admin> DBAdmins, int index, List<Student> DBStudents)
         {
             Admin admin = DBAdmins[index];
-            int choice = 0;
+            string choice = "";
 
             string answer = "";
             do
             {
                 Console.Clear();
                 Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to students information\n3 : To access to teachers informations\n5 : To create a course\n6 : To create an exam\n7 : To display grade books\n8 : To display the calendar\n9 : To manage the calendar\n10 : To display the attendance\n11 : To manage the attendance\n12 : To register a student in an exam\n13 : To register a teacher to a course\n14 : To delete a course\n15 : To display Teacher Timetable\n16 : To Register a Student\n17 : To Remove a Student\n18 : To Register a Teacher\n19 : To Remove a Teacher\n20 : To manage your information\n21 : To manage a course\nChoice : ");
-                choice = Convert.ToInt32(Console.ReadLine());
+                choice = Console.ReadLine();
                 switch (choice)
                 {
-                    case 1:
+                    case "1":
                         Console.Clear();
                         admin.DisplayInformation();
                         break;
-                    case 2: // à faire
+                    case "2": // à faire
                         Console.Clear();
                         admin.DisplayStudentInformation();
                         break;
-                    case 3: // à faire
+                    case "3": // à faire
                         Console.Clear();
                         admin.DisplayTeacherInformation();
                         break;
-                    case 4: // à faire
+                    case "4": // à faire
                         Console.Clear();
                         Console.WriteLine("à faire");
                         //     admin.CreateStudentsGroup(Branche branche);
                         break;
-                    case 5:
+                    case "5":
                         Console.Clear();
                         admin.CreationCourse();
                         break;
-                    case 6:
+                    case "6":
                         Console.Clear();
                         admin.CreationExam();
                         break;
-                    case 7: // à faire
+                    case "7": // à faire
                         Console.Clear();
                         Console.WriteLine("à faire");
                         break;
-                    case 8: // à faire
+                    case "8": // à faire
                         Console.Clear();
                         Console.WriteLine("à faire");
                         break;
-                    case 9: // à faire
+                    case "9": // à faire
                         Console.Clear();
                         Console.WriteLine("à faire");
                         break;
-                    case 10:
+                    case "10":
                         Console.Clear();
                         admin.DisplayAttendance(); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
                         break;
-                    case 11:
+                    case "11":
                         Console.Clear();
                         admin.ManageAttendance();
                         break;
-                    case 13:
+                    case "12":
                         Console.Clear();
                         admin.IncsriptionCourse();
                         break;
 
-                    case 14:
+                    case "13":
                         Console.Clear();
                         admin.DeleteCourse();
                         break;
 
-                    case 15:
+                    case "14":
                         Console.Clear();
                         admin.DisplayTimetableTeacher();
                         break;
 
-                    case 16:
+                    case "15":
                         Console.Clear();
                         admin.RegisterStudent();
                         break;
 
-                    case 17:
+                    case "16":
                         Console.Clear();
                         admin.RemoveStudent();
                         break;
 
-                    case 18:
+                    case "17":
                         Console.Clear();
                         admin.RegisterTeacher();
                         break;
 
-                    case 19:
+                    case "18":
                         Console.Clear();
                         admin.RemoveTeacher();
                         break;
-                    case 20:
+                    case "19":
                         Console.Clear();
                         admin.ManageInformation();
                         break;
-                    case 21:
+                    case "20":
                         Console.Clear();
                         admin.ManageCourse();
+                        break;
+                    default:
+                        Console.WriteLine("\nThis choice is not available");
                         break;
                 }
                 Console.WriteLine("Do you want to continue ? Yes or No");
