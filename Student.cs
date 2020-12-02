@@ -40,7 +40,11 @@ namespace ProjetOOP_v2
             Courses = courses;
             Exams = new List<Exam>();
 
-		}
+            Grades = new List<int>();
+            Grades.Add(-1);
+            Grades.Add(-1);
+            Grades.Add(-1);
+        }
 
         public override void ManageInformation()
         {
@@ -157,13 +161,13 @@ namespace ProjetOOP_v2
         public void DisplayNote()
         {
             Console.WriteLine("Your grades are :");
-            for (int i = 0; i <= Grades.Count; i++)
+            for (int i = 0; i < Grades.Count; i++)
             {
                 if (Grades[i] == -1)
                 {
-                    Console.WriteLine($"{Courses[i]} : You don't have any grade for this course");
+                    Console.WriteLine($"{Courses[i].NameCourse} : You don't have any grade for this course");
                 }
-                else Console.WriteLine($"{Courses[i]} : {Grades[i]}");
+                else Console.WriteLine($"{Courses[i].NameCourse} : {Grades[i]}");
 
             }
         }

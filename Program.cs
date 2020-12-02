@@ -209,7 +209,7 @@ namespace ProjetOOP_v2
             do
             {
                 Console.Clear();
-                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to my students information\n3 : To register a student in a course\n4: To manage grade books\n5 : To display grade books\n6 : To display the calendar\n7 : To manage the calendar\n8: To manage the attendance\n9 : To display the attendance\n10 : To manage your information\nChoice : ");
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to my students information\n3 : To register a student in a course\n4 : To manage grade books\n5 : To display grade books\n6 : To display the calendar\n7 : To manage the calendar\n8: To manage the attendance\n9 : To display the attendance\n10 : To manage your information\nChoice : ");
                 choice = Console.ReadLine();
                 Console.WriteLine();
                 switch (choice)
