@@ -149,6 +149,37 @@ namespace ProjetOOP_v2
                 Console.WriteLine();
             }
         }
+
+
+        public void GradeBook()
+        {
+            foreach (Student studentt in GroupStudents)
+            {
+                Console.WriteLine(studentt.Name);
+            }
+            Console.WriteLine("Which student do you want to add grade for ?");
+            string student = Console.ReadLine();
+            string coursee = "";
+            foreach (Student a in GroupStudents)
+            {
+                if (student == a.Name)
+                {
+                    Console.WriteLine("Which course do you want to add a grade for ?");
+                    coursee = Console.ReadLine();
+                    Console.WriteLine();
+                    for (int i = 0; i <= 2; i++)
+                    {
+
+                        if (coursee == a.Courses[i].NameCourse)
+                        {
+                            Console.WriteLine("Enter the grade !");
+                            int gradee = Convert.ToInt32(Console.ReadLine());
+                            a.Grades[i] = gradee;
+                        }
+                    }
+                }
+            }
+        }
     }
 
 }

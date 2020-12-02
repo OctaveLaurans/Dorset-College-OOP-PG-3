@@ -176,7 +176,7 @@ namespace ProjetOOP_v2
                         break;
                     case "3": // à faire
                         Console.Clear();
-                        Console.WriteLine("No grade available");
+                        student.DisplayNote();
                         break;
                     case "4":
                         Console.Clear();
@@ -230,7 +230,7 @@ namespace ProjetOOP_v2
                         break;
                     case "4": // à faire
                         Console.Clear();
-                        Console.WriteLine("à faire");
+                        teacher.GradeBook();
                         break;
                     case "5": // à faire
                         Console.Clear();

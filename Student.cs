@@ -18,6 +18,8 @@ namespace ProjetOOP_v2
         public int NumberOfPresence { get; set; }
         public int NumberOfDelay { get; set; }
 
+        public List<int> Grades { get; set; }
+
 
         public Student(string name, string adress, string phoneNumber, string login, string password, Branche branche, int numberOfPayments, int numberOfAbsences, int numberOfPresence, int numberOfDelay, List<Course> courses)
             : base(name, adress, phoneNumber, login, password)
@@ -149,6 +151,21 @@ namespace ProjetOOP_v2
                 Console.WriteLine();
             }
             
+        }
+
+
+        public void DisplayNote()
+        {
+            Console.WriteLine("Your grades are :");
+            for (int i = 0; i <= Grades.Count; i++)
+            {
+                if (Grades[i] == -1)
+                {
+                    Console.WriteLine($"{Courses[i]} : You don't have any grade for this course");
+                }
+                else Console.WriteLine($"{Courses[i]} : {Grades[i]}");
+
+            }
         }
     }
 }
