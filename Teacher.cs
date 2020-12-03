@@ -69,11 +69,12 @@ namespace ProjetOOP_v2
                     Console.WriteLine("This choice is not available");
                     break;
             }
+
         }
 
         public void DisplayStudentsInformation()
         {
-            foreach(Student student in GroupStudents)
+            foreach (Student student in GroupStudents)
             {
                 student.DisplayInformation();
             }
@@ -87,9 +88,14 @@ namespace ProjetOOP_v2
             do
             {
                 bool exist = false;
-
-                Console.Write("Enter the name of the student for whom you want to display the attendance\n");
+                Console.Clear();
+                foreach (Student studentt in GroupStudents)
+                {
+                    Console.WriteLine(studentt.Name);
+                }
+                Console.Write("\nEnter the name of the student for whom you want to display the attendance\n");
                 string Nchoice = Console.ReadLine();
+                Console.Clear();
                 Console.WriteLine();
                 for (int i = 0; i < GroupStudents.Count; i++)
                 {
@@ -100,10 +106,14 @@ namespace ProjetOOP_v2
                         break;
                     }
                 }
-                if(exist==false)
+                if (exist == false)
                 {
+                    Console.Clear();
                     Console.WriteLine("You don't have acces to this student information\n");
-                    continu = true;
+                    Console.WriteLine("Do you want to check the attendance of another student ? Yes or No ?");
+                    string choice = Console.ReadLine();
+                    if (choice == "Yes") continu = true;
+                    else continu = false;
                 }
                 else
                 {
@@ -117,7 +127,7 @@ namespace ProjetOOP_v2
             while (continu == true);
         }
 
-        
+
         public void DisplayTimetable()
         {
             Console.Write("\t\t Monday \tTuesday \tWednesday \tThursday \tFriday\n");
@@ -159,14 +169,17 @@ namespace ProjetOOP_v2
             {
                 Console.WriteLine(studentt.Name);
             }
-            Console.WriteLine("Which student do you want to add grade for ?");
+            Console.WriteLine("\nWhich student do you want to add grade for ?");
             string student = Console.ReadLine();
             string coursee = "";
+            string contains = "";
             foreach (Student a in GroupStudents)
             {
                 if (student == a.Name)
                 {
-                    Console.WriteLine("Which course do you want to add a grade for ?");
+                    Console.Clear();
+                    contains = "yes";
+                    Console.WriteLine("Which course do you want to add a grade for ?\n");
                     coursee = Console.ReadLine();
                     Console.WriteLine();
                     for (int i = 0; i <= 2; i++)
@@ -181,6 +194,12 @@ namespace ProjetOOP_v2
                     }
                 }
             }
+            if (contains != "yes")
+            {
+                Console.Clear();
+                Console.WriteLine("You doesn't have this student in your class\n");
+            }
+
         }
     }
 
