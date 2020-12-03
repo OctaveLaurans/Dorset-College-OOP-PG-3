@@ -53,31 +53,34 @@ namespace ProjetOOP_v2
             Console.WriteLine("2. Phone Number");
             Console.WriteLine("3. Password");
             Console.Write("Choice : ");
-            int choice = Convert.ToInt32(Console.ReadLine());
+            string choice = Console.ReadLine();
             Console.WriteLine();
 
             string change;
             switch(choice)
             {
-                case 1:
+                case "1":
                     Console.Write("Enter your new adress : ");
                     change = Console.ReadLine();
                     this.Adress = change;
                     Console.WriteLine();
                     break;
 
-                case 2:
+                case "2":
                     Console.Write("Enter your new phone number : ");
                     change = Console.ReadLine();
                     this.PhoneNumber = change;
                     Console.WriteLine();
                     break;
 
-                case 3:
+                case "3":
                     Console.Write("Enter your new password : ");
                     change = Console.ReadLine();
                     this.Password = change;
                     Console.WriteLine();
+                    break;
+                default:
+                    Console.WriteLine("This choice is not available");
                     break;
             }
 
