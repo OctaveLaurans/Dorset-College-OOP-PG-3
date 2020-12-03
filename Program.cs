@@ -176,7 +176,7 @@ namespace ProjetOOP_v2
                         break;
                     case "3": 
                         Console.Clear();
-                        student.DisplayNote();
+                        student.DisplayGrades();
                         break;
                     case "4":
                         Console.Clear();
@@ -225,11 +225,11 @@ namespace ProjetOOP_v2
                         break;
                     case "3":
                         Console.Clear();
-                        teacher.GradeBook(); //Mettre la matière du prof par défault, ne pas lui donner le choix de la matière à entrer
+                        teacher.ManageGradeBook(); //Mettre la matière du prof par défault, ne pas lui donner le choix de la matière à entrer
                         break;
                     case "4": // à faire
                         Console.Clear();
-                        Console.WriteLine("a faire");
+                        teacher.DisplayGradeBook();
                         break;
                     case "5": // à faire
                         Console.Clear();
@@ -300,7 +300,7 @@ namespace ProjetOOP_v2
                         break;
                     case "7": // à faire
                         Console.Clear();
-                        Console.WriteLine("à faire");
+                        admin.DisplayGradeBook();
                         break;
                     case "8": // à faire
                         Console.Clear();

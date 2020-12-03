@@ -161,9 +161,9 @@ namespace ProjetOOP_v2
         }
 
 
-        public void DisplayNote()
+        public void DisplayGrades()
         {
-            Console.WriteLine("Your grades are :");
+            Console.WriteLine("Your grades are :\n");
             for (int i = 0; i < Grades.Count; i++)
             {
                 if (Grades[i] == -1)
@@ -171,8 +171,8 @@ namespace ProjetOOP_v2
                     Console.WriteLine($"{Courses[i].NameCourse} : You don't have any grade for this course");
                 }
                 else Console.WriteLine($"{Courses[i].NameCourse} : {Grades[i]}");
-
             }
+            Console.WriteLine();
         }
     }
 }

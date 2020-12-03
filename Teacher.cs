@@ -163,43 +163,57 @@ namespace ProjetOOP_v2
         }
 
 
-        public void GradeBook()
+        public void ManageGradeBook()
         {
             foreach (Student studentt in GroupStudents)
             {
                 Console.WriteLine(studentt.Name);
             }
+            Console.WriteLine();
             Console.WriteLine("\nWhich student do you want to add grade for ?");
             string student = Console.ReadLine();
-            string coursee = "";
-            string contains = "";
+            bool contains = false;
             foreach (Student a in GroupStudents)
             {
                 if (student == a.Name)
                 {
                     Console.Clear();
-                    contains = "yes";
-                    Console.WriteLine("Which course do you want to add a grade for ?\n");
-                    coursee = Console.ReadLine();
-                    Console.WriteLine();
-                    for (int i = 0; i <= 2; i++)
-                    {
+                    contains = true;
+                    Console.WriteLine("Enter the grade !");
+                    int gradee = Convert.ToInt32(Console.ReadLine());
 
-                        if (coursee == a.Courses[i].NameCourse)
+                    for(int i = 0; i < a.Courses.Count; i++)
+                    {
+                        if(a.Courses[i] == Course)
                         {
-                            Console.WriteLine("Enter the grade !");
-                            int gradee = Convert.ToInt32(Console.ReadLine());
                             a.Grades[i] = gradee;
                         }
                     }
                 }
             }
-            if (contains != "yes")
+            if (contains == false)
             {
                 Console.Clear();
                 Console.WriteLine("You doesn't have this student in your class\n");
             }
 
+        }
+
+        public void DisplayGradeBook()
+        {
+            Console.WriteLine("Students :\n");
+            foreach (Student student in GroupStudents)
+            {
+                for (int i = 0; i < student.Courses.Count; i++)
+                {
+                    if (student.Courses[i] == Course)
+                    {
+                        if (student.Grades[i] >= 0) Console.WriteLine($"{student.Name} : {student.Grades[i]}");
+                        else Console.WriteLine($"{student.Name} : No grade yet");
+                    }
+                }
+            }
+            Console.WriteLine();
         }
     }
 

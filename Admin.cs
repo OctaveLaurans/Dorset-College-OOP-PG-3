@@ -125,7 +125,7 @@ namespace ProjetOOP_v2
             double duration = Convert.ToDouble(Console.ReadLine());
             Console.WriteLine();
 
-            Course course = new Course { NameCourse = nameCourse, DayCourse = dayCourse, HourCourse = hourCourse };
+            Course course = new Course { NameCourse = nameCourse, DayCourse = dayCourse, HourCourse = hourCourse, Duration = duration };
             course.DisplaySchedule();
 
             int brancheNumber = -1;
@@ -146,6 +146,11 @@ namespace ProjetOOP_v2
 
 
             AllCourses[brancheNumber].Add(course);
+
+            foreach(Student student in AllStudents)
+            {
+                student.Grades.Add(-1);
+            }
 
             return course;
         }
@@ -526,6 +531,41 @@ namespace ProjetOOP_v2
                     Console.WriteLine($"{teacher.Name} has been removed");
                     break;
                 }
+            }
+        }
+
+
+        public void DisplayGradeBook()
+        {
+            bool exist = false;
+
+            Console.Write("Enter the name of the student for whom you want to display the information\n");
+            string Nchoice = Console.ReadLine();
+            Console.WriteLine();
+            for (int i = 0; i < AllStudents.Count; i++)
+            {
+                if (AllStudents[i].Name == Nchoice)
+                {
+                    exist = true;
+
+                    Console.WriteLine(AllStudents[i].Name);
+
+                    for (int j = 0; j < AllStudents[i].Grades.Count; j++)
+                    {
+                        if (AllStudents[i].Grades[j] == -1)
+                        {
+                            Console.WriteLine($"{AllStudents[i].Courses[j].NameCourse} : ");
+                        }
+                        else Console.WriteLine($"{AllStudents[i].Courses[j].NameCourse} : {AllStudents[i].Grades[j]}");
+                    }
+                    Console.WriteLine();
+
+                    break;
+                }
+            }
+            if (exist == false)
+            {
+                Console.WriteLine("This student doesn't exist ... please try again\n");
             }
         }
     }
