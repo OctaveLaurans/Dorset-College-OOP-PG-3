@@ -154,12 +154,12 @@ namespace ProjetOOP_v2
                 Console.WriteLine();
                 switch (choice)
                 {
-                    case "1": //ok ca marche
+                    case "1": 
                         Console.Clear();
                         Console.WriteLine("Your informations :\n");
                         student.DisplayInformation();
                         break;
-                    case "2": // ok ça amarche
+                    case "2": 
                         do
                         {
                             Console.Clear();
@@ -174,13 +174,13 @@ namespace ProjetOOP_v2
                         }
                         while (choice2 == "Yes");
                         break;
-                    case "3": // à faire
+                    case "3": 
                         Console.Clear();
                         student.DisplayNote();
                         break;
                     case "4":
                         Console.Clear();
-                        student.DisplayAttendance(); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
+                        student.DisplayAttendance(); 
                         break;
                     case "5":
                         Console.Clear();
@@ -209,7 +209,7 @@ namespace ProjetOOP_v2
             do
             {
                 Console.Clear();
-                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to my students information\n3 : To register a student in a course\n4 : To manage grade books\n5 : To display grade books\n6 : To display the calendar\n7 : To manage the calendar\n8: To manage the attendance\n9 : To display the attendance\n10 : To manage your information\nChoice : ");
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to my students information\n3 : To manage grade books\n4 : To display grade books\n5 : To display the calendar\n6 : To manage the calendar\n7: To manage the attendance\n8 : To display the attendance\n9 : To manage your information\nChoice : ");
                 choice = Console.ReadLine();
                 Console.WriteLine();
                 switch (choice)
@@ -219,38 +219,33 @@ namespace ProjetOOP_v2
                         Console.WriteLine("Your informations :\n");
                         teacher.DisplayInformation();
                         break;
-                    case "2": // à faire
+                    case "2": 
                         Console.Clear();
                         teacher.DisplayStudentsInformation();
                         break;
                     case "3":
                         Console.Clear();
-                        Console.WriteLine("à faire");
-                        //teacher.InscriptionCourseStudent(Student name); // a revoir 
+                        teacher.GradeBook(); //Mettre la matière du prof par défault, ne pas lui donner le choix de la matière à entrer
                         break;
                     case "4": // à faire
                         Console.Clear();
-                        teacher.GradeBook();
+                        Console.WriteLine("a faire");
                         break;
                     case "5": // à faire
                         Console.Clear();
-                        Console.WriteLine("à faire");
-                        break;
-                    case "6": // à faire
-                        Console.Clear();
                         teacher.DisplayTimetable();
+                        break;
+                    case "6":
+                        Console.Clear();
                         break;
                     case "7":
                         Console.Clear();
                         break;
                     case "8":
                         Console.Clear();
-                        break;
-                    case "9":
-                        Console.Clear();
                         teacher.DisplayAttendance(); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
                         break;
-                    case "10":
+                    case "9":
                         Console.Clear();
                         teacher.ManageInformation();
                         break;
@@ -571,10 +566,11 @@ namespace ProjetOOP_v2
 
             string nomFichier = "C:\\Users\\maxim\\Documents\\ESILV A3\\Dorset Online\\OOP\\Project\\Code\\Database.csv";
             string nomFichier2 = "C:\\Users\\maxim\\Documents\\ESILV A3\\Dorset Online\\OOP\\Project\\Database2.csv";
+            //string nomFichier = "Database.csv";
+            //string nomFichier2 = "Database.csv";
 
 
-
-            List<Student> DBStudents = new List<Student>();
+            List <Student> DBStudents = new List<Student>();
             List<Teacher> DBTeachers = new List<Teacher>();
             List<Admin> DBAdmins = new List<Admin>();
 
