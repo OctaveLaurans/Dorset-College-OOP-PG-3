@@ -507,6 +507,67 @@ namespace ProjetOOP_v2
 
         }
 
+        static void WriterGrades(string nomFichier, List<Student> DBStudents, SortedList<string, Branche> branches)
+        {
+            StreamWriter fichWriter = new StreamWriter(nomFichier);
+            string newInfo = "";
+
+            List<string> writer = new List<string>();
+
+            List<Student> studentsIngeneering = new List<Student>();
+            List<Student> studentsBusiness = new List<Student>();
+            List<Student> studentsLiterature = new List<Student>();
+
+            foreach(Student student in DBStudents)
+            {
+                switch(student.Branche.BrancheName)
+                {
+                    case "Ingeneering":
+                        studentsIngeneering.Add(student);
+                        break;
+
+                    case "Business":
+                        studentsBusiness.Add(student);
+                        break;
+
+                    case "Literature":
+                        studentsLiterature.Add(student);
+                        break;
+                }
+            }
+
+
+
+            foreach(Course course in studentsIngeneering[0].Courses)
+            {
+                newInfo += ";" + course.NameCourse;
+            }
+            writer.Add(newInfo);
+            foreach(Student student in studentsIngeneering)
+            {
+                newInfo = "";
+                newInfo += student.Name;
+
+                for (int i = 0; i < student.Grades.Count; i++)
+                {
+                    newInfo += ";";
+                    if (student.Grades[i] >= 0) newInfo += student.Grades[i];
+                }
+
+                writer.Add(newInfo);
+            }
+
+
+            foreach (string line in writer)
+            {
+                fichWriter.WriteLine(line);
+            }
+
+            fichWriter.Close();
+
+
+        }
+
         static List<List<Course>> InitializeCourses()
         {
 
@@ -566,6 +627,7 @@ namespace ProjetOOP_v2
 
             string nomFichier = "C:\\Users\\maxim\\Documents\\ESILV A3\\Dorset Online\\OOP\\Project\\Code\\Database.csv";
             string nomFichier2 = "C:\\Users\\maxim\\Documents\\ESILV A3\\Dorset Online\\OOP\\Project\\Database2.csv";
+            string nomFichier3 = "C:\\Users\\maxim\\Documents\\ESILV A3\\Dorset Online\\OOP\\Project\\DatabaseGrades.csv";
             //string nomFichier = "Database.csv";
             //string nomFichier2 = "Database.csv";
 
@@ -585,6 +647,7 @@ namespace ProjetOOP_v2
 
             Writer(nomFichier2, DBStudents, DBTeachers, DBAdmins);
 
+            WriterGrades(nomFichier3, DBStudents, branches);
 
             Console.ReadKey();
 
