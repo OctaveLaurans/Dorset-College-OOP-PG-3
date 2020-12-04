@@ -209,7 +209,7 @@ namespace ProjetOOP_v2
             do
             {
                 Console.Clear();
-                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to my students information\n3 : To manage grade books\n4 : To display grade books\n5 : To display the calendar\n6 : To manage the calendar\n7: To manage the attendance\n8 : To display the attendance\n9 : To manage your information\nChoice : ");
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to my students information\n3 : To manage grade books\n4 : To display grade books\n5 : To display the calendar\n6: To manage the attendance\n7 : To display the attendance\n8 : To manage your information\nChoice : ");
                 choice = Console.ReadLine();
                 Console.WriteLine();
                 switch (choice)
@@ -225,27 +225,24 @@ namespace ProjetOOP_v2
                         break;
                     case "3":
                         Console.Clear();
-                        teacher.ManageGradeBook(); //Mettre la matière du prof par défault, ne pas lui donner le choix de la matière à entrer
+                        teacher.ManageGradeBook(); 
                         break;
-                    case "4": // à faire
+                    case "4": 
                         Console.Clear();
                         teacher.DisplayGradeBook();
                         break;
-                    case "5": // à faire
+                    case "5": 
                         Console.Clear();
                         teacher.DisplayTimetable();
                         break;
-                    case "6":
+                    case "6": //Que l'admin ?
                         Console.Clear();
                         break;
                     case "7":
                         Console.Clear();
+                        teacher.DisplayAttendance(); 
                         break;
                     case "8":
-                        Console.Clear();
-                        teacher.DisplayAttendance(); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
-                        break;
-                    case "9":
                         Console.Clear();
                         teacher.ManageInformation();
                         break;
@@ -269,7 +266,7 @@ namespace ProjetOOP_v2
             do
             {
                 Console.Clear();
-                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to students information\n3 : To access to teachers informations\n5 : To create a course\n6 : To create an exam\n7 : To display grade books\n8 : To display the calendar\n9 : To manage the calendar\n10 : To display the attendance\n11 : To manage the attendance\n12 : To register a student in an exam\n13 : To register a teacher to a course\n14 : To delete a course\n15 : To display Teacher Timetable\n16 : To Register a Student\n17 : To Remove a Student\n18 : To Register a Teacher\n19 : To Remove a Teacher\n20 : To manage your information\n21 : To manage a course\nChoice : ");
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to students information\n3 : To access to teachers informations\n4 : To create a course\n5 : To create an exam\n6 : To display grade books\n7 : To display the calendar\n8 : To manage the calendar\n9 : To display the attendance\n10 : To manage the attendance\n11 : To register a student in an exam\n12 : To register a teacher to a course\n13 : To delete a course\n14 : To display Teacher Timetable\n15 : To Register a Student\n16 : To Remove a Student\n17 : To Register a Teacher\n18 : To Remove a Teacher\n19 : To manage your information\n20 : To manage a course\nChoice : ");
                 choice = Console.ReadLine();
                 switch (choice)
                 {
@@ -277,77 +274,70 @@ namespace ProjetOOP_v2
                         Console.Clear();
                         admin.DisplayInformation();
                         break;
-                    case "2": // à faire
+                    case "2": 
                         Console.Clear();
                         admin.DisplayStudentInformation();
                         break;
-                    case "3": // à faire
+                    case "3": 
                         Console.Clear();
                         admin.DisplayTeacherInformation();
                         break;
-                    case "4": // à faire
-                        Console.Clear();
-                        Console.WriteLine("à faire");
-                        //     admin.CreateStudentsGroup(Branche branche);
-                        break;
-                    case "5":
+                    case "4":
                         Console.Clear();
                         admin.CreationCourse();
                         break;
-                    case "6":
+                    case "5":
                         Console.Clear();
                         admin.CreationExam();
                         break;
-                    case "7": // à faire
+                    case "6": 
                         Console.Clear();
                         admin.DisplayGradeBook();
+                        break;
+                    case "7": 
+                        Console.Clear();
+                        admin.DisplayTimetableTeacher();
                         break;
                     case "8": // à faire
                         Console.Clear();
                         Console.WriteLine("à faire");
                         break;
-                    case "9": // à faire
+                    case "9":
                         Console.Clear();
-                        Console.WriteLine("à faire");
+                        admin.DisplayAttendance(); 
                         break;
                     case "10":
                         Console.Clear();
-                        admin.DisplayAttendance(); //demande juste le nom de l'étudiant et n'affiche pas la suite de la méthode
+                        admin.ManageAttendance();
                         break;
                     case "11":
                         Console.Clear();
-                        admin.ManageAttendance();
+                       // admin.IncsriptionExam();
                         break;
                     case "12":
                         Console.Clear();
                         admin.IncsriptionCourse();
                         break;
-
                     case "13":
                         Console.Clear();
                         admin.DeleteCourse();
                         break;
-
                     case "14":
                         Console.Clear();
                         admin.DisplayTimetableTeacher();
                         break;
-
                     case "15":
                         Console.Clear();
                         admin.RegisterStudent();
                         break;
-
                     case "16":
                         Console.Clear();
                         admin.RemoveStudent();
                         break;
-
                     case "17":
                         Console.Clear();
                         admin.RegisterTeacher();
                         break;
-
                     case "18":
                         Console.Clear();
                         admin.RemoveTeacher();
