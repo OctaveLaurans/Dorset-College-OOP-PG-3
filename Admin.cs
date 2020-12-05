@@ -227,7 +227,8 @@ namespace ProjetOOP_v2
                     break;
             }
 
-            for(int i=0; i<AllCourses[brancheNumber].Count; i++)
+            int i = 0;
+            for(i=0; i<AllCourses[brancheNumber].Count; i++)
             {
                 if(nameCourse==AllCourses[brancheNumber][i].NameCourse)
                 {
@@ -237,6 +238,21 @@ namespace ProjetOOP_v2
                 }
             }
 
+            foreach(Student student in AllStudents)
+            {
+                if(student.Branche.BrancheName == branche)
+                {
+                    student.Grades.RemoveAt(i);
+                }
+            }
+
+            for(int j=0; j<AllTeachers.Count; j++)
+            {
+                if (AllTeachers[j].Course.NameCourse == nameCourse)
+                {
+                    AllTeachers.Remove(AllTeachers[j]);
+                }
+            }
         }
         public void IncsriptionCourse()
         {
@@ -253,7 +269,7 @@ namespace ProjetOOP_v2
             }
             Teacher teacher = AllTeachers[j];
 
-            Console.WriteLine("You want to register a teacher for a course, whiwh branch is concerned ?");
+            Console.WriteLine("You want to register a teacher for a course, which branch is concerned ?");
             string branche = Console.ReadLine();
             Console.WriteLine("What's the name of the course ?");
             string nameCourse = Console.ReadLine();
@@ -531,7 +547,7 @@ namespace ProjetOOP_v2
             int index = Branches.IndexOfKey(branchName);
             Branche branche = Branches.ElementAt(index).Value;
 
-            Student student = new Student(name, adress, phoneNumber, email, password, branche, nbrPayment, 0, 0, 0, AllCourses[index]);
+            Student student = new Student(name, adress, phoneNumber, email, password, branche, nbrPayment, 0, 0, 0, AllCourses[index], AllCourses[index].Count);
             AllStudents.Add(student);
         }
         public void RemoveStudent()
@@ -568,6 +584,48 @@ namespace ProjetOOP_v2
 
             Teacher teacher = new Teacher(name, adress, phoneNumber, email, password);
             AllTeachers.Add(teacher);
+
+
+            Console.WriteLine("You want to register a teacher for a course, which branch is concerned ?");
+            string branche = Console.ReadLine();
+            Console.WriteLine("What's the name of the course ?");
+            string nameCourse = Console.ReadLine();
+
+            int brancheNumber = -1;
+            switch (branche)
+            {
+                case "Business":
+                    brancheNumber = 0;
+                    break;
+
+                case "Ingeneering":
+                    brancheNumber = 1;
+                    break;
+
+                case "Literature":
+                    brancheNumber = 2;
+                    break;
+            }
+
+            for (int i = 0; i < AllCourses[brancheNumber].Count; i++)
+            {
+                if (nameCourse == AllCourses[brancheNumber][i].NameCourse)
+                {
+                    teacher.Course = AllCourses[brancheNumber][i];
+                    Console.WriteLine($"{teacher.Name} has been registered for the course {teacher.Course.NameCourse}\n");
+                    break;
+                }
+            }
+
+            teacher.GroupStudents.Clear();
+
+            foreach (Student student in AllStudents)
+            {
+                if (student.Branche.BrancheName == Branches.Keys[brancheNumber])
+                {
+                    teacher.GroupStudents.Add(student);
+                }
+            }
         }
         public void RemoveTeacher()
         {

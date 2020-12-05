@@ -400,7 +400,7 @@ namespace ProjetOOP_v2
 
                         Student student = new Student(datas[i][0], datas[i][1], datas[i][2],
                             datas[i][3], datas[i][4], branche, Convert.ToInt32(datas[i][7]), Convert.ToInt32(datas[i][8]),
-                            Convert.ToInt32(datas[i][9]), Convert.ToInt32(datas[i][10]), courses[index]);
+                            Convert.ToInt32(datas[i][9]), Convert.ToInt32(datas[i][10]), courses[index], courses[index].Count);
 
                         DBStudents.Add(student);
 
@@ -650,44 +650,76 @@ namespace ProjetOOP_v2
             fichierLect.Close();
         }
 
-        static List<List<Course>> InitializeCourses()
+        static List<List<Course>> InitializeCourses(string nomFichier)
         {
-
             List<List<Course>> AllCourses = new List<List<Course>>();
 
-            Course statistics = new Course { NameCourse = "Statistics", DayCourse = "Monday", HourCourse = 9, Duration = 1 };
-            Course oop = new Course { NameCourse = "OOP", DayCourse = "Wednesday", HourCourse = 15, Duration = 1 };
-            Course dataStructure = new Course { NameCourse = "Data Structure", DayCourse = "Friday", HourCourse = 11, Duration = 1 };
-
-            Course finance = new Course { NameCourse = "Finance", DayCourse = "Tuesday", HourCourse = 10, Duration = 1 };
-            Course marketing = new Course { NameCourse = "Marketing", DayCourse = "Wednesday", HourCourse = 12, Duration = 1 };
-            Course management = new Course { NameCourse = "Management", DayCourse = "Friday", HourCourse = 17, Duration = 1 };
-
-            Course philosophy = new Course { NameCourse = "Philosophy", DayCourse = "Monday", HourCourse = 15, Duration = 1 };
-            Course english = new Course { NameCourse = "English", DayCourse = "Tuesday", HourCourse = 8, Duration = 1 };
-            Course history = new Course { NameCourse = "History", DayCourse = "Thursday", HourCourse = 13, Duration = 1 };
-
             List<Course> listIngeneering = new List<Course>();
-            listIngeneering.Add(statistics);
-            listIngeneering.Add(oop);
-            listIngeneering.Add(dataStructure);
-
             List<Course> listBusiness = new List<Course>();
-            listBusiness.Add(finance);
-            listBusiness.Add(marketing);
-            listBusiness.Add(management);
-
             List<Course> listLiterature = new List<Course>();
-            listLiterature.Add(philosophy);
-            listLiterature.Add(english);
-            listLiterature.Add(history);
+
+
+            StreamReader fichierLect = new StreamReader(nomFichier);
+            string ligne = "";
+            List<string[]> datas = new List<string[]>();
+            while (fichierLect.Peek() > 0)
+            {
+                ligne = fichierLect.ReadLine();
+                datas.Add(ligne.Split(';'));
+            }
+
+            for (int i = 1; i < datas.Count; i++)
+            {
+                Course course = new Course { NameCourse = datas[i][0], DayCourse = datas[i][2], HourCourse = Convert.ToInt32(datas[i][3]), Duration = Convert.ToDouble(datas[i][4]) };
+                
+                switch(datas[i][1])
+                {
+                    case "Business":
+                        listBusiness.Add(course);
+                        break;
+
+                    case "Ingeneering":
+                        listIngeneering.Add(course);
+                        break;
+
+                    case "Literature":
+                        listLiterature.Add(course);
+                        break;
+                }
+            }
+            fichierLect.Close();
 
             AllCourses.Add(listBusiness);
             AllCourses.Add(listIngeneering);
             AllCourses.Add(listLiterature);
 
-
             return AllCourses;
+        }
+        static void WriterCourses(string nomFichier, List<List<Course>> AllCourses, SortedList<string, Branche> branches)
+        {
+            StreamWriter fichWriter = new StreamWriter(nomFichier);
+            string newInfo = "";
+
+            List<string> writer = new List<string>();
+
+            newInfo = ";Branche;Day Course;Hour Course;Duration";
+            writer.Add(newInfo);
+            for(int i=0; i<AllCourses.Count; i++)
+            {
+                foreach (Course course in AllCourses[i])
+                {
+                    newInfo = course.NameCourse + ";" + branches.ElementAt(i).Value.BrancheName + ";" + course.DayCourse + ";" +
+                        course.HourCourse + ";" + course.Duration;
+                    writer.Add(newInfo);
+                }
+            }
+
+            foreach (string line in writer)
+            {
+                fichWriter.WriteLine(line);
+            }
+
+            fichWriter.Close();
         }
 
         static SortedList<string, Branche> InitializeBranches()
@@ -709,6 +741,7 @@ namespace ProjetOOP_v2
 
             string databaseFile = "Database.csv";
             string gradesFile = "DatabaseGrades.csv";
+            string coursesFile = "DatabaseCourses.csv";
 
 
             List <Student> DBStudents = new List<Student>();
@@ -718,7 +751,7 @@ namespace ProjetOOP_v2
 
             SortedList<string, Branche> branches = InitializeBranches();
 
-            List<List<Course>> AllCourses = InitializeCourses();
+            List<List<Course>> AllCourses = InitializeCourses(coursesFile);
 
             Initialization(databaseFile, gradesFile, DBStudents, DBTeachers, DBAdmins, branches, AllCourses);
 
@@ -727,6 +760,8 @@ namespace ProjetOOP_v2
             Writer(databaseFile, DBStudents, DBTeachers, DBAdmins);
 
             WriterGrades(gradesFile, DBStudents, branches);
+
+            WriterCourses(coursesFile, AllCourses, branches);
 
             Console.ReadKey();
 
