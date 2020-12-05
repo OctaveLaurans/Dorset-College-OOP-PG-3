@@ -188,7 +188,7 @@ namespace ProjetOOP_v2
             {
                 if (nameCourse == AllCourses[brancheNumber][i].NameCourse)
                 {
-                    Console.WriteLine($"What are the new schedule of the course {AllCourses[brancheNumber][i]}");
+                    Console.WriteLine($"What is the new schedule of the course {AllCourses[brancheNumber][i].NameCourse}");
                     Console.WriteLine("Course date ? (Day in the week)");
                     string dayCourse = Console.ReadLine();
                     Console.WriteLine("At what time ?");
@@ -591,7 +591,7 @@ namespace ProjetOOP_v2
         {
             bool exist = false;
 
-            Console.Write("Enter the name of the student for whom you want to display the information\n");
+            Console.Write("Enter the name of the student for whom you want to display the grades\n");
             string Nchoice = Console.ReadLine();
             Console.WriteLine();
             for (int i = 0; i < AllStudents.Count; i++)

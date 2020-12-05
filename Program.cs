@@ -213,7 +213,7 @@ namespace ProjetOOP_v2
             do
             {
                 Console.Clear();
-                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to my students information\n3 : To manage grade books\n4 : To display grade books\n5 : To display the calendar\n6: To manage the attendance\n7 : To display the attendance\n8 : To manage your information\n9 : To display planned exam\nChoice : ");
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to my students information\n3 : To manage grade books\n4 : To display grade books\n5 : To display the calendar\n6 : To display the attendance\n7 : To manage your information\n8 : To display planned exam\nChoice : ");
                 choice = Console.ReadLine();
                 Console.WriteLine();
                 switch (choice)
@@ -239,18 +239,15 @@ namespace ProjetOOP_v2
                         Console.Clear();
                         teacher.DisplayTimetable();
                         break;
-                    case "6": //Que l'admin ?
-                        Console.Clear();
-                        break;
-                    case "7":
+                    case "6":
                         Console.Clear();
                         teacher.DisplayAttendance(); 
                         break;
-                    case "8":
+                    case "7":
                         Console.Clear();
                         teacher.ManageInformation();
                         break;
-                    case "9":
+                    case "8":
                         Console.Clear();
                         teacher.DisplayExam();
                         break;
@@ -710,12 +707,8 @@ namespace ProjetOOP_v2
         public static void Main(string[] args)
         {
 
-            string nomFichier = "C:\\Users\\maxim\\Documents\\ESILV A3\\Dorset Online\\OOP\\Project\\Code\\Database.csv";
-            string nomFichier2 = "C:\\Users\\maxim\\Documents\\ESILV A3\\Dorset Online\\OOP\\Project\\Database2.csv";
-            string nomFichier3 = "C:\\Users\\maxim\\Documents\\ESILV A3\\Dorset Online\\OOP\\Project\\DatabaseGrades.csv";
-            string nomFichier4 = "C:\\Users\\maxim\\Documents\\ESILV A3\\Dorset Online\\OOP\\Project\\DatabaseGrades2.csv";
-            //string nomFichier = "Database.csv";
-            //string nomFichier2 = "Database.csv";
+            string databaseFile = "Database.csv";
+            string gradesFile = "DatabaseGrades.csv";
 
 
             List <Student> DBStudents = new List<Student>();
@@ -727,13 +720,13 @@ namespace ProjetOOP_v2
 
             List<List<Course>> AllCourses = InitializeCourses();
 
-            Initialization(nomFichier, nomFichier3, DBStudents, DBTeachers, DBAdmins, branches, AllCourses);
+            Initialization(databaseFile, gradesFile, DBStudents, DBTeachers, DBAdmins, branches, AllCourses);
 
             Application(DBStudents, DBTeachers, DBAdmins, AllCourses);
 
-            Writer(nomFichier2, DBStudents, DBTeachers, DBAdmins);
+            Writer(databaseFile, DBStudents, DBTeachers, DBAdmins);
 
-            WriterGrades(nomFichier4, DBStudents, branches);
+            WriterGrades(gradesFile, DBStudents, branches);
 
             Console.ReadKey();
 
