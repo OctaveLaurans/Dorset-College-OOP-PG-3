@@ -368,9 +368,9 @@ namespace ProjetOOP_v2
         }
 
 
-        static void Initialization(string nomFichier, List<Student> DBStudents, List<Teacher> DBTeachers, List<Admin> DBAdmins, SortedList<string, Branche> branches, List<List<Course>> courses)
+        static void Initialization(string databaseFile, string gradesFile, List<Student> DBStudents, List<Teacher> DBTeachers, List<Admin> DBAdmins, SortedList<string, Branche> branches, List<List<Course>> courses)
         {
-            StreamReader fichierLect = new StreamReader(nomFichier);
+            StreamReader fichierLect = new StreamReader(databaseFile);
             string ligne = "";
             List<string[]> datas = new List<string[]>();
             while (fichierLect.Peek() > 0)
@@ -448,6 +448,8 @@ namespace ProjetOOP_v2
                 }
             }
             fichierLect.Close();
+
+            ReaderGrades(gradesFile, DBStudents);
         }
         static void Writer(string nomFichier, List<Student> DBStudents, List<Teacher> DBTeachers, List<Admin> DBAdmins)
         {
@@ -546,6 +548,51 @@ namespace ProjetOOP_v2
 
                 writer.Add(newInfo);
             }
+            writer.Add(";");
+
+            newInfo = "";
+            foreach (Course course in studentsBusiness[0].Courses)
+            {
+                newInfo += ";" + course.NameCourse;
+            }
+            writer.Add(newInfo);
+            foreach (Student student in studentsBusiness)
+            {
+                newInfo = "";
+                newInfo += student.Name;
+
+                for (int i = 0; i < student.Grades.Count; i++)
+                {
+                    newInfo += ";";
+                    if (student.Grades[i] >= 0) newInfo += student.Grades[i];
+                }
+
+                writer.Add(newInfo);
+            }
+            writer.Add(";");
+
+
+            newInfo = "";
+            foreach (Course course in studentsLiterature[0].Courses)
+            {
+                newInfo += ";" + course.NameCourse;
+            }
+            writer.Add(newInfo);
+            foreach (Student student in studentsLiterature)
+            {
+                newInfo = "";
+                newInfo += student.Name;
+
+                for (int i = 0; i < student.Grades.Count; i++)
+                {
+                    newInfo += ";";
+                    if (student.Grades[i] >= 0) newInfo += student.Grades[i];
+                }
+
+                writer.Add(newInfo);
+            }
+            writer.Add(";");
+
 
 
             foreach (string line in writer)
@@ -556,6 +603,42 @@ namespace ProjetOOP_v2
             fichWriter.Close();
 
 
+        }
+
+        static void ReaderGrades(string nomFichier, List<Student> DBStudents)
+        {
+            StreamReader fichierLect = new StreamReader(nomFichier);
+            string ligne = "";
+            List<string[]> datas = new List<string[]>();
+            while (fichierLect.Peek() > 0)
+            {
+                ligne = fichierLect.ReadLine();
+                datas.Add(ligne.Split(';'));
+            }
+
+           
+            foreach(Student student in DBStudents)
+            {
+                bool studentFound = false;
+                for (int i=0; i<datas.Count; i++)
+                {
+                    if(student.Name == datas[i][0])
+                    {
+                        studentFound = true;
+                        for(int j=0; j<student.Courses.Count; j++)
+                        {
+                            if (datas[i][j + 1] == "") student.Grades[j] = -1;
+                            else student.Grades[j] = Convert.ToInt32(datas[i][j + 1]);
+                        }
+                    }
+                    if (studentFound == true)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            fichierLect.Close();
         }
 
         static List<List<Course>> InitializeCourses()
@@ -618,6 +701,7 @@ namespace ProjetOOP_v2
             string nomFichier = "C:\\Users\\maxim\\Documents\\ESILV A3\\Dorset Online\\OOP\\Project\\Code\\Database.csv";
             string nomFichier2 = "C:\\Users\\maxim\\Documents\\ESILV A3\\Dorset Online\\OOP\\Project\\Database2.csv";
             string nomFichier3 = "C:\\Users\\maxim\\Documents\\ESILV A3\\Dorset Online\\OOP\\Project\\DatabaseGrades.csv";
+            string nomFichier4 = "C:\\Users\\maxim\\Documents\\ESILV A3\\Dorset Online\\OOP\\Project\\DatabaseGrades2.csv";
             //string nomFichier = "Database.csv";
             //string nomFichier2 = "Database.csv";
 
@@ -631,13 +715,13 @@ namespace ProjetOOP_v2
 
             List<List<Course>> AllCourses = InitializeCourses();
 
-            Initialization(nomFichier, DBStudents, DBTeachers, DBAdmins, branches, AllCourses);
+            Initialization(nomFichier, nomFichier3, DBStudents, DBTeachers, DBAdmins, branches, AllCourses);
 
             Application(DBStudents, DBTeachers, DBAdmins, AllCourses);
 
             Writer(nomFichier2, DBStudents, DBTeachers, DBAdmins);
 
-            WriterGrades(nomFichier3, DBStudents, branches);
+            WriterGrades(nomFichier4, DBStudents, branches);
 
             Console.ReadKey();
 
