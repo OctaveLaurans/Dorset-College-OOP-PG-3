@@ -149,7 +149,7 @@ namespace ProjetOOP_v2
             do
             {
                 Console.Clear();
-                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To manage my information\n3 : To display my grade book\n4: To display my attendance\n5 : To display my timetable\n6 : To pay the school fees\n7 : To display planned exams\nChoice : ");
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To manage my information\n3 : To pay the school fees\n4: To display my attendance\n5 : To display my grade book \n6 : To display my timetable\n7 : To display planned exams\nChoice : ");
                 choice = Console.ReadLine();
                 Console.WriteLine();
                 switch (choice)
@@ -176,7 +176,7 @@ namespace ProjetOOP_v2
                         break;
                     case "3": 
                         Console.Clear();
-                        student.DisplayGrades();
+                        student.Payment();
                         break;
                     case "4":
                         Console.Clear();
@@ -184,11 +184,11 @@ namespace ProjetOOP_v2
                         break;
                     case "5":
                         Console.Clear();
-                        student.DisplayTimetable();
+                        student.DisplayGrades();
                         break;
                     case "6":
                         Console.Clear();
-                        student.Payment();
+                        student.DisplayTimetable();
                         break;
                     case "7":
                         Console.Clear();
@@ -213,7 +213,7 @@ namespace ProjetOOP_v2
             do
             {
                 Console.Clear();
-                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to my students information\n3 : To manage grade books\n4 : To display grade books\n5 : To display the calendar\n6 : To display the attendance\n7 : To manage your information\n8 : To display planned exam\nChoice : ");
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To manage your information\n3 : To access to my students information\n4 : To display grade books\n5 : To manage grade books\n6 : To display the attendance\n7 : To display the calendar\n8 : To display planned exam\nChoice : ");
                 choice = Console.ReadLine();
                 Console.WriteLine();
                 switch (choice)
@@ -225,11 +225,11 @@ namespace ProjetOOP_v2
                         break;
                     case "2": 
                         Console.Clear();
-                        teacher.DisplayStudentsInformation();
+                        teacher.ManageInformation(); 
                         break;
                     case "3":
                         Console.Clear();
-                        teacher.ManageGradeBook(); 
+                        teacher.DisplayStudentsInformation(); 
                         break;
                     case "4": 
                         Console.Clear();
@@ -237,7 +237,7 @@ namespace ProjetOOP_v2
                         break;
                     case "5": 
                         Console.Clear();
-                        teacher.DisplayTimetable();
+                        teacher.ManageGradeBook(); 
                         break;
                     case "6":
                         Console.Clear();
@@ -245,7 +245,7 @@ namespace ProjetOOP_v2
                         break;
                     case "7":
                         Console.Clear();
-                        teacher.ManageInformation();
+                        teacher.DisplayTimetable();
                         break;
                     case "8":
                         Console.Clear();
@@ -271,7 +271,7 @@ namespace ProjetOOP_v2
             do
             {
                 Console.Clear();
-                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to students information\n3 : To access to teachers informations\n4 : To create a course\n5 : To create an exam\n6 : To display grade books\n7 : To display the calendar\n8 : To manage the calendar\n9 : To display the attendance\n10 : To manage the attendance\n11 : To register a student in an exam\n12 : To register a teacher to a course\n13 : To delete a course\n14 : To display Teacher Timetable\n15 : To Register a Student\n16 : To Remove a Student\n17 : To Register a Teacher\n18 : To Remove a Teacher\n19 : To manage your information\n20 : To manage a course\n21 : To display planned exams\nChoice : ");
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To manage your information\n3 : To access to teachers informations\n4 : To access to students information\n5 : To display grade books\n6 : To display Teacher Timetable\n7 : To display the attendance\n8 : To manage the attendance\n9 : To create a course\n10 :To manage a course\n11 : To delete a course\n12 : To register a teacher to a course\n13 : To create an exam\n14 : To register a student in an exam\n15 : To display planned exams\n16 : To Register a Student\n17 : To Remove a Student\n18 : To Register a Teacher\n19 : To Remove a Teacher\nChoice : ");
                 choice = Console.ReadLine();
                 switch (choice)
                 {
@@ -281,7 +281,7 @@ namespace ProjetOOP_v2
                         break;
                     case "2": 
                         Console.Clear();
-                        admin.DisplayStudentInformation();
+                        admin.ManageInformation(); 
                         break;
                     case "3": 
                         Console.Clear();
@@ -289,75 +289,67 @@ namespace ProjetOOP_v2
                         break;
                     case "4":
                         Console.Clear();
-                        admin.CreationCourse();
+                        admin.DisplayStudentInformation();
                         break;
                     case "5":
                         Console.Clear();
-                        admin.CreationExam();
+                        admin.DisplayGradeBook(); 
                         break;
                     case "6": 
                         Console.Clear();
-                        admin.DisplayGradeBook();
-                        break;
-                    case "7": 
-                        Console.Clear();
                         admin.DisplayTimetableTeacher();
                         break;
-                    case "8": // à faire
-                        Console.Clear();
-                        Console.WriteLine("à faire");
-                        break;
-                    case "9":
+                    case "7":
                         Console.Clear();
                         admin.DisplayAttendance(); 
                         break;
-                    case "10":
+                    case "8":
                         Console.Clear();
                         admin.ManageAttendance();
                         break;
+                    case "9":
+                        Console.Clear();
+                        admin.CreationCourse();
+                        break;
+                    case "10":
+                        Console.Clear();
+                        admin.ManageCourse();  
+                        break;
                     case "11":
                         Console.Clear();
-                       // admin.IncsriptionExam();
+                        admin.DeleteCourse(); 
                         break;
                     case "12":
                         Console.Clear();
-                        admin.IncsriptionCourse();
+                        admin.IncsriptionCourse(); 
                         break;
                     case "13":
                         Console.Clear();
-                        admin.DeleteCourse();
+                        admin.CreationExam(); 
                         break;
                     case "14":
                         Console.Clear();
-                        admin.DisplayTimetableTeacher();
+                        admin.RegisterStudent(); 
                         break;
                     case "15":
                         Console.Clear();
-                        admin.RegisterStudent();
+                        admin.DisplayExams();
                         break;
                     case "16":
                         Console.Clear();
-                        admin.RemoveStudent();
+                        admin.RegisterStudent();
                         break;
                     case "17":
                         Console.Clear();
-                        admin.RegisterTeacher();
+                        admin.RemoveStudent();
                         break;
                     case "18":
                         Console.Clear();
-                        admin.RemoveTeacher();
+                        admin.RegisterTeacher();
                         break;
                     case "19":
                         Console.Clear();
-                        admin.ManageInformation();
-                        break;
-                    case "20":
-                        Console.Clear();
-                        admin.ManageCourse();
-                        break;
-                    case "21":
-                        Console.Clear();
-                        admin.DisplayExams();
+                        admin.RemoveTeacher();
                         break;
                     default:
                         Console.WriteLine("\nThis choice is not available");
