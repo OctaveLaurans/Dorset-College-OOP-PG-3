@@ -215,6 +215,32 @@ namespace ProjetOOP_v2
             }
             Console.WriteLine();
         }
+
+        public void DisplayExam()
+        {
+            Console.WriteLine("Exam :\n");
+
+            bool examExist = false;
+            if (GroupStudents[0].Exams.Count > 0)
+            {
+                foreach (Exam exam in GroupStudents[0].Exams)
+                {
+                    if(exam.CourseConcerned == Course.NameCourse)
+                    {
+                        exam.DisplayInformation();
+                        examExist = true;
+                    }
+                }
+                if(examExist == false)
+                {
+                    Console.WriteLine("No exam planned\n");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No exam planned\n");
+            }
+        }
     }
 
 }

@@ -12,6 +12,7 @@ namespace ProjetOOP_v2
         public List<Teacher> AllTeachers { get; set; }
         public List<List<Course>> AllCourses { get; set; }
         public SortedList<string, Branche> Branches { get; set; }
+        public List<Exam> Exams { get; set; }
 
         public Admin(string name, string adress, string phoneNumber, string login, string password, List<Student> allStudents, List<Teacher> allTeachers, List<List<Course>> allCourses, SortedList<string, Branche> branches)
             : base(name, adress, phoneNumber, login, password)
@@ -20,7 +21,10 @@ namespace ProjetOOP_v2
             AllTeachers = allTeachers;
             AllCourses = allCourses;
             Branches = branches;
+
+            Exams = new List<Exam>(); 
         }
+
 
         public override void DisplayInformation()
         {
@@ -88,7 +92,6 @@ namespace ProjetOOP_v2
                 Console.WriteLine("This student doesn't exist ... please try again\n");
             }
         }
-
         public void DisplayTeacherInformation()
         {
             bool exist = false;
@@ -110,6 +113,7 @@ namespace ProjetOOP_v2
                 Console.WriteLine("This teacher doesn't exist ... please try again\n");
             }
         }
+
 
         public Course CreationCourse()
         {
@@ -149,12 +153,14 @@ namespace ProjetOOP_v2
 
             foreach(Student student in AllStudents)
             {
-                student.Grades.Add(-1);
+                if(student.Branche.BrancheName == branche)
+                {
+                    student.Grades.Add(-1);
+                }
             }
 
             return course;
         }
-
         public void ManageCourse()
         {
             Console.WriteLine("You want to modify a course, which branch is concerned ?");
@@ -198,7 +204,6 @@ namespace ProjetOOP_v2
                 }
             }
         }
-
         public void DeleteCourse()
         {
             Console.WriteLine("You want to delete a course, which branch is concerned ?");
@@ -233,8 +238,6 @@ namespace ProjetOOP_v2
             }
 
         }
-
-
         public void IncsriptionCourse()
         {
 
@@ -292,31 +295,83 @@ namespace ProjetOOP_v2
             }
         }
 
-        public Exam CreationExam()
+
+
+        public void CreationExam()
         {
-            Console.WriteLine("You want to create an Exam, what's the subject ?");
-            string nameExam = Console.ReadLine();
+            Console.WriteLine("You want to create an exam, which branch is concerned ?");
+            string branche = Console.ReadLine();
+            Console.WriteLine("What is the name of the course ?");
+            string nameCourse = Console.ReadLine();
             Console.WriteLine("Exam date ? (DD/MM)");
             string dayExam = Console.ReadLine();
             Console.WriteLine("At what time ? (HH:MM)");
             string hourExam = Console.ReadLine();
             Console.WriteLine("Duration ? (in decimal form)");
             double durationExam = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine();
 
-            Console.WriteLine($"Subject : {nameExam}, Date : {dayExam}, Hours : {hourExam}");
-
-            Exam exam = new Exam { NameExam = nameExam, DayExam = dayExam, HourExam = hourExam };
-
-            return exam;
-        }
-
-        public void IncsriptionExam(Exam exam, List<Student> students)
-        {//We have to verify that the student follows the exam subject
-            foreach (Student student in students)
+            int brancheNumber = -1;
+            switch (branche)
             {
-                student.Exams.Add(exam);
+                case "Business":
+                    brancheNumber = 0;
+                    break;
+
+                case "Ingeneering":
+                    brancheNumber = 1;
+                    break;
+
+                case "Literature":
+                    brancheNumber = 2;
+                    break;
+            }
+
+            bool courseExist = false;
+            foreach(Course course in AllCourses[brancheNumber])
+            {
+                if(course.NameCourse == nameCourse)
+                {
+                    courseExist = true;
+                }
+            }
+
+            if(courseExist == true)
+            {
+                Exam exam = new Exam { CourseConcerned = nameCourse, DayExam = dayExam, HourExam = hourExam, DurationExam = durationExam };
+                exam.DisplayInformation();
+
+                Exams.Add(exam);
+
+                foreach (Student student in AllStudents)
+                {
+                    if (student.Branche.BrancheName == branche)
+                    {
+                        student.Exams.Add(exam);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("This course doesn't exist !\n");
             }
         }
+        public void DisplayExams()
+        {
+            Console.WriteLine("Exams :\n");
+            if (Exams.Count > 0)
+            {
+                foreach (Exam exam in Exams)
+                {
+                    exam.DisplayInformation();
+                }
+            }
+            else
+            {
+                Console.WriteLine("No exam planned\n");
+            }
+        }
+
 
         public void ManageAttendance()
         {
@@ -371,8 +426,6 @@ namespace ProjetOOP_v2
             }
 
         }
-
-
         public void DisplayAttendance()
         {
             bool continu = false;
@@ -481,7 +534,6 @@ namespace ProjetOOP_v2
             Student student = new Student(name, adress, phoneNumber, email, password, branche, nbrPayment, 0, 0, 0, AllCourses[index]);
             AllStudents.Add(student);
         }
-
         public void RemoveStudent()
         {
             Console.WriteLine("Deleting a student");
@@ -498,6 +550,7 @@ namespace ProjetOOP_v2
                 }
             }
         }
+
 
         public void RegisterTeacher()
         {
@@ -516,7 +569,6 @@ namespace ProjetOOP_v2
             Teacher teacher = new Teacher(name, adress, phoneNumber, email, password);
             AllTeachers.Add(teacher);
         }
-
         public void RemoveTeacher()
         {
             Console.WriteLine("Deleting a teacher");

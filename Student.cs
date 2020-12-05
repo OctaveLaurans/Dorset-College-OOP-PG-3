@@ -174,5 +174,21 @@ namespace ProjetOOP_v2
             }
             Console.WriteLine();
         }
+
+        public void DisplayExams()
+        {
+            Console.WriteLine("Exams :\n");
+            if(Exams.Count > 0)
+            {
+                foreach (Exam exam in Exams)
+                {
+                    exam.DisplayInformation();
+                }
+            }
+            else
+            {
+                Console.WriteLine("No exam planned\n");
+            }
+        }
     }
 }

@@ -149,7 +149,7 @@ namespace ProjetOOP_v2
             do
             {
                 Console.Clear();
-                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To manage my information\n3 : To display my grade book\n4: To display my attendance\n5 : To display my timetable\n6 : To pay the school fees\nChoice : ");
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To manage my information\n3 : To display my grade book\n4: To display my attendance\n5 : To display my timetable\n6 : To pay the school fees\n7 : To display planned exams\nChoice : ");
                 choice = Console.ReadLine();
                 Console.WriteLine();
                 switch (choice)
@@ -190,6 +190,10 @@ namespace ProjetOOP_v2
                         Console.Clear();
                         student.Payment();
                         break;
+                    case "7":
+                        Console.Clear();
+                        student.DisplayExams();
+                        break;
                     default:
                         Console.WriteLine("\nThis choice is not available");
                         break;
@@ -209,7 +213,7 @@ namespace ProjetOOP_v2
             do
             {
                 Console.Clear();
-                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to my students information\n3 : To manage grade books\n4 : To display grade books\n5 : To display the calendar\n6: To manage the attendance\n7 : To display the attendance\n8 : To manage your information\nChoice : ");
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to my students information\n3 : To manage grade books\n4 : To display grade books\n5 : To display the calendar\n6: To manage the attendance\n7 : To display the attendance\n8 : To manage your information\n9 : To display planned exam\nChoice : ");
                 choice = Console.ReadLine();
                 Console.WriteLine();
                 switch (choice)
@@ -246,6 +250,10 @@ namespace ProjetOOP_v2
                         Console.Clear();
                         teacher.ManageInformation();
                         break;
+                    case "9":
+                        Console.Clear();
+                        teacher.DisplayExam();
+                        break;
                     default:
                         Console.WriteLine("\nThis choice is not available");
                         break;
@@ -266,7 +274,7 @@ namespace ProjetOOP_v2
             do
             {
                 Console.Clear();
-                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to students information\n3 : To access to teachers informations\n4 : To create a course\n5 : To create an exam\n6 : To display grade books\n7 : To display the calendar\n8 : To manage the calendar\n9 : To display the attendance\n10 : To manage the attendance\n11 : To register a student in an exam\n12 : To register a teacher to a course\n13 : To delete a course\n14 : To display Teacher Timetable\n15 : To Register a Student\n16 : To Remove a Student\n17 : To Register a Teacher\n18 : To Remove a Teacher\n19 : To manage your information\n20 : To manage a course\nChoice : ");
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To access to students information\n3 : To access to teachers informations\n4 : To create a course\n5 : To create an exam\n6 : To display grade books\n7 : To display the calendar\n8 : To manage the calendar\n9 : To display the attendance\n10 : To manage the attendance\n11 : To register a student in an exam\n12 : To register a teacher to a course\n13 : To delete a course\n14 : To display Teacher Timetable\n15 : To Register a Student\n16 : To Remove a Student\n17 : To Register a Teacher\n18 : To Remove a Teacher\n19 : To manage your information\n20 : To manage a course\n21 : To display planned exams\nChoice : ");
                 choice = Console.ReadLine();
                 switch (choice)
                 {
@@ -349,6 +357,10 @@ namespace ProjetOOP_v2
                     case "20":
                         Console.Clear();
                         admin.ManageCourse();
+                        break;
+                    case "21":
+                        Console.Clear();
+                        admin.DisplayExams();
                         break;
                     default:
                         Console.WriteLine("\nThis choice is not available");
