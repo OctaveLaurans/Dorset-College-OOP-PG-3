@@ -5,8 +5,14 @@ using System.Linq;
 
 namespace ProjetOOP_v2
 {
-    public class Program
-    {
+    public class Program        
+                                
+    { // Maxime Geniesse
+      // Arthur Gay Bellile
+      // Aurélie Leduc _ 22831
+      //Camille Lacroix _ 22836
+      //Samuel Barbarin
+      //Octave Laurans 
 
         static string IdentificationChoice()
         {
