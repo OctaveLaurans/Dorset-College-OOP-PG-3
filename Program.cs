@@ -155,7 +155,7 @@ namespace ProjetOOP_v2
             do
             {
                 Console.Clear();
-                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To manage my information\n3 : To pay the school fees\n4: To display my attendance\n5 : To display my grade book \n6 : To display my timetable\n7 : To display planned exams\nChoice : ");
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To manage my information\n3 : To pay the school fees\n4 : To display my attendance\n5 : To display my grade book \n6 : To display my timetable\n7 : To display planned exams\nChoice : ");
                 choice = Console.ReadLine();
                 Console.WriteLine();
                 switch (choice)
@@ -277,7 +277,7 @@ namespace ProjetOOP_v2
             do
             {
                 Console.Clear();
-                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To manage your information\n3 : To access to teachers informations\n4 : To access to students information\n5 : To display grade books\n6 : To display Teacher Timetable\n7 : To display the attendance\n8 : To manage the attendance\n9 : To create a course\n10 :To manage a course\n11 : To delete a course\n12 : To register a teacher to a course\n13 : To create an exam\n14 : To register a student in an exam\n15 : To display planned exams\n16 : To Register a Student\n17 : To Remove a Student\n18 : To Register a Teacher\n19 : To Remove a Teacher\nChoice : ");
+                Console.Write("Which program do you want to execute ?\n\n\n1 : To display my information\n2 : To manage your information\n3 : To access to teachers informations\n4 : To access to students information\n5 : To display grade books\n6 : To display Teacher Timetable\n7 : To display the attendance\n8 : To manage the attendance\n9 : To create a course\n10 : To manage a course\n11 : To delete a course\n12 : To register a teacher to a course\n13 : To create an exam\n14 : To display planned exams\n15 : To Register a Student\n16 : To Remove a Student\n17 : To Register a Teacher\n18 : To Remove a Teacher\nChoice : ");
                 choice = Console.ReadLine();
                 switch (choice)
                 {
@@ -335,25 +335,21 @@ namespace ProjetOOP_v2
                         break;
                     case "14":
                         Console.Clear();
-                        admin.RegisterStudent(); 
+                        admin.DisplayExams();
                         break;
                     case "15":
                         Console.Clear();
-                        admin.DisplayExams();
+                        admin.RegisterStudent();
                         break;
                     case "16":
                         Console.Clear();
-                        admin.RegisterStudent();
+                        admin.RemoveStudent();
                         break;
                     case "17":
                         Console.Clear();
-                        admin.RemoveStudent();
-                        break;
-                    case "18":
-                        Console.Clear();
                         admin.RegisterTeacher();
                         break;
-                    case "19":
+                    case "18":
                         Console.Clear();
                         admin.RemoveTeacher();
                         break;
