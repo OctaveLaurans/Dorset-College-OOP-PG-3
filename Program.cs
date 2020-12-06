@@ -7,12 +7,12 @@ namespace ProjetOOP_v2
 {
     public class Program        
                                 
-    { // Maxime Geniesse
-      // Arthur Gay Bellile
+    { // Maxime Geniesse _ 23204
+      // Arthur Gay Bellile _ 22837
       // Aurélie Leduc _ 22831
       //Camille Lacroix _ 22836
-      //Samuel Barbarin
-      //Octave Laurans 
+      //Samuel Barbarin _ 23195
+      //Octave Laurans _ 23198
 
         static string IdentificationChoice()
         {
